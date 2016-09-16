@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "ident": {
+      "type": "string"
+    }
+  },
+  "data": {
+    "ident": "template"
+  }
+}

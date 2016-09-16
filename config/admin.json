@@ -1,0 +1,346 @@
+{
+    "admin": {
+        "routes": {
+            "templates": {
+                "home": {
+                    "route": "[/[home]]",
+                    "redirect": "admin/object/collection?obj_type=city/object/news/entry"
+                }
+            },
+            "actions": {
+                "join": {
+                    "ident": "charcoal/admin/action/join",
+                    "methods": ["POST"]
+                },
+                "add-join": {
+                    "ident": "charcoal/admin/action/add-join",
+                    "methods": ["POST"]
+                },
+                "remove-join": {
+                    "ident": "charcoal/admin/action/remove-join",
+                    "methods": ["POST"]
+                },
+                "object/draft": {
+                    "ident": "saintconstant/action/draft",
+                    "methods": ["GET", "POST"]
+                }
+            }
+        },
+        "login": {
+            "background_image": "https://locomotive.ca/uploads/locomotive_texts/thumbnails/cartes-1.jpg"
+        },
+        "user_menu": {},
+        "header_menu": {
+            "items": {
+                "section": {
+                    "active": true,
+                    "label": {
+                        "en": "Contents",
+                        "fr": "Contenus"
+                    },
+                    "icon": "contents",
+                    "url": "object/collection?obj_type=city/object/section",
+                    "has_children": false
+                },
+                "map":{
+                    "active":true,
+                    "label":{
+                        "fr":"Carte interactive",
+                        "en":"Interactive map"
+                    },
+                    "icon":"map-marker",
+                    "url":"object/collection?obj_type=city/object/location"
+                },
+                "contact": {
+                    "active": true,
+                    "label": "Contact",
+                    "icon": "contacts",
+                    "url": "object/collection?obj_type=city/object/contact",
+                    "has_children": false
+                },
+                "media": {
+                    "active": true,
+                    "label": {
+                        "en": "Medias",
+                        "fr": "Médias"
+                    },
+                    "icon": "media",
+                    "url": "media",
+                    "has_children": false
+                },
+                "configuration": {
+                    "active": true,
+                    "label": "Options",
+                    "icon": "config",
+                    "url": "object/edit?obj_type=city/object/config&obj_id=1",
+                    "has_children": false
+                }
+            }
+        },
+        "sidemenu": {
+            "content": {
+                "title": {
+                    "en": "Contents",
+                    "fr": "Contenus"
+                },
+                "display_type": "collapsible",
+                "display_options": {
+                    "parented": true
+                },
+                "links": {
+                    "city/object/section": {
+                        "name": "Sections",
+                        "url": "object/collection?obj_type=city/object/section"
+                    },
+                    "city/object/news": {
+                        "name": {
+                            "en": "News",
+                            "fr": "Nouvelles"
+                        },
+                        "url": "object/collection?obj_type=city/object/news"
+                    },
+                    "city/object/event": {
+                        "name": {
+                            "en": "Events",
+                            "fr": "Évènements"
+                        },
+                        "url": "object/collection?obj_type=city/object/event"
+                    },
+                    "city/object/team-member": {
+                        "name": {
+                            "en": "Team",
+                            "fr": "Équipe"
+                        },
+                        "url": "object/collection?obj_type=city/object/team-member"
+                    }
+                },
+                "groups": {
+                    "categories": {
+                        "title": {
+                            "en": "Categories",
+                            "fr": "Catégories"
+                        },
+                        "priority": "10",
+                        "links": {
+                            "city/object/news-category": {
+                                "name": {
+                                    "en": "News",
+                                    "fr": "Nouvelles"
+                                },
+                                "url": "object/collection?obj_type=city/object/news-category"
+                            },
+                            "city/object/event-category": {
+                                "name": {
+                                    "en": "Events",
+                                    "fr": "Évènements"
+                                },
+                                "url": "object/collection?obj_type=city/object/event-category"
+                            },
+                            "city/object/team-category": {
+                                "name": {
+                                    "en": "Team",
+                                    "fr": "Équipe"
+                                },
+                                "url": "object/collection?obj_type=city/object/team-category"
+                            }
+                        }
+                    },
+                    "admin": {
+                        "title": {
+                            "en": "Admin",
+                            "fr": "Admin"
+                        },
+                        "priority": "20",
+                        "links": {
+                            "city/object/template": {
+                                "name": {
+                                    "en": "Templates",
+                                    "fr": "Gabarits"
+                                },
+                                "url": "object/collection?obj_type=city/object/template"
+                            }
+                        }
+                    }
+                }
+            },
+            "contact": {
+                "title": "Contact",
+                "links": {
+                    "city/object/contact": {
+                        "name": {
+                            "en": "Contact Inquiries",
+                            "fr": "Demandes de contact"
+                        },
+                        "url": "object/collection?obj_type=city/object/contact"
+                    },
+                    "city/object/contact-category": {
+                        "name": {
+                            "en": "Contact categories",
+                            "fr": "Catégories contact"
+                        },
+                        "url": "object/collection?obj_type=city/object/contact-category"
+                    },
+                    "city/object/newsletter-subscription": {
+                        "name": {
+                            "en": "Newsletter subscriptions",
+                            "fr": "Inscriptions à l'infolettre"
+                        },
+                        "url": "object/collection?obj_type=city/object/newsletter-subscription"
+                    }
+                }
+            },
+            "map": {
+                "title": {
+                    "fr": "Carte interactive",
+                    "en": "Interactive map"
+                },
+                "links": {
+                    "city/object/location": {
+                        "name": "Emplacements",
+                        "url": "object/collection?obj_type=city/object/location"
+                    },
+                    "city/object/location-category": {
+                        "name": "Catégories d'emplacements",
+                        "url": "object/collection?obj_type=city/object/location-category"
+                    },
+                    "city/object/district": {
+                        "name": "Districts",
+                        "url": "object/collection?obj_type=city/object/district"
+                    }
+                }
+            },
+            "option": {
+                "title": "Options",
+                "links": {
+                    "city/object/option/configuration": {
+                        "name": {
+                            "en": "Configuration",
+                            "fr": "Configuration"
+                        },
+                        "url": "object/edit?obj_type=city/object/option/configuration&obj_id=1"
+                    },
+                    "city/object/author": {
+                        "name": {
+                            "en": "Authors",
+                            "fr": "Auteurs"
+                        },
+                        "url": "object/collection?obj_type=city/object/author"
+                    },
+                    "city/object/option/partner": {
+                        "name": {
+                            "en": "Partners",
+                            "fr": "Partenaires"
+                        },
+                        "url": "object/collection?obj_type=city/object/option/partner"
+                    }
+                },
+                "groups": {
+                    "pages": {
+                        "title": "Pages",
+                        "display_type": "collapsible",
+                        "links": {
+                            "city/object/option/home": {
+                                "name": {
+                                    "en": "Home",
+                                    "fr": "Accueil"
+                                },
+                                "url": "object/edit?obj_type=city/object/option/home&obj_id=1"
+                            },
+                            "city/object/option/archive": {
+                                "name": {
+                                    "en": "Index",
+                                    "fr": "Index"
+                                },
+                                "url": "object/edit?obj_type=city/object/option/archive&obj_id=1"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "footer_menu": {},
+
+        "elfinder": {
+            "bind": {
+                "upload.pre mkdir.pre mkfile.pre rename.pre archive.pre ls.pre": [
+                    "Plugin.Normalizer.cmdPreprocess",
+                    "Plugin.Sanitizer.cmdPreprocess"
+                ],
+                "ls": [
+                    "Plugin.Normalizer.cmdPostprocess",
+                    "Plugin.Sanitizer.cmdPostprocess"
+                ],
+                "upload.presave": [
+                    "Plugin.Normalizer.onUpLoadPreSave",
+                    "Plugin.Sanitizer.onUpLoadPreSave"
+                ]
+            },
+            "roots": {
+                "default": {
+                    "uploadAllow": [
+                        "image",
+                        "application/pdf",
+                        "text/plain",
+                        "application/msword",
+                        "application/vnd.ms-word",
+                        "application/vnd.ms-powerpoint",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        "application/vnd.ms-word.document.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
+                        "application/vnd.ms-word.template.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "application/vnd.ms-excel.sheet.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+                        "application/vnd.ms-excel.template.macroEnabled.12",
+                        "application/vnd.ms-excel.sheet.binary.macroEnabled.12",
+                        "application/vnd.ms-excel.addin.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                        "application/vnd.ms-powerpoint.presentation.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
+                        "application/vnd.ms-powerpoint.slideshow.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.presentationml.template",
+                        "application/vnd.ms-powerpoint.template.macroEnabled.12",
+                        "application/vnd.ms-powerpoint.addin.macroEnabled.12",
+                        "application/vnd.openxmlformats-officedocument.presentationml.slide",
+                        "application/vnd.ms-powerpoint.slide.macroEnabled.12"
+                    ]
+                }
+            },
+            "plugin": {
+                "Normalizer": {
+                    "enable": true,
+                    "nfc": true,
+                    "nfkc": true,
+                    "lowercase": false,
+                    "convmap": {
+                        "°": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8",
+                        "⁹": "9", "₀": "0", "₁": "1", "₂": "2", "₃": "3", "₄": "4", "₅": "5", "₆": "6", "₇": "7",
+                        "₈": "8", "₉": "9", "æ": "ae", "ǽ": "ae", "À": "A", "Á": "A", "Â": "A", "Ã": "A", "Å": "AA",
+                        "Ǻ": "A", "Ă": "A", "Ǎ": "A", "Æ": "AE", "Ǽ": "AE", "à": "a", "á": "a", "â": "a", "ã": "a",
+                        "å": "aa", "ǻ": "a", "ă": "a", "ǎ": "a", "ª": "a", "@": "at", "Ĉ": "C", "Ċ": "C", "ĉ": "c",
+                        "ċ": "c", "©": "c", "Ð": "Dj", "Đ": "D", "ð": "dj", "đ": "d", "È": "E", "É": "E", "Ê": "E",
+                        "Ë": "E", "Ĕ": "E", "Ė": "E", "è": "e", "é": "e", "ê": "e", "ë": "e", "ĕ": "e", "ė": "e",
+                        "ƒ": "f", "Ĝ": "G", "Ġ": "G", "ĝ": "g", "ġ": "g", "Ĥ": "H", "Ħ": "H", "ĥ": "h", "ħ": "h",
+                        "Ì": "I", "Í": "I", "Î": "I", "Ï": "I", "Ĩ": "I", "Ĭ": "I", "Ǐ": "I", "Į": "I", "Ĳ": "IJ",
+                        "ì": "i", "í": "i", "î": "i", "ï": "i", "ĩ": "i", "ĭ": "i", "ǐ": "i", "į": "i", "ĳ": "ij",
+                        "Ĵ": "J", "ĵ": "j", "Ĺ": "L", "Ľ": "L", "Ŀ": "L", "ĺ": "l", "ľ": "l", "ŀ": "l", "Ñ": "N",
+                        "ñ": "n", "ŉ": "n", "Ò": "O", "Ó": "O", "Ô": "O", "Õ": "O", "Ō": "O", "Ŏ": "O", "Ǒ": "O",
+                        "Ő": "O", "Ơ": "O", "Ø": "OE", "Ǿ": "O", "Œ": "OE", "ò": "o", "ó": "o", "ô": "o", "õ": "o",
+                        "ō": "o", "ŏ": "o", "ǒ": "o", "ő": "o", "ơ": "o", "ø": "oe", "ǿ": "o", "º": "o", "œ": "oe",
+                        "Ŕ": "R", "Ŗ": "R", "ŕ": "r", "ŗ": "r", "Ŝ": "S", "Ș": "S", "ŝ": "s", "ș": "s", "ſ": "s",
+                        "Ţ": "T", "Ț": "T", "Ŧ": "T", "Þ": "TH", "ţ": "t", "ț": "t", "ŧ": "t", "þ": "th", "Ù": "U",
+                        "Ú": "U", "Û": "U", "Ü": "U", "Ũ": "U", "Ŭ": "U", "Ű": "U", "Ų": "U", "Ư": "U", "Ǔ": "U",
+                        "Ǖ": "U", "Ǘ": "U", "Ǚ": "U", "Ǜ": "U", "ù": "u", "ú": "u", "û": "u", "ü": "u", "ũ": "u",
+                        "ŭ": "u", "ű": "u", "ų": "u", "ư": "u", "ǔ": "u", "ǖ": "u", "ǘ": "u", "ǚ": "u", "ǜ": "u",
+                        "Ŵ": "W", "ŵ": "w", "Ý": "Y", "Ÿ": "Y", "Ŷ": "Y", "ý": "y", "ÿ": "y", "ŷ": "y"
+                    }
+                },
+                "Sanitizer": {
+                    "enable": true,
+                    "targets": [" ", "\\", "/", ":", "*", "?", "'", "\"", "<", ">", "|"],
+                    "replace": "_"
+                }
+            }
+        }
+    }
+}

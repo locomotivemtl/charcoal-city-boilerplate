@@ -1,0 +1,10 @@
+{
+  "databases": {
+    "default": {
+      "database": "charcoal_boilerplate",
+      "username": "root",
+      "password": ""
+    }
+  },
+  "default_database": "default"
+}
