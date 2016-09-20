@@ -13,17 +13,17 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/beneroch/charcoal-attachment.git",
-                "reference": "ff8aaa86937d2b6dbd3aedaec3ecb13750fbbbc2"
+                "reference": "df213b03b30401d752013264090e7faa30ede36b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/beneroch/charcoal-attachment/get/ff8aaa86937d2b6dbd3aedaec3ecb13750fbbbc2.zip",
-                "reference": "ff8aaa86937d2b6dbd3aedaec3ecb13750fbbbc2",
+                "url": "https://bitbucket.org/beneroch/charcoal-attachment/get/df213b03b30401d752013264090e7faa30ede36b.zip",
+                "reference": "df213b03b30401d752013264090e7faa30ede36b",
                 "shasum": ""
             },
             "require": {
-                "locomotivemtl/charcoal-base": "dev-master",
-                "locomotivemtl/charcoal-core": "dev-master"
+                "locomotivemtl/charcoal-base": "~0.1",
+                "locomotivemtl/charcoal-core": "~0.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8",
@@ -75,7 +75,7 @@
                 "issues": "https://bitbucket.org/beneroch/charcoal-attachment/issues",
                 "source": "https://bitbucket.org/beneroch/charcoal-attachment"
             },
-            "time": "2016-09-15 20:13:52"
+            "time": "2016-09-17 00:47:41"
         },
         {
             "name": "beneroch/charcoal-city",
@@ -83,7 +83,7 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/beneroch/charcoal-city.git",
-                "reference": "7a18b7493760f31b17c4682eaafb036b55e97adb"
+                "reference": "daab237e4a0bf34a0e1ba18796c3e96e2ece6e13"
             },
             "require": {
                 "beneroch/charcoal-attachment": "dev-master",
@@ -131,7 +131,7 @@
                 "charcoal",
                 "city"
             ],
-            "time": "2016-09-16 15:52:49"
+            "time": "2016-09-16 22:16:40"
         },
         {
             "name": "beneroch/charcoal-utils",
@@ -139,12 +139,12 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/beneroch/charcoal-utils.git",
-                "reference": "b2841c05170fabde7e0948748d556426d78d911e"
+                "reference": "399551f6f4be2cb54c9871554305cae3055e0b45"
             },
             "require": {
-                "locomotivemtl/charcoal-base": "dev-master",
-                "locomotivemtl/charcoal-core": "dev-master",
-                "locomotivemtl/charcoal-translation": "dev-master"
+                "locomotivemtl/charcoal-base": "~0.1",
+                "locomotivemtl/charcoal-core": "~0.1",
+                "locomotivemtl/charcoal-translation": "~0.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8",
@@ -175,7 +175,7 @@
             "support": {
                 "source": "https://bitbucket.org/beneroch/charcoal-utils"
             },
-            "time": "2016-08-21 02:21:17"
+            "time": "2016-09-17 00:48:31"
         },
         {
             "name": "container-interop/container-interop",
@@ -289,12 +289,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "113071af3b2b9eb96b05dab05472cbaed64a3df4"
+                "reference": "f314080006142bc05a8a92ee0863751acaa7238f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/113071af3b2b9eb96b05dab05472cbaed64a3df4",
-                "reference": "113071af3b2b9eb96b05dab05472cbaed64a3df4",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f314080006142bc05a8a92ee0863751acaa7238f",
+                "reference": "f314080006142bc05a8a92ee0863751acaa7238f",
                 "shasum": ""
             },
             "require": {
@@ -343,7 +343,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-09-12 15:07:23"
+            "time": "2016-09-19 09:50:28"
         },
         {
             "name": "guzzlehttp/promises",
@@ -563,12 +563,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-admin.git",
-                "reference": "e4e4b40446f7339a6fc72791b445c00b2f031dfc"
+                "reference": "76b6d4aef5e198961f465548f893156b5194659e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/e4e4b40446f7339a6fc72791b445c00b2f031dfc",
-                "reference": "e4e4b40446f7339a6fc72791b445c00b2f031dfc",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/76b6d4aef5e198961f465548f893156b5194659e",
+                "reference": "76b6d4aef5e198961f465548f893156b5194659e",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +620,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-09-16 03:52:12"
+            "time": "2016-09-19 14:04:47"
         },
         {
             "name": "locomotivemtl/charcoal-app",
@@ -868,12 +868,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-core.git",
-                "reference": "e621fe9d20ae90c684d1ff40cb40ed896b893aa2"
+                "reference": "736df5a754ac30a8f61dbb5ce6beca759282b556"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-core/zipball/e621fe9d20ae90c684d1ff40cb40ed896b893aa2",
-                "reference": "e621fe9d20ae90c684d1ff40cb40ed896b893aa2",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-core/zipball/736df5a754ac30a8f61dbb5ce6beca759282b556",
+                "reference": "736df5a754ac30a8f61dbb5ce6beca759282b556",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +926,7 @@
                 "framework",
                 "locomotive"
             ],
-            "time": "2016-09-16 03:58:20"
+            "time": "2016-09-16 20:19:10"
         },
         {
             "name": "locomotivemtl/charcoal-email",
@@ -1095,12 +1095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-property.git",
-                "reference": "83fa5cdc282a6277c9273d8f8df121b528de51ae"
+                "reference": "024d106496bb19df900a6527f3fc2426a82ae55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-property/zipball/83fa5cdc282a6277c9273d8f8df121b528de51ae",
-                "reference": "83fa5cdc282a6277c9273d8f8df121b528de51ae",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-property/zipball/024d106496bb19df900a6527f3fc2426a82ae55d",
+                "reference": "024d106496bb19df900a6527f3fc2426a82ae55d",
                 "shasum": ""
             },
             "require": {
@@ -1148,7 +1148,7 @@
             "keywords": [
                 "charcoal"
             ],
-            "time": "2016-09-16 03:59:52"
+            "time": "2016-09-16 20:20:23"
         },
         {
             "name": "locomotivemtl/charcoal-queue",
@@ -1208,12 +1208,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-search.git",
-                "reference": "734eba7dd074186eda910195f863013c00277e2e"
+                "reference": "03e6ad59d345ecb06c9f5be90118877c510ef6a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-search/zipball/734eba7dd074186eda910195f863013c00277e2e",
-                "reference": "734eba7dd074186eda910195f863013c00277e2e",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-search/zipball/03e6ad59d345ecb06c9f5be90118877c510ef6a1",
+                "reference": "03e6ad59d345ecb06c9f5be90118877c510ef6a1",
                 "shasum": ""
             },
             "require": {
@@ -1261,7 +1261,7 @@
                 "charcoal",
                 "search"
             ],
-            "time": "2016-09-16 14:27:04"
+            "time": "2016-09-16 21:52:41"
         },
         {
             "name": "locomotivemtl/charcoal-translation",
@@ -1331,18 +1331,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-ui.git",
-                "reference": "f7b619fc89aef0b70ad9c218b42a106315dd60b6"
+                "reference": "0e622e6ecb2428c2d719cb81a1a5bfa2cdc8e272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-ui/zipball/f7b619fc89aef0b70ad9c218b42a106315dd60b6",
-                "reference": "f7b619fc89aef0b70ad9c218b42a106315dd60b6",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-ui/zipball/0e622e6ecb2428c2d719cb81a1a5bfa2cdc8e272",
+                "reference": "0e622e6ecb2428c2d719cb81a1a5bfa2cdc8e272",
                 "shasum": ""
             },
             "require": {
                 "locomotivemtl/charcoal-config": "~0.6",
                 "locomotivemtl/charcoal-factory": "~0.3",
-                "locomotivemtl/charcoal-translation": "dev-master",
+                "locomotivemtl/charcoal-translation": "~0.1",
                 "locomotivemtl/charcoal-view": "~0.1",
                 "php": ">=5.5.0",
                 "psr/log": "^1.0"
@@ -1392,7 +1392,7 @@
                 "menu",
                 "ui"
             ],
-            "time": "2016-09-15 18:47:37"
+            "time": "2016-09-17 01:17:46"
         },
         {
             "name": "locomotivemtl/charcoal-view",
@@ -1513,12 +1513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952"
+                "reference": "dacec2fe1ead778f90d0149caa8f047a0856571b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f42fbdfd53e306bda545845e4dbfd3e72edb4952",
-                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dacec2fe1ead778f90d0149caa8f047a0856571b",
+                "reference": "dacec2fe1ead778f90d0149caa8f047a0856571b",
                 "shasum": ""
             },
             "require": {
@@ -1583,7 +1583,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-07-29 03:23:52"
+            "time": "2016-09-18 16:07:11"
         },
         {
             "name": "mustache/mustache",
@@ -2091,12 +2091,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "564bd91d5f728e2c63069abf7dfc13b5f11d51da"
+                "reference": "17a87733ea77b63cca6870641ecbe43e9d7500b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/564bd91d5f728e2c63069abf7dfc13b5f11d51da",
-                "reference": "564bd91d5f728e2c63069abf7dfc13b5f11d51da",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/17a87733ea77b63cca6870641ecbe43e9d7500b6",
+                "reference": "17a87733ea77b63cca6870641ecbe43e9d7500b6",
                 "shasum": ""
             },
             "require": {
@@ -2141,7 +2141,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-09-16 12:27:17"
+            "time": "2016-09-19 12:41:01"
         },
         {
             "name": "tedivm/stash",
@@ -3375,12 +3375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "a71771e813541fee035c8c85105dac75dc161d7c"
+                "reference": "68d40cda4aa745f65e89d819ac3ff03bd1b76854"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/a71771e813541fee035c8c85105dac75dc161d7c",
-                "reference": "a71771e813541fee035c8c85105dac75dc161d7c",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/68d40cda4aa745f65e89d819ac3ff03bd1b76854",
+                "reference": "68d40cda4aa745f65e89d819ac3ff03bd1b76854",
                 "shasum": ""
             },
             "require": {
@@ -3445,7 +3445,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-09-12 23:24:57"
+            "time": "2016-09-19 05:43:21"
         },
         {
             "name": "symfony/yaml",

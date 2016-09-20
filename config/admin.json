@@ -21,7 +21,7 @@
                     "methods": ["POST"]
                 },
                 "object/draft": {
-                    "ident": "saintconstant/action/draft",
+                    "ident": "city/action/draft",
                     "methods": ["GET", "POST"]
                 }
             }
@@ -209,15 +209,15 @@
                     }
                 }
             },
-            "option": {
+            "options": {
                 "title": "Options",
                 "links": {
-                    "city/object/option/configuration": {
+                    "city/object/config": {
                         "name": {
                             "en": "Configuration",
                             "fr": "Configuration"
                         },
-                        "url": "object/edit?obj_type=city/object/option/configuration&obj_id=1"
+                        "url": "object/edit?obj_type=city/object/config&obj_id=1"
                     },
                     "city/object/author": {
                         "name": {
@@ -225,35 +225,6 @@
                             "fr": "Auteurs"
                         },
                         "url": "object/collection?obj_type=city/object/author"
-                    },
-                    "city/object/option/partner": {
-                        "name": {
-                            "en": "Partners",
-                            "fr": "Partenaires"
-                        },
-                        "url": "object/collection?obj_type=city/object/option/partner"
-                    }
-                },
-                "groups": {
-                    "pages": {
-                        "title": "Pages",
-                        "display_type": "collapsible",
-                        "links": {
-                            "city/object/option/home": {
-                                "name": {
-                                    "en": "Home",
-                                    "fr": "Accueil"
-                                },
-                                "url": "object/edit?obj_type=city/object/option/home&obj_id=1"
-                            },
-                            "city/object/option/archive": {
-                                "name": {
-                                    "en": "Index",
-                                    "fr": "Index"
-                                },
-                                "url": "object/edit?obj_type=city/object/option/archive&obj_id=1"
-                            }
-                        }
                     }
                 }
             }

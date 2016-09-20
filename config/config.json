@@ -47,9 +47,11 @@
     "view": {
         "paths": [
             "views/",
-            "vendor/locomotivemtl/charcoal-admin/templates/",
+            "vendor/mcaskill/charcoal-support/views/",
             "vendor/beneroch/charcoal-attachment/templates/",
             "vendor/beneroch/charcoal-utils/templates/",
+            "vendor/beneroch/charcoal-attachment/templates/",
+            "vendor/locomotivemtl/charcoal-admin/templates/",
             "vendor/locomotivemtl/charcoal-app/templates/"
         ],
         "default_engine": "mustache",
@@ -66,8 +68,9 @@
             "vendor/locomotivemtl/charcoal-messaging/metadata/",
             "vendor/locomotivemtl/charcoal-property/metadata/",
             "vendor/locomotivemtl/charcoal-base/metadata/",
-            "vendor/beneroch/charcoal-city/metadata/",
-            "vendor/beneroch/charcoal-utils/metadata/"
+            "vendor/beneroch/charcoal-utils/metadata/",
+            "vendor/beneroch/charcoal-attachment/metadata/",
+            "vendor/beneroch/charcoal-city/metadata/"
         ]
     },
 
