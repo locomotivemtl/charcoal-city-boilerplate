@@ -61,6 +61,7 @@
     "metadata": {
         "paths": [
             "metadata/",
+            "vendor/mcaskill/charcoal-support/metadata/",
             "vendor/locomotivemtl/charcoal-cms/metadata/",
             "vendor/locomotivemtl/charcoal-admin/metadata/",
             "vendor/locomotivemtl/charcoal-app/metadata/",
