@@ -14,9 +14,6 @@ ini_set('display_errors', true);
 
 setlocale(LC_ALL, 'fr_FR.UTF-8', 'french');
 
-$base_dir = realpath(__DIR__.'/..').'/';
-$this['ROOT'] = $base_dir.'www/';
-
 /** The application's absolute root path */
 $this['base_path'] = dirname(__DIR__).'/';
 
