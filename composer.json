@@ -18,7 +18,7 @@
         "locomotivemtl/charcoal-email": "~0.1",
         "beneroch/charcoal-utils": "dev-master",
         "beneroch/charcoal-attachment": "dev-master",
-        "beneroch/charcoal-city": "dev-master",
+        "locomotivemtl/charcoal-city": "dev-master",
         "mcaskill/charcoal-support": "dev-master",
         "mustache/mustache": "^2.10"
     },
@@ -54,7 +54,7 @@
         },
         {
             "type": "git",
-            "url": "https://bitbucket.org/beneroch/charcoal-city.git"
+            "url": "https://github.com/locomotivemtl/charcoal-city"
         }
     ]
 }

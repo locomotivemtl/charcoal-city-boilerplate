@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "28b11e3afb29849e8b97b46cd9d7b796",
-    "content-hash": "7107973b0c7517215422ea9c10690e95",
+    "hash": "c44bd6a94f7b582ccfa35ea07edfedf5",
+    "content-hash": "2010c73fc9ba1ba8c58926f95129c50d",
     "packages": [
         {
             "name": "beneroch/charcoal-attachment",
@@ -76,62 +76,6 @@
                 "source": "https://bitbucket.org/beneroch/charcoal-attachment"
             },
             "time": "2016-09-21 19:32:13"
-        },
-        {
-            "name": "beneroch/charcoal-city",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://bitbucket.org/beneroch/charcoal-city.git",
-                "reference": "daab237e4a0bf34a0e1ba18796c3e96e2ece6e13"
-            },
-            "require": {
-                "beneroch/charcoal-attachment": "dev-master",
-                "guzzlehttp/guzzle": "^6.2",
-                "locomotivemtl/charcoal-base": "~0.2",
-                "locomotivemtl/charcoal-cms": "~0.1",
-                "locomotivemtl/charcoal-core": "~0.2",
-                "mcaskill/charcoal-support": "dev-master",
-                "php": ">=5.6.0",
-                "willdurand/geocoder": "^3.3"
-            },
-            "type": "charcoal-city",
-            "autoload": {
-                "psr-4": {
-                    "City\\": "src/City",
-                    "Charcoal\\": "src/Charcoal"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "@phplint",
-                    "@phpunit",
-                    "@phpcs"
-                ],
-                "phplint": [
-                    "find {src,tests} -name '*.php' -print0 | xargs -0 -n1 -P8 php -l | grep -v '^No syntax errors detected'; test $? -eq 1"
-                ],
-                "phpunit": [
-                    "php vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text"
-                ],
-                "phpcs": [
-                    "php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1;php vendor/bin/phpcs -ps --colors --standard=phpcs.xml src/"
-                ],
-                "phpcbf": [
-                    "php vendor/bin/phpcbf -ps --colors --standard=phpcs.xml src/ tests/"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A Charcoal City Objects Collection",
-            "homepage": "https://locomotive.ca",
-            "keywords": [
-                "admin",
-                "charcoal",
-                "city"
-            ],
-            "time": "2016-09-16 22:16:40"
         },
         {
             "name": "beneroch/charcoal-utils",
@@ -563,12 +507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-admin.git",
-                "reference": "6f97471bbcc5c7c5137d997945d8fdd58b1a8c33"
+                "reference": "f6a1aef69975afe2193c720111b7eeb34d8474a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/6f97471bbcc5c7c5137d997945d8fdd58b1a8c33",
-                "reference": "6f97471bbcc5c7c5137d997945d8fdd58b1a8c33",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/f6a1aef69975afe2193c720111b7eeb34d8474a5",
+                "reference": "f6a1aef69975afe2193c720111b7eeb34d8474a5",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +564,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-09-23 19:12:39"
+            "time": "2016-09-23 20:04:15"
         },
         {
             "name": "locomotivemtl/charcoal-app",
@@ -754,6 +698,66 @@
                 "framework"
             ],
             "time": "2016-09-20 17:41:23"
+        },
+        {
+            "name": "locomotivemtl/charcoal-city",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/locomotivemtl/charcoal-city",
+                "reference": "c32a7e548a7774152ee31b988cb27aeffcff83e7"
+            },
+            "require": {
+                "beneroch/charcoal-attachment": "dev-master",
+                "guzzlehttp/guzzle": "^6.2",
+                "locomotivemtl/charcoal-base": "~0.2",
+                "locomotivemtl/charcoal-cms": "~0.1",
+                "locomotivemtl/charcoal-core": "~0.2",
+                "mcaskill/charcoal-support": "dev-master",
+                "php": ">=5.6.0",
+                "willdurand/geocoder": "^3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "City\\": "src/City",
+                    "Charcoal\\": "src/Charcoal"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "@phplint",
+                    "@phpunit",
+                    "@phpcs"
+                ],
+                "phplint": [
+                    "find {src,tests} -name '*.php' -print0 | xargs -0 -n1 -P8 php -l | grep -v '^No syntax errors detected'; test $? -eq 1"
+                ],
+                "phpunit": [
+                    "php vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text"
+                ],
+                "phpcs": [
+                    "php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1;php vendor/bin/phpcs -ps --colors --standard=phpcs.xml src/"
+                ],
+                "phpcbf": [
+                    "php vendor/bin/phpcbf -ps --colors --standard=phpcs.xml src/ tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Charcoal City Objects Collection",
+            "homepage": "https://locomotive.ca",
+            "keywords": [
+                "admin",
+                "charcoal",
+                "city"
+            ],
+            "time": "2016-09-23 20:52:03"
         },
         {
             "name": "locomotivemtl/charcoal-cms",
@@ -3566,7 +3570,7 @@
     "stability-flags": {
         "beneroch/charcoal-utils": 20,
         "beneroch/charcoal-attachment": 20,
-        "beneroch/charcoal-city": 20,
+        "locomotivemtl/charcoal-city": 20,
         "mcaskill/charcoal-support": 20
     },
     "prefer-stable": false,
