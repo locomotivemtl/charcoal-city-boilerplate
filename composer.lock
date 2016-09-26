@@ -1525,12 +1525,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "dacec2fe1ead778f90d0149caa8f047a0856571b"
+                "reference": "ffc421a4fd4e9651e236341f5ff3994b25a8ecc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dacec2fe1ead778f90d0149caa8f047a0856571b",
-                "reference": "dacec2fe1ead778f90d0149caa8f047a0856571b",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ffc421a4fd4e9651e236341f5ff3994b25a8ecc5",
+                "reference": "ffc421a4fd4e9651e236341f5ff3994b25a8ecc5",
                 "shasum": ""
             },
             "require": {
@@ -1595,7 +1595,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-09-18 16:07:11"
+            "time": "2016-09-25 14:47:31"
         },
         {
             "name": "mustache/mustache",
@@ -1938,12 +1938,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
+                "reference": "607ce1d4005af32dd866c4a402459494c168d555"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/607ce1d4005af32dd866c4a402459494c168d555",
+                "reference": "607ce1d4005af32dd866c4a402459494c168d555",
                 "shasum": ""
             },
             "require": {
@@ -1977,7 +1977,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-09-19 16:02:08"
+            "time": "2016-09-25 13:41:54"
         },
         {
             "name": "seld/cli-prompt",
@@ -2033,12 +2033,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "1dedd2592c4f7e088ee3a87a7936f5df71cb7593"
+                "reference": "7c33189d2edad8ef5a433c4e2375f5d777bc5c5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/1dedd2592c4f7e088ee3a87a7936f5df71cb7593",
-                "reference": "1dedd2592c4f7e088ee3a87a7936f5df71cb7593",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/7c33189d2edad8ef5a433c4e2375f5d777bc5c5a",
+                "reference": "7c33189d2edad8ef5a433c4e2375f5d777bc5c5a",
                 "shasum": ""
             },
             "require": {
@@ -2095,7 +2095,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-08-14 08:11:00"
+            "time": "2016-09-25 07:36:37"
         },
         {
             "name": "studio-42/elfinder",
@@ -2103,12 +2103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "362b494797042d3f4bb33eaa4a21ce6fc29b67ce"
+                "reference": "aa65ef9bc4eab4f2325a70f19bbcf5824b7124e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/362b494797042d3f4bb33eaa4a21ce6fc29b67ce",
-                "reference": "362b494797042d3f4bb33eaa4a21ce6fc29b67ce",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/aa65ef9bc4eab4f2325a70f19bbcf5824b7124e3",
+                "reference": "aa65ef9bc4eab4f2325a70f19bbcf5824b7124e3",
                 "shasum": ""
             },
             "require": {
@@ -2153,7 +2153,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-09-23 12:14:50"
+            "time": "2016-09-26 13:21:07"
         },
         {
             "name": "tedivm/stash",
@@ -3387,12 +3387,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "84b88e0f5d283011012e67c50125c85c12a28d86"
+                "reference": "a3cb3163988f6ec1646d8a06b2c0c7b30798ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/84b88e0f5d283011012e67c50125c85c12a28d86",
-                "reference": "84b88e0f5d283011012e67c50125c85c12a28d86",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/a3cb3163988f6ec1646d8a06b2c0c7b30798ce54",
+                "reference": "a3cb3163988f6ec1646d8a06b2c0c7b30798ce54",
                 "shasum": ""
             },
             "require": {
@@ -3457,7 +3457,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-09-23 01:12:07"
+            "time": "2016-09-25 22:43:32"
         },
         {
             "name": "symfony/yaml",
@@ -3465,12 +3465,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "7fbb0dfc86370757774ff2d9bd5c3b89c9aac1a8"
+                "reference": "ef38bb2d8e9341a7a052526330b0f6693fb95138"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/7fbb0dfc86370757774ff2d9bd5c3b89c9aac1a8",
-                "reference": "7fbb0dfc86370757774ff2d9bd5c3b89c9aac1a8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ef38bb2d8e9341a7a052526330b0f6693fb95138",
+                "reference": "ef38bb2d8e9341a7a052526330b0f6693fb95138",
                 "shasum": ""
             },
             "require": {
@@ -3512,7 +3512,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-20 08:33:13"
+            "time": "2016-09-25 16:21:58"
         },
         {
             "name": "webmozart/assert",
