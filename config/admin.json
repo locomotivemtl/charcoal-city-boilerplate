@@ -4,7 +4,7 @@
             "templates": {
                 "home": {
                     "route": "[/[home]]",
-                    "redirect": "admin/object/collection?obj_type=city/object/news/entry"
+                    "redirect": "admin/object/collection?obj_type=city/object/section"
                 }
             },
             "actions": {
@@ -39,7 +39,7 @@
                         "fr": "Contenus"
                     },
                     "icon": "contents",
-                    "url": "object/collection?obj_type=city/object/section",
+                    "url": "object/collection?main_menu=section&obj_type=city/object/section",
                     "has_children": false
                 },
                 "map":{
@@ -49,13 +49,13 @@
                         "en":"Interactive map"
                     },
                     "icon":"map-marker",
-                    "url":"object/collection?obj_type=city/object/location"
+                    "url":"object/collection?main_menu=map&obj_type=city/object/location"
                 },
                 "contact": {
                     "active": true,
                     "label": "Contact",
                     "icon": "contacts",
-                    "url": "object/collection?obj_type=city/object/contact",
+                    "url": "object/collection?main_menu=contact&obj_type=city/object/contact",
                     "has_children": false
                 },
                 "media": {
@@ -65,14 +65,14 @@
                         "fr": "Médias"
                     },
                     "icon": "media",
-                    "url": "media",
+                    "url": "media?main_menu=media",
                     "has_children": false
                 },
                 "configuration": {
                     "active": true,
                     "label": "Options",
                     "icon": "config",
-                    "url": "object/edit?obj_type=city/object/config&obj_id=1",
+                    "url": "object/edit?main_menu=configuration&obj_type=city/object/config&obj_id=1",
                     "has_children": false
                 }
             }
@@ -90,28 +90,28 @@
                 "links": {
                     "city/object/section": {
                         "name": "Sections",
-                        "url": "object/collection?obj_type=city/object/section"
+                        "url": "object/collection?main_menu=section&obj_type=city/object/section"
                     },
                     "city/object/news": {
                         "name": {
                             "en": "News",
                             "fr": "Nouvelles"
                         },
-                        "url": "object/collection?obj_type=city/object/news"
+                        "url": "object/collection?main_menu=section&obj_type=city/object/news"
                     },
                     "city/object/event": {
                         "name": {
                             "en": "Events",
                             "fr": "Évènements"
                         },
-                        "url": "object/collection?obj_type=city/object/event"
+                        "url": "object/collection?main_menu=section&obj_type=city/object/event"
                     },
                     "city/object/team-member": {
                         "name": {
                             "en": "Team",
                             "fr": "Équipe"
                         },
-                        "url": "object/collection?obj_type=city/object/team-member"
+                        "url": "object/collection?main_menu=section&obj_type=city/object/team-member"
                     }
                 },
                 "groups": {
@@ -127,21 +127,21 @@
                                     "en": "News",
                                     "fr": "Nouvelles"
                                 },
-                                "url": "object/collection?obj_type=city/object/news-category"
+                                "url": "object/collection?main_menu=section&obj_type=city/object/news-category"
                             },
                             "city/object/event-category": {
                                 "name": {
                                     "en": "Events",
                                     "fr": "Évènements"
                                 },
-                                "url": "object/collection?obj_type=city/object/event-category"
+                                "url": "object/collection?main_menu=section&obj_type=city/object/event-category"
                             },
                             "city/object/team-category": {
                                 "name": {
                                     "en": "Team",
                                     "fr": "Équipe"
                                 },
-                                "url": "object/collection?obj_type=city/object/team-category"
+                                "url": "object/collection?main_menu=section&obj_type=city/object/team-category"
                             }
                         }
                     },
@@ -157,7 +157,7 @@
                                     "en": "Templates",
                                     "fr": "Gabarits"
                                 },
-                                "url": "object/collection?obj_type=city/object/template"
+                                "url": "object/collection?main_menu=section&obj_type=city/object/template"
                             }
                         }
                     }
@@ -171,21 +171,21 @@
                             "en": "Contact Inquiries",
                             "fr": "Demandes de contact"
                         },
-                        "url": "object/collection?obj_type=city/object/contact"
+                        "url": "object/collection?main_menu=contact&obj_type=city/object/contact"
                     },
                     "city/object/contact-category": {
                         "name": {
                             "en": "Contact categories",
                             "fr": "Catégories contact"
                         },
-                        "url": "object/collection?obj_type=city/object/contact-category"
+                        "url": "object/collection?main_menu=contact&obj_type=city/object/contact-category"
                     },
                     "city/object/newsletter-subscription": {
                         "name": {
                             "en": "Newsletter subscriptions",
                             "fr": "Inscriptions à l'infolettre"
                         },
-                        "url": "object/collection?obj_type=city/object/newsletter-subscription"
+                        "url": "object/collection?main_menu=contact&obj_type=city/object/newsletter-subscription"
                     }
                 }
             },
@@ -197,15 +197,15 @@
                 "links": {
                     "city/object/location": {
                         "name": "Emplacements",
-                        "url": "object/collection?obj_type=city/object/location"
+                        "url": "object/collection?main_menu=map&obj_type=city/object/location"
                     },
                     "city/object/location-category": {
                         "name": "Catégories d'emplacements",
-                        "url": "object/collection?obj_type=city/object/location-category"
+                        "url": "object/collection?main_menu=map&obj_type=city/object/location-category"
                     },
                     "city/object/district": {
                         "name": "Districts",
-                        "url": "object/collection?obj_type=city/object/district"
+                        "url": "object/collection?main_menu=map&obj_type=city/object/district"
                     }
                 }
             },
@@ -217,14 +217,14 @@
                             "en": "Configuration",
                             "fr": "Configuration"
                         },
-                        "url": "object/edit?obj_type=city/object/config&obj_id=1"
+                        "url": "object/edit?main_menu=configuration&obj_type=city/object/config&obj_id=1"
                     },
                     "city/object/author": {
                         "name": {
                             "en": "Authors",
                             "fr": "Auteurs"
                         },
-                        "url": "object/collection?obj_type=city/object/author"
+                        "url": "object/collection?main_menu=configuration&obj_type=city/object/author"
                     }
                 }
             }
