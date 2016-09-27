@@ -1549,6 +1549,20 @@ Charcoal.Admin.Widget_Form.prototype.submit_form = function (form)
 
     this.disable_form($form, $trigger);
 
+    // Use this loop if ever cascading checkbox inputs end up not
+    // working properly in checkbox.mustache
+    // $form.find('input[type="checkbox"]').each(function () {
+    //     var $input = $(this);
+    //     var inputName = $input.attr('name');
+
+    //     // Prevents affecting switch type radio inputs
+    //     if (typeof inputName !== 'undefined') {b
+    //         if (!form_data.has(inputName)) {
+    //             form_data.set(inputName, '');
+    //         }
+    //     }
+    // });
+
     this.xhr = $.ajax({
         type:        'POST',            // ($form.prop('method') || 'POST')
         url:         this.request_url(),  // ($form.data('action') || this.request_url())
@@ -2587,23 +2601,38 @@ Charcoal.Admin.Widget_Table.Table_Row.prototype.inline_edit = function ()
 
 Charcoal.Admin.Widget_Table.Table_Row.prototype.delete_object = function ()
 {
-    var that = this,
-        data = {
-            obj_type: that.obj_type,
-            obj_id: that.obj_id
-        };
+    var that = this;
 
-    if (window.confirm('Are you sure you want to delete this object?')) {
-
-        $.post(that.delete_url, data, function (response) {
-            if (response.success) {
-                $(that.element).remove();
-                //that.widget_table.reload();
-            } else {
-                window.alert('Delete failed.');
+    BootstrapDialog.confirm({
+        title: 'Confirmer la suppression',
+        type: BootstrapDialog.TYPE_DANGER,
+        message:'Êtes-vous sûr de vouloir supprimer cet objet? Cette action est irréversible.',
+        btnOKLabel: 'Supprimer',
+        btnCancelLabel: 'Annuler',
+        callback: function (result) {
+            if (result) {
+                var url = that.delete_url;
+                var data = {
+                    obj_type: that.obj_type,
+                    obj_id: that.obj_id
+                };
+                $.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: data,
+                    dataType: 'json'
+                }).done(function (response) {
+                    //console.debug(response);
+                    if (response.success) {
+                        $(that.element).remove();
+                    } else {
+                        window.alert('Erreur. Impossible de supprimer cet objet.');
+                    }
+                });
             }
-        }, 'json');
-    }
+        }
+    });
+
 };
 
 ;Charcoal.Admin.Widget_Wysiwyg = function ()
@@ -4516,6 +4545,12 @@ Charcoal.Admin.Property_Input_Selectize_Tags.prototype.constructor = Charcoal.Ad
 Charcoal.Admin.Property_Input_Selectize_Tags.prototype.parent      = Charcoal.Admin.Property.prototype;
 
 Charcoal.Admin.Property_Input_Selectize_Tags.prototype.init = function () {
+    if (typeof $.fn.sortable !== 'function') {
+        var url = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js';
+        Charcoal.Admin.loadScript(url, this.init.bind(this));
+
+        return this;
+    }
     this.init_selectize();
 };
 
