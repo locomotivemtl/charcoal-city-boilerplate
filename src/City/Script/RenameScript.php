@@ -200,6 +200,7 @@ class RenameScript extends AbstractScript
 
         if ($climate->arguments->defined('help')) {
             $climate->usage();
+
             return;
         }
 
@@ -209,13 +210,17 @@ class RenameScript extends AbstractScript
         $verbose     = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
-        if (!$sourceName) {
-            $input      = $climate->input('What is the current project namespace (default : boilerplate)?');
-            $sourceName = strtolower($input->prompt());
-        }
-
-        if ($sourceName === '') {
-            $sourceName = $this->defaultSourceName;
+        if ($sourceName == $this->defaultSourceName) {
+            $input = $climate->confirm(sprintf(
+                'Are you sure you want to use "&s" as source namespace? (y|n)',
+                $this->defaultSourceName
+            ));
+            if ($input->confirmed()) {
+                $sourceName = $this->defaultSourceName;
+            } else {
+                $input      = $climate->input('What is the current project namespace (default : boilerplate)?');
+                $sourceName = strtolower($input->prompt());
+            }
         }
 
         try {
