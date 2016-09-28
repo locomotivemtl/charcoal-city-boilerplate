@@ -37,6 +37,11 @@ class RenameScript extends AbstractScript
     protected $projectName;
 
     /**
+     * @var string $excludeFromGlob Namespaces to exclude from replacement.
+     */
+    protected $excludeFromGlob = '/^city$/';
+
+    /**
      * RenameScript constructor Register the action's arguments..
      */
     public function __construct()
@@ -373,7 +378,9 @@ class RenameScript extends AbstractScript
         $files = glob($pattern, $flags);
 
         foreach (glob(dirname($pattern).'/*', (GLOB_ONLYDIR | GLOB_NOSORT)) as $dir) {
-            $files = array_merge($files, $this->globRecursive($dir.'/'.basename($pattern), $flags));
+            if (!preg_match($this->excludeFromGlob, $dir)) {
+                $files = array_merge($files, $this->globRecursive($dir.'/'.basename($pattern), $flags));
+            }
         }
 
         return $files;
