@@ -210,15 +210,16 @@ class RenameScript extends AbstractScript
         $verbose     = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
+        // Verify current namespace
         if ($sourceName == $this->defaultSourceName) {
             $input = $climate->confirm(sprintf(
-                'Are you sure you want to use "&s" as source namespace? (y|n)',
+                'Is "%s" the current project namespace?',
                 $this->defaultSourceName
             ));
             if ($input->confirmed()) {
                 $sourceName = $this->defaultSourceName;
             } else {
-                $input      = $climate->input('What is the current project namespace (default : boilerplate)?');
+                $input      = $climate->input('What is the current project namespace?');
                 $sourceName = strtolower($input->prompt());
             }
         }
