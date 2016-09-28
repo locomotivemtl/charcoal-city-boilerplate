@@ -39,7 +39,8 @@ class RenameScript extends AbstractScript
     /**
      * @var string $excludeFromGlob Namespaces to exclude from replacement.
      */
-    protected $excludeFromGlob = '/^city$/';
+    protected $excludeFromGlob = '!(\/city|vendor|node_modules|bower_components|mustache_cache'.
+    '|www\/assets\/admin|www\/uploads)($|/)!i';
 
     /**
      * RenameScript constructor Register the action's arguments..
@@ -252,6 +253,8 @@ class RenameScript extends AbstractScript
         // Replace file contents
         $this->replaceFileContent();
 
+        error_log(var_export(' ------ ', true));
+
         // Rename files
         $this->renameFiles();
 
@@ -282,42 +285,42 @@ class RenameScript extends AbstractScript
             $this->globRecursive('www/*'),
             glob('*.*')
         );
-        foreach ($files as $filename) {
-            if (is_dir($filename)) {
-                continue;
-            }
-            $file            = file_get_contents($filename);
-            $numReplacement1 = 0;
-            $numReplacement2 = 0;
-            $content         = preg_replace(
-                '#'.$this->sourceName.'#',
-                $projectName,
-                $file,
-                -1,
-                $numReplacement1
-            );
-            $content         = preg_replace(
-                '#'.ucfirst($this->sourceNmae).'#',
-                ucfirst($projectName),
-                $content,
-                -1,
-                $numReplacement2
-            );
-            $numReplacements = ($numReplacement1 + $numReplacement2);
-            if ($numReplacements > 0) {
-                // Save file content
-                file_put_contents($filename, $content);
-                $climate->dim()->out(
-                    sprintf(
-                        '%d occurence(s) of "%s" have been changed to "%s" in file "%s"',
-                        $numReplacements,
-                        $this->sourceName,
-                        $projectName,
-                        $filename
-                    )
-                );
-            }
-        }
+        // foreach ($files as $filename) {
+        //     if (is_dir($filename)) {
+        //         continue;
+        //     }
+        //     $file            = file_get_contents($filename);
+        //     $numReplacement1 = 0;
+        //     $numReplacement2 = 0;
+        //     $content         = preg_replace(
+        //         '#'.$this->sourceName.'#',
+        //         $projectName,
+        //         $file,
+        //         -1,
+        //         $numReplacement1
+        //     );
+        //     $content         = preg_replace(
+        //         '#'.ucfirst($this->sourceNmae).'#',
+        //         ucfirst($projectName),
+        //         $content,
+        //         -1,
+        //         $numReplacement2
+        //     );
+        //     $numReplacements = ($numReplacement1 + $numReplacement2);
+        //     if ($numReplacements > 0) {
+        //         // Save file content
+        //         file_put_contents($filename, $content);
+        //         $climate->dim()->out(
+        //             sprintf(
+        //                 '%d occurence(s) of "%s" have been changed to "%s" in file "%s"',
+        //                 $numReplacements,
+        //                 $this->sourceName,
+        //                 $projectName,
+        //                 $filename
+        //             )
+        //         );
+        //     }
+        // }
     }
 
     /**
@@ -338,29 +341,29 @@ class RenameScript extends AbstractScript
         $sourceFiles = $this->globRecursive('*'.$this->sourceName.'*');
         $sourceFiles = array_reverse($sourceFiles);
 
-        foreach ($sourceFiles as $filename) {
-            $targetName = preg_replace('#'.$this->sourceName.'#', $projectName, basename($filename));
-            $targetName = dirname($filename).'/'.$targetName;
-
-            if ($targetName != $filename) {
-                rename($filename, $targetName);
-                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $targetName));
-            }
-        }
-
-        $sourceFiles = $this->globRecursive('*'.ucfirst($this->sourceName).'*');
-        $sourceFiles = array_reverse($sourceFiles);
-
-        foreach ($sourceFiles as $filename) {
-            $climate->inline('.');
-            $targetName = preg_replace('/'.ucfirst($this->sourceName).'/', ucfirst($projectName), basename($filename));
-            $targetName = dirname($filename).'/'.$targetName;
-
-            if ($targetName != $filename) {
-                rename($filename, $targetName);
-                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $targetName));
-            }
-        }
+        // foreach ($sourceFiles as $filename) {
+        //     $targetName = preg_replace('#'.$this->sourceName.'#', $projectName, basename($filename));
+        //     $targetName = dirname($filename).'/'.$targetName;
+        //
+        //     if ($targetName != $filename) {
+        //         rename($filename, $targetName);
+        //         $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $targetName));
+        //     }
+        // }
+        //
+        // $sourceFiles = $this->globRecursive('*'.ucfirst($this->sourceName).'*');
+        // $sourceFiles = array_reverse($sourceFiles);
+        //
+        // foreach ($sourceFiles as $filename) {
+        //     $climate->inline('.');
+        //     $targetName = preg_replace('/'.ucfirst($this->sourceName).'/', ucfirst($projectName), basename($filename));
+        //     $targetName = dirname($filename).'/'.$targetName;
+        //
+        //     if ($targetName != $filename) {
+        //         rename($filename, $targetName);
+        //         $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $targetName));
+        //     }
+        // }
     }
 
     /**
@@ -379,6 +382,7 @@ class RenameScript extends AbstractScript
 
         foreach (glob(dirname($pattern).'/*', (GLOB_ONLYDIR | GLOB_NOSORT)) as $dir) {
             if (!preg_match($this->excludeFromGlob, $dir)) {
+                error_log(var_export($dir, true));
                 $files = array_merge($files, $this->globRecursive($dir.'/'.basename($pattern), $flags));
             }
         }
