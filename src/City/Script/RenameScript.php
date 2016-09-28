@@ -1,6 +1,6 @@
 <?php
 
-namespace Boilerplate\Script;
+namespace City\Script;
 
 use \Exception;
 use \InvalidArgumentException;
@@ -24,7 +24,12 @@ class RenameScript extends AbstractScript
     /**
      * @var string $sourceName The original string to search and replace.
      */
-    protected $sourceName = 'boilerplate';
+    protected $sourceName;
+
+    /**
+     * @var string $sourceName The default string to search and replace.
+     */
+    protected $defaultSourceName = 'boilerplate';
 
     /**
      * @var string $projectName The user-provided name of the project.
@@ -32,7 +37,7 @@ class RenameScript extends AbstractScript
     protected $projectName;
 
     /**
-     * Constructor — Register the action's arguments.
+     * RenameScript constructor Register the action's arguments..
      */
     public function __construct()
     {
@@ -98,6 +103,38 @@ class RenameScript extends AbstractScript
     }
 
     /**
+     * Set the current source name.
+     *
+     * @param string $sourceName The name of the project.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return RenameScript Chainable
+     */
+    public function setSourceName($sourceName)
+    {
+        if (!is_string($sourceName)) {
+            throw new InvalidArgumentException(
+                'Invalid source namespace name. Must be a string.'
+            );
+        }
+
+        if (!$sourceName) {
+            throw new InvalidArgumentException(
+                'Invalid source namespace name. Must contain at least one character.'
+            );
+        }
+
+        if (!preg_match('/^[a-z]+$/', $sourceName)) {
+            throw new InvalidArgumentException(
+                'Invalid source namespace name. Only characters A-Z in lowercase are allowed.'
+            );
+        }
+
+        $this->sourceName = $sourceName;
+
+        return $this;
+    }
+
+    /**
      * Retrieve the current project name.
      *
      * @return string
@@ -105,6 +142,16 @@ class RenameScript extends AbstractScript
     public function projectName()
     {
         return $this->projectName;
+    }
+
+    /**
+     * Retrieve the current source name.
+     *
+     * @return string
+     */
+    public function sourceName()
+    {
+        return $this->sourceName;
     }
 
     /**
@@ -148,12 +195,24 @@ class RenameScript extends AbstractScript
         }
 
         $climate->arguments->parse();
+        $sourceName  = $climate->arguments->get('sourceName');
         $projectName = $climate->arguments->get('projectName');
-        $verbose = !!$climate->arguments->get('quiet');
+        $verbose     = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
+        if (!$sourceName) {
+            $input      = $climate->input('What is the current project namespace (default : boilerplate)?');
+            $sourceName = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setSourceName($sourceName);
+        } catch (Exception $e) {
+            $climate->error($e->getMessage());
+        }
+
         if (!$projectName) {
-            $input = $climate->input('What is the name of the project?');
+            $input       = $climate->input('What is the name of the project?');
             $projectName = strtolower($input->prompt());
         }
 
@@ -185,9 +244,9 @@ class RenameScript extends AbstractScript
      */
     protected function replaceFileContent()
     {
-        $climate = $this->climate();
+        $climate     = $this->climate();
         $projectName = $this->projectName();
-        $verbose = $this->verbose();
+        $verbose     = $this->verbose();
 
         $climate->out("\n".'Replacing file content...');
         $files = array_merge(
@@ -203,24 +262,24 @@ class RenameScript extends AbstractScript
             if (is_dir($filename)) {
                 continue;
             }
-            $file = file_get_contents($filename);
+            $file            = file_get_contents($filename);
             $numReplacement1 = 0;
             $numReplacement2 = 0;
-            $content = preg_replace(
+            $content         = preg_replace(
                 '#'.$this->sourceName.'#',
                 $projectName,
                 $file,
                 -1,
                 $numReplacement1
             );
-            $content = preg_replace(
+            $content         = preg_replace(
                 '#'.ucfirst($this->sourceNmae).'#',
                 ucfirst($projectName),
                 $content,
                 -1,
                 $numReplacement2
             );
-            $numReplacements = ($numReplacement1+$numReplacement2);
+            $numReplacements = ($numReplacement1 + $numReplacement2);
             if ($numReplacements > 0) {
                 // Save file content
                 file_put_contents($filename, $content);
@@ -247,9 +306,9 @@ class RenameScript extends AbstractScript
      */
     protected function renameFiles()
     {
-        $climate = $this->climate();
+        $climate     = $this->climate();
         $projectName = $this->projectName();
-        $verbose = $this->verbose();
+        $verbose     = $this->verbose();
 
         $climate->out("\n".'Renaming files and directories');
         $sourceFiles = $this->globRecursive('*'.$this->sourceName.'*');
@@ -288,13 +347,13 @@ class RenameScript extends AbstractScript
      * @param string  $pattern The search pattern.
      * @param integer $flags   The glob flags.
      * @return array Returns an array containing the matched files/directories,
-     *               an empty array if no file matched or FALSE on error.
+     *                         an empty array if no file matched or FALSE on error.
      */
     private function globRecursive($pattern, $flags = 0)
     {
         $files = glob($pattern, $flags);
 
-        foreach (glob(dirname($pattern).'/*', (GLOB_ONLYDIR|GLOB_NOSORT)) as $dir) {
+        foreach (glob(dirname($pattern).'/*', (GLOB_ONLYDIR | GLOB_NOSORT)) as $dir) {
             $files = array_merge($files, $this->globRecursive($dir.'/'.basename($pattern), $flags));
         }
 
