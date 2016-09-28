@@ -55,11 +55,20 @@ class RenameScript extends AbstractScript
     public function defaultArguments()
     {
         $arguments = [
+            'sourceName'  => [
+                'longPrefix'   => 'source',
+                'description'  => sprintf(
+                    'Project (module) source. The source namespace. '.
+                    'By default "%s" will by used as source if you let it blank.',
+                    $this->defaultSourceName
+                ),
+                'defaultValue' => $this->defaultSourceName
+            ],
             'projectName' => [
                 'longPrefix'   => 'name',
                 'description'  => sprintf(
                     'Project (module) name. All occurences of "%s" in the files will be changed to this name.',
-                    'Boilerplate'
+                    'sourceName'
                 ),
                 'defaultValue' => ''
             ]
@@ -203,6 +212,10 @@ class RenameScript extends AbstractScript
         if (!$sourceName) {
             $input      = $climate->input('What is the current project namespace (default : boilerplate)?');
             $sourceName = strtolower($input->prompt());
+        }
+
+        if ($sourceName === '') {
+            $sourceName = $this->defaultSourceName;
         }
 
         try {
