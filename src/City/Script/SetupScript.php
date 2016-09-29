@@ -37,67 +37,79 @@ class SetupScript extends AbstractScript
     protected $projectNamespace;
 
     /**
-     * Setup function called after the project creation.
-     * @return void
+     * @var string $projectRpo The VCS repository of the project.
      */
-    public static function setup()
+    protected $projectRepo;
+
+    /**
+     * SetupScript constructor Register the action's arguments..
+     */
+    public function __construct()
     {
-        $setup   = new SetupScript();
-        $climate = $setup->climate();
+        $arguments = $this->defaultArguments();
+        $this->setArguments($arguments);
+    }
 
-        $climate->underline()->out('Charcoal City setup script');
+    /**
+     * Retrieve the available default arguments of this action.
+     *
+     * @link http://climate.thephpleague.com/arguments/ For descriptions of the options for CLImate.
+     *
+     * @return array
+     */
+    public function defaultArguments()
+    {
+        $arguments = [
+            'projectName'       => [
+                'prefix'      => 'n',
+                'longPrefix'  => 'name',
+                'description' => 'Project name.'
+            ],
+            'projectNamespace'  => [
+                'Prefix'      => 'ns',
+                'longPrefix'  => 'namespace',
+                'description' => 'Project namespace.'
+            ],
+            'projectRepository' => [
+                'Prefix'      => 'r',
+                'longPrefix'  => 'repo',
+                'description' => 'Project VCS repository name.'
+            ]
+        ];
 
-        if ($climate->arguments->defined('help')) {
-            $climate->usage();
+        $arguments = array_merge(parent::defaultArguments(), $arguments);
 
-            return;
-        }
-
-        $climate->arguments->parse();
-        $verbose = !!$climate->arguments->get('quiet');
-        $setup->setVerbose($verbose);
-
-        $input       = $climate->input('What is the name of the project?');
-        $projectName = strtolower($input->prompt());
-
-        try {
-            $setup->setProjectName($projectName);
-        } catch (Exception $e) {
-            $climate->error($e->getMessage());
-        }
-
-        $climate->bold()->out(sprintf('Using "%s" as project name...', $projectName));
-        $climate->out(sprintf('Using "%s" as namespace...', ucfirst($projectName)));
+        return $arguments;
     }
 
     /**
      * Set the current project name.
      *
-     * @param string $projectName The name of the project.
+     * @param string $name The name of the project.
      * @throws InvalidArgumentException If the project name is invalid.
      * @return SetupScript Chainable
      */
-    public function setProjectName($projectName)
+    public function setProjectName($name)
     {
-        if (!is_string($projectName)) {
+        if (!is_string($name)) {
             throw new InvalidArgumentException(
                 'Invalid project name. Must be a string.'
             );
         }
 
-        if (!$projectName) {
+        if (!$name) {
             throw new InvalidArgumentException(
                 'Invalid project name. Must contain at least one character.'
             );
         }
 
-        if (!preg_match('/^[a-z]+$/', $projectName)) {
+        if (!preg_match('/^[a-z]+$/', $name)) {
             throw new InvalidArgumentException(
                 'Invalid project name. Only characters A-Z in lowercase are allowed.'
             );
         }
 
-        $this->projectName = $projectName;
+        $this->projectName = $name;
 
         return $this;
     }
@@ -105,31 +117,67 @@ class SetupScript extends AbstractScript
     /**
      * Set the current project namespace.
      *
-     * @param string $projectNamespace The namespace of the project.
+     * @param string $namespace The namespace of the project.
      * @throws InvalidArgumentException If the project name is invalid.
      * @return SetupScript Chainable
      */
-    public function setProjectNamespace($projectNamespace)
+    public function setProjectNamespace($namespace)
     {
-        if (!is_string($projectNamespace)) {
+        if (!is_string($namespace)) {
             throw new InvalidArgumentException(
-                'Invalid source projectNamespace name. Must be a string.'
+                'Invalid namespace. Must be a string.'
             );
         }
 
-        if (!$projectNamespace) {
+        if (!$namespace) {
             throw new InvalidArgumentException(
-                'Invalid source projectNamespace name. Must contain at least one character.'
+                'Invalid namespace. Must contain at least one character.'
             );
         }
 
-        if (!preg_match('/^[a-z]+$/', $projectNamespace)) {
+        if (!preg_match('/^[a-zA-Z]+$/', $namespace)) {
             throw new InvalidArgumentException(
-                'Invalid source projectNamespace name. Only characters A-Z in lowercase are allowed.'
+                'Invalid namespace. Only characters A-Z in lowercase are allowed.'
             );
         }
 
-        $this->projectNamespace = $projectNamespace;
+        $this->projectNamespace = $namespace;
+
+        return $this;
+    }
+
+    /**
+     * Set the current project namespace.
+     *
+     * @param string $repo The namespace of the project.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return SetupScript Chainable
+     */
+    public function setProjectRepo($repo)
+    {
+        if (!is_string($repo)) {
+            throw new InvalidArgumentException(
+                'Invalid VCS repository. Must be a string.'
+            );
+        }
+
+        if (!$repo) {
+            throw new InvalidArgumentException(
+                'Invalid VCS repository. Must contain at least one character.'
+            );
+        }
+
+        if (!preg_match(
+            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
+            $repo
+        )
+        ) {
+            throw new InvalidArgumentException(
+                'Invalid VCS repository. Only valid Urls are allowed.'
+            );
+        }
+
+        $this->projectRepo = $repo;
 
         return $this;
     }
@@ -152,6 +200,16 @@ class SetupScript extends AbstractScript
     public function projectNamespace()
     {
         return $this->projectNamespace;
+    }
+
+    /**
+     * Retrieve the current project repository.
+     *
+     * @return string
+     */
+    public function projectRepo()
+    {
+        return $this->projectRepo;
     }
 
     /**
@@ -182,25 +240,58 @@ class SetupScript extends AbstractScript
         // Never Used
         unset($request, $response);
 
-        // Verify current namespace
-        if ($sourceName == $this->defaultSourceName) {
-            $input = $climate->confirm(sprintf(
-                'Is "%s" the current project namespace?',
-                $this->defaultSourceName
-            ));
-            if ($input->confirmed()) {
-                $sourceName = $this->defaultSourceName;
-            } else {
-                $input      = $climate->input('What is the current project namespace?');
-                $sourceName = strtolower($input->prompt());
-            }
+        $climate = $this->climate();
+
+        $climate->underline()->out('Charcoal City setup script');
+
+        if ($climate->arguments->defined('help')) {
+            $climate->usage();
+
+            return;
+        }
+
+        $climate->arguments->parse();
+        $projectName      = $climate->arguments->get('projectName');
+        $projectNamespace = $climate->arguments->get('projectNamespace');
+        $projectRepo      = $climate->arguments->get('projectRepository');
+        $verbose          = !!$climate->arguments->get('quiet');
+        $this->setVerbose($verbose);
+
+        if (!$projectName) {
+            $input       = $climate->input('What is the name of the project?');
+            $projectName = strtolower($input->prompt());
         }
 
         try {
-            $this->setSourceName($sourceName);
+            $this->setProjectName($projectName);
         } catch (Exception $e) {
             $climate->error($e->getMessage());
         }
+
+        if (!$projectNamespace) {
+            $input            = $climate->input('What is the namespace of the project?');
+            $projectNamespace = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setProjectNamespace($projectNamespace);
+        } catch (Exception $e) {
+            $climate->error($e->getMessage());
+        }
+
+        if (!$projectRepo) {
+            $input       = $climate->input('What is the VCS repository of the project?');
+            $projectRepo = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setProjectRepo($projectRepo);
+        } catch (Exception $e) {
+            $climate->error($e->getMessage());
+        }
+
+        $climate->bold()->out(sprintf('Using "%s" as project name...', $projectName));
+        $climate->out(sprintf('Using "%s" as namespace...', ucfirst($projectName)));
 
         // Replace file contents
         $this->replaceFileContent();

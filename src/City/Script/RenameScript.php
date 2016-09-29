@@ -21,6 +21,7 @@ use \Charcoal\App\Script\AbstractScript;
  */
 class RenameScript extends AbstractScript
 {
+    use KeyNormalizerTrait;
     /**
      * @var string $sourceName The original string to search and replace.
      */
@@ -32,9 +33,9 @@ class RenameScript extends AbstractScript
     protected $defaultSourceName = 'boilerplate';
 
     /**
-     * @var string $projectName The user-provided name of the project.
+     * @var string $targetName The user-provided name of the project.
      */
-    protected $projectName;
+    protected $targetName;
 
     /**
      * @var string $excludeFromGlob Namespaces to exclude from replacement.
@@ -61,22 +62,22 @@ class RenameScript extends AbstractScript
     public function defaultArguments()
     {
         $arguments = [
-            'sourceName'  => [
-                'longPrefix'   => 'source',
-                'description'  => sprintf(
+            'sourceName' => [
+                'prefix'      => 's',
+                'longPrefix'  => 'source',
+                'description' => sprintf(
                     'Project (module) source. The source namespace. '.
                     'By default "%s" will by used as source if you let it blank.',
                     $this->defaultSourceName
-                ),
-                'defaultValue' => $this->defaultSourceName
+                )
             ],
-            'projectName' => [
-                'longPrefix'   => 'name',
-                'description'  => sprintf(
+            'targetName' => [
+                'prefix'      => 't',
+                'longPrefix'  => 'target',
+                'description' => sprintf(
                     'Project (module) name. All occurences of "%s" in the files will be changed to this name.',
                     'sourceName'
-                ),
-                'defaultValue' => ''
+                )
             ]
         ];
 
@@ -88,31 +89,34 @@ class RenameScript extends AbstractScript
     /**
      * Set the current project name.
      *
-     * @param string $projectName The name of the project.
+     * @param string $targetName The target name of the project.
      * @throws InvalidArgumentException If the project name is invalid.
      * @return RenameScript Chainable
      */
-    public function setProjectName($projectName)
+    public function setTargetName($targetName)
     {
-        if (!is_string($projectName)) {
+        if (!is_string($targetName)) {
             throw new InvalidArgumentException(
                 'Invalid project name. Must be a string.'
             );
         }
 
-        if (!$projectName) {
+        if (!$targetName) {
             throw new InvalidArgumentException(
                 'Invalid project name. Must contain at least one character.'
             );
         }
 
-        if (!preg_match('/^[a-z]+$/', $projectName)) {
+        if (!preg_match('/^[-a-z_ ]+$/i', $targetName)) {
             throw new InvalidArgumentException(
                 'Invalid project name. Only characters A-Z in lowercase are allowed.'
             );
         }
 
-        $this->projectName = $projectName;
+        // Convert to camel case
+        $targetName = self::camel($targetName);
+
+        $this->targetName = $targetName;
 
         return $this;
     }
@@ -138,11 +142,14 @@ class RenameScript extends AbstractScript
             );
         }
 
-        if (!preg_match('/^[a-z]+$/', $sourceName)) {
+        if (!preg_match('/^[-a-z_ ]+$/i', $sourceName)) {
             throw new InvalidArgumentException(
-                'Invalid source namespace name. Only characters A-Z in lowercase are allowed.'
+                'Invalid source namespace name. Only characters A-Z in camelCase are allowed.'
             );
         }
+
+        // Convert to camel case
+        $sourceName = self::camel($sourceName);
 
         $this->sourceName = $sourceName;
 
@@ -150,13 +157,13 @@ class RenameScript extends AbstractScript
     }
 
     /**
-     * Retrieve the current project name.
+     * Retrieve the current project target name.
      *
      * @return string
      */
-    public function projectName()
+    public function targetName()
     {
-        return $this->projectName;
+        return $this->targetName;
     }
 
     /**
@@ -211,23 +218,17 @@ class RenameScript extends AbstractScript
         }
 
         $climate->arguments->parse();
-        $sourceName  = $climate->arguments->get('sourceName');
-        $projectName = $climate->arguments->get('projectName');
-        $verbose     = !!$climate->arguments->get('quiet');
+        $sourceName = $climate->arguments->get('sourceName');
+        $targetName = $climate->arguments->get('targetName');
+        $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
-        // Verify current namespace
-        if ($sourceName == $this->defaultSourceName) {
-            $input = $climate->confirm(sprintf(
-                'Is "%s" the current project namespace?',
-                $this->defaultSourceName
-            ));
-            if ($input->confirmed()) {
-                $sourceName = $this->defaultSourceName;
-            } else {
-                $input      = $climate->input('What is the current project namespace?');
-                $sourceName = strtolower($input->prompt());
-            }
+        if (!$sourceName) {
+            $input = $climate->input(
+                sprintf('What is the project source namespace? [default: %s]', $this->defaultSourceName)
+            );
+            $input->defaultTo($this->defaultSourceName);
+            $sourceName = $input->prompt();
         }
 
         try {
@@ -236,19 +237,19 @@ class RenameScript extends AbstractScript
             $climate->error($e->getMessage());
         }
 
-        if (!$projectName) {
-            $input       = $climate->input('What is the name of the project?');
-            $projectName = strtolower($input->prompt());
+        if (!$targetName) {
+            $input      = $climate->input('What is the project target namespace?');
+            $targetName = $input->prompt();
         }
 
         try {
-            $this->setProjectName($projectName);
+            $this->setTargetName($targetName);
         } catch (Exception $e) {
             $climate->error($e->getMessage());
         }
 
-        $climate->bold()->out(sprintf('Using "%s" as project name...', $projectName));
-        $climate->out(sprintf('Using "%s" as namespace...', ucfirst($projectName)));
+        $climate->bold()->out(sprintf('Using "%s" as project name...', $targetName));
+        $climate->out(sprintf('Using "%s" as namespace...', ucfirst($targetName)));
 
         // Replace file contents
         $this->replaceFileContent();
@@ -269,9 +270,12 @@ class RenameScript extends AbstractScript
      */
     protected function replaceFileContent()
     {
-        $climate     = $this->climate();
-        $projectName = $this->projectName();
-        $verbose     = $this->verbose();
+        $climate         = $this->climate();
+        $targetName      = $this->targetName();
+        $snakeTargetName = self::snake($targetName);
+        $sourceName      = $this->sourceName();
+        $snakeSourceName = self::snake($sourceName);
+        $verbose         = $this->verbose();
 
         $climate->out("\n".'Replacing file content...');
         $files = array_merge(
@@ -291,15 +295,15 @@ class RenameScript extends AbstractScript
             $numReplacement1 = 0;
             $numReplacement2 = 0;
             $content         = preg_replace(
-                '#\b'.$this->sourceName.'\b#',
-                $projectName,
+                '#\b'.$snakeSourceName.'\b#',
+                $snakeTargetName,
                 $file,
                 -1,
                 $numReplacement1
             );
             $content         = preg_replace(
-                '#\b'.ucfirst($this->sourceName).'\b#',
-                ucfirst($projectName),
+                '#\b'.$sourceName.'\b#',
+                $targetName,
                 $content,
                 -1,
                 $numReplacement2
@@ -312,8 +316,8 @@ class RenameScript extends AbstractScript
                     sprintf(
                         '%d occurence(s) of "%s" have been changed to "%s" in file "%s"',
                         $numReplacements,
-                        $this->sourceName,
-                        $projectName,
+                        $sourceName,
+                        $targetName,
                         $filename
                     )
                 );
@@ -331,30 +335,33 @@ class RenameScript extends AbstractScript
      */
     protected function renameFiles()
     {
-        $climate     = $this->climate();
-        $projectName = $this->projectName();
-        $verbose     = $this->verbose();
+        $climate         = $this->climate();
+        $sourceName      = $this->sourceName();
+        $snakeSourceName = $sourceName;
+        $targetName      = $this->targetName();
+        $snakeTargetName = $targetName;
+        $verbose         = $this->verbose();
 
         $climate->out("\n".'Renaming files and directories');
-        $sourceFiles = $this->globRecursive('*'.$this->sourceName.'*');
+        $sourceFiles = $this->globRecursive('*'.$snakeSourceName.'*');
         $sourceFiles = array_reverse($sourceFiles);
 
         foreach ($sourceFiles as $filename) {
-            $targetName = preg_replace('#'.$this->sourceName.'#', $projectName, basename($filename));
-            $targetName = dirname($filename).'/'.$targetName;
+            $snakeTargetName = preg_replace('#'.$snakeSourceName.'#', $snakeTargetName, basename($filename));
+            $snakeTargetName = dirname($filename).'/'.$snakeTargetName;
 
-            if ($targetName != $filename) {
-                rename($filename, $targetName);
-                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $targetName));
+            if ($snakeTargetName != $filename) {
+                rename($filename, $snakeTargetName);
+                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $snakeTargetName));
             }
         }
 
-        $sourceFiles = $this->globRecursive('*'.ucfirst($this->sourceName).'*');
+        $sourceFiles = $this->globRecursive('*'.$sourceName.'*');
         $sourceFiles = array_reverse($sourceFiles);
 
         foreach ($sourceFiles as $filename) {
             $climate->inline('.');
-            $targetName = preg_replace('/'.ucfirst($this->sourceName).'/', ucfirst($projectName), basename($filename));
+            $targetName = preg_replace('/'.$sourceName.'/', $targetName, basename($filename));
             $targetName = dirname($filename).'/'.$targetName;
 
             if ($targetName != $filename) {
