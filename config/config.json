@@ -1,5 +1,5 @@
 {
-    "project_name": "Charcoal City Boilerplate",
+    "project_name": "Boilerplate",
 
     "timezone": "America/Montreal",
 
@@ -46,7 +46,7 @@
 
     "view": {
         "paths": [
-            "views/",
+            "templates/",
             "vendor/mcaskill/charcoal-support/views/",
             "vendor/beneroch/charcoal-attachment/templates/",
             "vendor/beneroch/charcoal-utils/templates/",
@@ -99,6 +99,9 @@
         "scripts": {
             "city/rename": {
                 "ident": "city/script/rename"
+            },
+            "city/setup": {
+                "ident": "city/script/setup"
             }
         }
     }

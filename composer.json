@@ -28,6 +28,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Boilerplate\\": "src/Boilerplate",
             "City\\": "src/City",
             "Charcoal\\": "src/Charcoal"
         }

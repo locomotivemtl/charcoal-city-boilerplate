@@ -21,6 +21,7 @@ use \Charcoal\App\Script\AbstractScript;
  */
 class SetupScript extends AbstractScript
 {
+    use KeyNormalizerTrait;
     /**
      * @var string $sourceName The default string to search and replace.
      */
@@ -37,9 +38,19 @@ class SetupScript extends AbstractScript
     protected $projectNamespace;
 
     /**
-     * @var string $projectRpo The VCS repository of the project.
+     * @var string $projectRepo The VCS repository of the project.
      */
     protected $projectRepo;
+
+    /**
+     * @var string $projectUrl The Url of the site.
+     */
+    protected $siteUrl;
+
+    /**
+     * @var string $illegalNames Names that will return an error.
+     */
+    protected $illegalNames = '*^(charcoal|city)$*i';
 
     /**
      * SetupScript constructor Register the action's arguments..
@@ -66,14 +77,19 @@ class SetupScript extends AbstractScript
                 'description' => 'Project name.'
             ],
             'projectNamespace'  => [
-                'Prefix'      => 'ns',
+                'prefix'      => 'ns',
                 'longPrefix'  => 'namespace',
                 'description' => 'Project namespace.'
             ],
             'projectRepository' => [
-                'Prefix'      => 'r',
+                'prefix'      => 'r',
                 'longPrefix'  => 'repo',
                 'description' => 'Project VCS repository name.'
+            ],
+            'siteUrl'           => [
+                'prefix'      => 'u',
+                'longPrefix'  => 'siteUrl',
+                'description' => 'The project site url'
             ]
         ];
 
@@ -103,9 +119,15 @@ class SetupScript extends AbstractScript
             );
         }
 
-        if (!preg_match('/^[a-z]+$/', $name)) {
+        if (preg_match($this->illegalNames, $name)) {
             throw new InvalidArgumentException(
-                'Invalid project name. Only characters A-Z in lowercase are allowed.'
+                'Invalid project name. The name chosen is illegal.'
+            );
+        }
+
+        if (!preg_match('/^[-a-z_ ]+$/i', $name)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
             );
         }
 
@@ -135,12 +157,19 @@ class SetupScript extends AbstractScript
             );
         }
 
-        if (!preg_match('/^[a-zA-Z]+$/', $namespace)) {
+        if (preg_match($this->illegalNames, $namespace)) {
             throw new InvalidArgumentException(
-                'Invalid namespace. Only characters A-Z in lowercase are allowed.'
+                'Invalid project namespace. The namespace chosen is illegal.'
             );
         }
 
+        if (!preg_match('/^[-a-z_ ]+$/i', $namespace)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
+            );
+        }
+        // Convert to studly
+        $namespace              = self::studly($namespace);
         $this->projectNamespace = $namespace;
 
         return $this;
@@ -183,6 +212,36 @@ class SetupScript extends AbstractScript
     }
 
     /**
+     * Set the current project namespace.
+     *
+     * @param string $url The website url.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return SetupScript Chainable
+     */
+    public function setSiteUrl($url)
+    {
+        if (!is_string($url)) {
+            throw new InvalidArgumentException(
+                'Invalid site url. Must be a string.'
+            );
+        }
+
+        if (!preg_match(
+            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
+            $url
+        )
+        ) {
+            throw new InvalidArgumentException(
+                'Invalid site url. Only valid Urls are allowed.'
+            );
+        }
+
+        $this->siteUrl = $url;
+
+        return $this;
+    }
+
+    /**
      * Retrieve the current project name.
      *
      * @return string
@@ -210,6 +269,16 @@ class SetupScript extends AbstractScript
     public function projectRepo()
     {
         return $this->projectRepo;
+    }
+
+    /**
+     * Retrieve the current project repository.
+     *
+     * @return string
+     */
+    public function siteUrl()
+    {
+        return $this->siteUrl;
     }
 
     /**
@@ -250,78 +319,137 @@ class SetupScript extends AbstractScript
             return;
         }
 
+        // Parse submitted arguments
         $climate->arguments->parse();
         $projectName      = $climate->arguments->get('projectName');
         $projectNamespace = $climate->arguments->get('projectNamespace');
         $projectRepo      = $climate->arguments->get('projectRepository');
+        $siteUrl          = $climate->arguments->get('siteUrl');
         $verbose          = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
-        if (!$projectName) {
-            $input       = $climate->input('What is the name of the project?');
-            $projectName = strtolower($input->prompt());
-        }
+        // Prompt for project name until correctly entered
+        do {
+            $projectName = $this->promptName($projectName);
+        } while (!$projectName);
+        // Prompt for project namespace until correctly entered
+        do {
+            $projectNamespace = $this->promptNamespace($projectNamespace);
+        } while (!$projectNamespace);
+        // Prompt for project repo until correctly entered
+        do {
+            $projectRepo = $this->promptRepo($projectRepo);
+        } while (!$projectRepo);
+        // Prompt for project site url until correctly entered
+        do {
+            $siteUrl = $this->promptUrl($siteUrl);
+        } while (!$siteUrl);
 
-        try {
-            $this->setProjectName($projectName);
-        } catch (Exception $e) {
-            $climate->error($e->getMessage());
-        }
+        $climate->bold()->out(sprintf('Using "%s" as project name...', $this->projectName()));
+        $climate->out(sprintf('Using "%s" as namespace...', $this->projectNamespace()));
+        $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
+        $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
 
-        if (!$projectNamespace) {
-            $input            = $climate->input('What is the namespace of the project?');
-            $projectNamespace = strtolower($input->prompt());
-        }
+        // Rename the project's files and content
+        // Configure the project
 
-        try {
-            $this->setProjectNamespace($projectNamespace);
-        } catch (Exception $e) {
-            $climate->error($e->getMessage());
-        }
+        // Create a user
 
-        if (!$projectRepo) {
-            $input       = $climate->input('What is the VCS repository of the project?');
-            $projectRepo = strtolower($input->prompt());
-        }
-
-        try {
-            $this->setProjectRepo($projectRepo);
-        } catch (Exception $e) {
-            $climate->error($e->getMessage());
-        }
-
-        $climate->bold()->out(sprintf('Using "%s" as project name...', $projectName));
-        $climate->out(sprintf('Using "%s" as namespace...', ucfirst($projectName)));
-
-        // Replace file contents
-        $this->replaceFileContent();
-
-        // Rename files
-        $this->renameFiles();
-
+        // Open a browser tab to admin
         $climate->green()->out("\n".'Success!');
     }
 
     /**
-     * Recursively find pathnames matching a pattern
-     *
-     * @see glob() for a description of the function and its parameters.
-     *
-     * @param string  $pattern The search pattern.
-     * @param integer $flags   The glob flags.
-     * @return array Returns an array containing the matched files/directories,
-     *                         an empty array if no file matched or FALSE on error.
+     * @param string $name The name of the project.
+     * @return string|null
      */
-    private function globRecursive($pattern, $flags = 0)
+    protected function promptName($name = null)
     {
-        $files = glob($pattern, $flags);
-
-        foreach (glob(dirname($pattern).'/*', (GLOB_ONLYDIR | GLOB_NOSORT)) as $dir) {
-            if (!preg_match($this->excludeFromGlob, $dir)) {
-                $files = array_merge($files, $this->globRecursive($dir.'/'.basename($pattern), $flags));
-            }
+        if (!$name) {
+            $input = $this->climate()->input('What is the name of the project?');
+            $name  = ucfirst($input->prompt());
         }
 
-        return $files;
+        try {
+            $this->setProjectName($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
     }
+
+    /**
+     * @param string $name The namespace of the project.
+     * @return string|null
+     */
+    protected function promptNamespace($name = null)
+    {
+        if (!$name) {
+            $generatedNamespace = self::studly($this->projectName());
+            $input              = $this->climate()->input(sprintf(
+                'What is the namespace of the project? [default: %s]',
+                $generatedNamespace
+            ));
+            $input->defaultTo($generatedNamespace);
+            $name = $input->prompt();
+        }
+
+        try {
+            $this->setProjectNamespace($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
+    }
+
+    /**
+     * @param string $repo The repo of the project.
+     * @return string|null
+     */
+    protected function promptRepo($repo = null)
+    {
+        if (!$repo) {
+            $input = $this->climate()->input('What is the VCS repository of the project?');
+            $repo  = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setProjectRepo($repo);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $repo;
+    }
+
+    /**
+     * @param string $url The url of the project site.
+     * @return string|null
+     */
+    protected function promptUrl($url = null)
+    {
+        if (!$url) {
+            $input = $this->climate()->input('What is the project website url? (optional)');
+            $url   = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setSiteUrl($url);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $url;
+    }
+
 }

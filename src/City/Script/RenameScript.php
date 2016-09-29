@@ -41,7 +41,7 @@ class RenameScript extends AbstractScript
      * @var string $excludeFromGlob Namespaces to exclude from replacement.
      */
     protected $excludeFromGlob = '!(\/city|vendor|node_modules|bower_components|mustache_cache'.
-    '|www\/assets\/admin|www\/uploads|*.log)($|/)!i';
+    '|www\/assets\/admin|www\/uploads|\.log)($|/)!i';
 
     /**
      * RenameScript constructor Register the action's arguments..
@@ -109,7 +109,7 @@ class RenameScript extends AbstractScript
 
         if (!preg_match('/^[-a-z_ ]+$/i', $targetName)) {
             throw new InvalidArgumentException(
-                'Invalid project name. Only characters A-Z in lowercase are allowed.'
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
             );
         }
 
@@ -144,7 +144,7 @@ class RenameScript extends AbstractScript
 
         if (!preg_match('/^[-a-z_ ]+$/i', $sourceName)) {
             throw new InvalidArgumentException(
-                'Invalid source namespace name. Only characters A-Z in camelCase are allowed.'
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
             );
         }
 
@@ -270,12 +270,14 @@ class RenameScript extends AbstractScript
      */
     protected function replaceFileContent()
     {
-        $climate         = $this->climate();
-        $targetName      = $this->targetName();
-        $snakeTargetName = self::snake($targetName);
-        $sourceName      = $this->sourceName();
-        $snakeSourceName = self::snake($sourceName);
-        $verbose         = $this->verbose();
+        $climate          = $this->climate();
+        $targetName       = $this->targetName();
+        $snakeTargetName  = self::snake($targetName);
+        $studlyTargetName = self::studly($targetName);
+        $sourceName       = $this->sourceName();
+        $snakeSourceName  = self::snake($sourceName);
+        $studlySourceName = self::studly($sourceName);
+        $verbose          = $this->verbose();
 
         $climate->out("\n".'Replacing file content...');
         $files = array_merge(
@@ -294,6 +296,7 @@ class RenameScript extends AbstractScript
             $file            = file_get_contents($filename);
             $numReplacement1 = 0;
             $numReplacement2 = 0;
+            $numReplacement3 = 0;
             $content         = preg_replace(
                 '#\b'.$snakeSourceName.'\b#',
                 $snakeTargetName,
@@ -308,7 +311,14 @@ class RenameScript extends AbstractScript
                 -1,
                 $numReplacement2
             );
-            $numReplacements = ($numReplacement1 + $numReplacement2);
+            $content         = preg_replace(
+                '#\b'.$studlySourceName.'\b#',
+                $studlyTargetName,
+                $content,
+                -1,
+                $numReplacement3
+            );
+            $numReplacements = ($numReplacement1 + $numReplacement2 + $numReplacement3);
             if ($numReplacements > 0) {
                 // Save file content
                 file_put_contents($filename, $content);
@@ -335,24 +345,27 @@ class RenameScript extends AbstractScript
      */
     protected function renameFiles()
     {
-        $climate         = $this->climate();
-        $sourceName      = $this->sourceName();
-        $snakeSourceName = $sourceName;
-        $targetName      = $this->targetName();
-        $snakeTargetName = $targetName;
-        $verbose         = $this->verbose();
+        $climate          = $this->climate();
+        $sourceName       = $this->sourceName();
+        $snakeSourceName  = self::snake($sourceName);
+        $studlySourceName = self::studly($sourceName);
+        $targetName       = $this->targetName();
+        $snakeTargetName  = self::snake($targetName);
+        $studlyTargetName = self::studly($targetName);
+        $verbose          = $this->verbose();
 
         $climate->out("\n".'Renaming files and directories');
+
         $sourceFiles = $this->globRecursive('*'.$snakeSourceName.'*');
         $sourceFiles = array_reverse($sourceFiles);
 
         foreach ($sourceFiles as $filename) {
-            $snakeTargetName = preg_replace('#'.$snakeSourceName.'#', $snakeTargetName, basename($filename));
-            $snakeTargetName = dirname($filename).'/'.$snakeTargetName;
+            $name = preg_replace('#'.$snakeSourceName.'#', $snakeTargetName, basename($filename));
+            $name = dirname($filename).'/'.$name;
 
-            if ($snakeTargetName != $filename) {
-                rename($filename, $snakeTargetName);
-                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $snakeTargetName));
+            if ($name != $filename) {
+                rename($filename, $name);
+                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $name));
             }
         }
 
@@ -360,13 +373,25 @@ class RenameScript extends AbstractScript
         $sourceFiles = array_reverse($sourceFiles);
 
         foreach ($sourceFiles as $filename) {
-            $climate->inline('.');
-            $targetName = preg_replace('/'.$sourceName.'/', $targetName, basename($filename));
-            $targetName = dirname($filename).'/'.$targetName;
+            $name = preg_replace('/'.$sourceName.'/', $targetName, basename($filename));
+            $name = dirname($filename).'/'.$name;
 
-            if ($targetName != $filename) {
-                rename($filename, $targetName);
-                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $targetName));
+            if ($name != $filename) {
+                rename($filename, $name);
+                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $name));
+            }
+        }
+
+        $sourceFiles = $this->globRecursive('*'.$studlySourceName.'*');
+        $sourceFiles = array_reverse($sourceFiles);
+
+        foreach ($sourceFiles as $filename) {
+            $name = preg_replace('/'.$studlySourceName.'/', $studlyTargetName, basename($filename));
+            $name = dirname($filename).'/'.$name;
+
+            if ($name != $filename) {
+                rename($filename, $name);
+                $climate->dim()->out(sprintf('%s has been renamed to %s', $filename, $name));
             }
         }
     }
