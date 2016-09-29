@@ -50,6 +50,8 @@
         "phpcbf": "php vendor/bin/phpcbf -ps --colors --standard=phpcs.xml src/ tests/",
         "post-create-project-cmd": [
             "php vendor/bin/charcoal city/setup"
+        ], "setup": [
+            "City\\Script\\SetupScript::create"
         ]
     },
     "repositories": [

@@ -26,40 +26,29 @@ class SetupScript extends AbstractScript
      * @var string $sourceName The default string to search and replace.
      */
     protected $defaultSourceName = 'boilerplate';
-
     /**
      * @var string $projectName The user-provided name of the project.
      */
     protected $projectName;
-
     /**
      * @var string $projectNamespace The namespace of the project.
      */
     protected $projectNamespace;
-
     /**
      * @var string $projectRepo The VCS repository of the project.
      */
     protected $projectRepo;
-
     /**
      * @var string $projectUrl The Url of the site.
      */
     protected $siteUrl;
-
     /**
      * @var string $illegalNames Names that will return an error.
      */
     protected $illegalNames = '*^(charcoal|city)$*i';
-
-    /**
-     * SetupScript constructor Register the action's arguments..
-     */
-    public function __construct()
-    {
-        $arguments = $this->defaultArguments();
-        $this->setArguments($arguments);
-    }
+    // ==========================================================================
+    // DEFAULTS
+    // ==========================================================================
 
     /**
      * Retrieve the available default arguments of this action.
@@ -97,6 +86,198 @@ class SetupScript extends AbstractScript
 
         return $arguments;
     }
+
+    // ==========================================================================
+    // FUNCTIONS
+    // ==========================================================================
+
+    /**
+     * SetupScript constructor Register the action's arguments..
+     */
+    public function __construct()
+    {
+        $arguments = $this->defaultArguments();
+        $this->setArguments($arguments);
+    }
+
+    /**
+     * Create a new setup scripts and runs it
+     * @return void
+     */
+    public static function create()
+    {
+        $instance = new SetupScript();
+        $instance->setup();
+    }
+
+    /**
+     * @see \League\CLImate\CLImate Used by `CliActionTrait`
+     * @param RequestInterface  $request  PSR-7 request.
+     * @param ResponseInterface $response PSR-7 response.
+     * @return void
+     */
+    public function run(RequestInterface $request = null, ResponseInterface $response = null)
+    {
+        // Never Used
+        unset($request, $response);
+        $this->setup();
+    }
+
+    /**
+     * Interactively setup a City project.
+     *
+     * The action will ask the user a series of questions,
+     * and then update the current city project for them.
+     * @return void
+     */
+    public function setup()
+    {
+        $climate = $this->climate();
+
+        $climate->underline()->out('Charcoal City setup script');
+
+        if ($climate->arguments->defined('help')) {
+            $climate->usage();
+
+            return;
+        }
+
+        // Parse submitted arguments
+        $climate->arguments->parse();
+        $projectName      = $climate->arguments->get('projectName');
+        $projectNamespace = $climate->arguments->get('projectNamespace');
+        $projectRepo      = $climate->arguments->get('projectRepository');
+        $siteUrl          = $climate->arguments->get('siteUrl');
+        $verbose          = !!$climate->arguments->get('quiet');
+        $this->setVerbose($verbose);
+
+        // Prompt for project name until correctly entered
+        do {
+            $projectName = $this->promptName($projectName);
+        } while (!$projectName);
+        // Prompt for project namespace until correctly entered
+        do {
+            $projectNamespace = $this->promptNamespace($projectNamespace);
+        } while (!$projectNamespace);
+        // Prompt for project repo until correctly entered
+        do {
+            $projectRepo = $this->promptRepo($projectRepo);
+        } while (!$projectRepo);
+        // Prompt for project site url until correctly entered
+        do {
+            $siteUrl = $this->promptUrl($siteUrl);
+        } while (!$siteUrl);
+
+        $climate->bold()->out(sprintf('Using "%s" as project name...', $this->projectName()));
+        $climate->out(sprintf('Using "%s" as namespace...', $this->projectNamespace()));
+        $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
+        $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
+
+        // Rename the project's files and content
+        // Configure the project
+
+        // Create a user
+
+        // Open a browser tab to admin
+        $climate->green()->out("\n".'Success!');
+    }
+
+    /**
+     * @param string $name The name of the project.
+     * @return string|null
+     */
+    protected function promptName($name = null)
+    {
+        if (!$name) {
+            $input = $this->climate()->input('What is the name of the project?');
+            $name  = ucfirst($input->prompt());
+        }
+
+        try {
+            $this->setProjectName($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
+    }
+
+    /**
+     * @param string $name The namespace of the project.
+     * @return string|null
+     */
+    protected function promptNamespace($name = null)
+    {
+        if (!$name) {
+            $generatedNamespace = self::studly($this->projectName());
+            $input              = $this->climate()->input(sprintf(
+                'What is the namespace of the project? [default: %s]',
+                $generatedNamespace
+            ));
+            $input->defaultTo($generatedNamespace);
+            $name = $input->prompt();
+        }
+
+        try {
+            $this->setProjectNamespace($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
+    }
+
+    /**
+     * @param string $repo The repo of the project.
+     * @return string|null
+     */
+    protected function promptRepo($repo = null)
+    {
+        if (!$repo) {
+            $input = $this->climate()->input('What is the VCS repository of the project?');
+            $repo  = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setProjectRepo($repo);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $repo;
+    }
+
+    /**
+     * @param string $url The url of the project site.
+     * @return string|null
+     */
+    protected function promptUrl($url = null)
+    {
+        if (!$url) {
+            $input = $this->climate()->input('What is the project website url? (optional)');
+            $url   = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setSiteUrl($url);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $url;
+    }
+
+    // ==========================================================================
+    // SETTERS
+    // ==========================================================================
 
     /**
      * Set the current project name.
@@ -241,6 +422,10 @@ class SetupScript extends AbstractScript
         return $this;
     }
 
+    // ==========================================================================
+    // GETTERS
+    // ==========================================================================
+
     /**
      * Retrieve the current project name.
      *
@@ -292,164 +477,4 @@ class SetupScript extends AbstractScript
             'success' => $this->success()
         ];
     }
-
-    /**
-     * Interactively setup a City project.
-     *
-     * The action will ask the user a series of questions,
-     * and then update the current city project for them.
-     *
-     * @see \League\CLImate\CLImate Used by `CliActionTrait`
-     * @param RequestInterface  $request  PSR-7 request.
-     * @param ResponseInterface $response PSR-7 response.
-     * @return void
-     */
-    public function run(RequestInterface $request, ResponseInterface $response)
-    {
-        // Never Used
-        unset($request, $response);
-
-        $climate = $this->climate();
-
-        $climate->underline()->out('Charcoal City setup script');
-
-        if ($climate->arguments->defined('help')) {
-            $climate->usage();
-
-            return;
-        }
-
-        // Parse submitted arguments
-        $climate->arguments->parse();
-        $projectName      = $climate->arguments->get('projectName');
-        $projectNamespace = $climate->arguments->get('projectNamespace');
-        $projectRepo      = $climate->arguments->get('projectRepository');
-        $siteUrl          = $climate->arguments->get('siteUrl');
-        $verbose          = !!$climate->arguments->get('quiet');
-        $this->setVerbose($verbose);
-
-        // Prompt for project name until correctly entered
-        do {
-            $projectName = $this->promptName($projectName);
-        } while (!$projectName);
-        // Prompt for project namespace until correctly entered
-        do {
-            $projectNamespace = $this->promptNamespace($projectNamespace);
-        } while (!$projectNamespace);
-        // Prompt for project repo until correctly entered
-        do {
-            $projectRepo = $this->promptRepo($projectRepo);
-        } while (!$projectRepo);
-        // Prompt for project site url until correctly entered
-        do {
-            $siteUrl = $this->promptUrl($siteUrl);
-        } while (!$siteUrl);
-
-        $climate->bold()->out(sprintf('Using "%s" as project name...', $this->projectName()));
-        $climate->out(sprintf('Using "%s" as namespace...', $this->projectNamespace()));
-        $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
-        $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
-
-        // Rename the project's files and content
-        // Configure the project
-
-        // Create a user
-
-        // Open a browser tab to admin
-        $climate->green()->out("\n".'Success!');
-    }
-
-    /**
-     * @param string $name The name of the project.
-     * @return string|null
-     */
-    protected function promptName($name = null)
-    {
-        if (!$name) {
-            $input = $this->climate()->input('What is the name of the project?');
-            $name  = ucfirst($input->prompt());
-        }
-
-        try {
-            $this->setProjectName($name);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $name;
-    }
-
-    /**
-     * @param string $name The namespace of the project.
-     * @return string|null
-     */
-    protected function promptNamespace($name = null)
-    {
-        if (!$name) {
-            $generatedNamespace = self::studly($this->projectName());
-            $input              = $this->climate()->input(sprintf(
-                'What is the namespace of the project? [default: %s]',
-                $generatedNamespace
-            ));
-            $input->defaultTo($generatedNamespace);
-            $name = $input->prompt();
-        }
-
-        try {
-            $this->setProjectNamespace($name);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $name;
-    }
-
-    /**
-     * @param string $repo The repo of the project.
-     * @return string|null
-     */
-    protected function promptRepo($repo = null)
-    {
-        if (!$repo) {
-            $input = $this->climate()->input('What is the VCS repository of the project?');
-            $repo  = strtolower($input->prompt());
-        }
-
-        try {
-            $this->setProjectRepo($repo);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $repo;
-    }
-
-    /**
-     * @param string $url The url of the project site.
-     * @return string|null
-     */
-    protected function promptUrl($url = null)
-    {
-        if (!$url) {
-            $input = $this->climate()->input('What is the project website url? (optional)');
-            $url   = strtolower($input->prompt());
-        }
-
-        try {
-            $this->setSiteUrl($url);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $url;
-    }
-
 }
