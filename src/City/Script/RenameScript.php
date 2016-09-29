@@ -187,7 +187,7 @@ class RenameScript extends AbstractScript
      * The action will ask the user a series of questions,
      * and then update the current module for them.
      *
-     * It attempts to rename all occurrences of the "soure name"
+     * It attempts to rename all occurrences of the "source name"
      * with the provided Project name_.
      *
      * @see \League\CLImate\CLImate Used by `CliActionTrait`
@@ -336,7 +336,7 @@ class RenameScript extends AbstractScript
         $verbose     = $this->verbose();
 
         $climate->out("\n".'Renaming files and directories');
-        $sourceFiles = $this->globRecursive('*\b'.$this->sourceName.'*');
+        $sourceFiles = $this->globRecursive('*'.$this->sourceName.'*');
         $sourceFiles = array_reverse($sourceFiles);
 
         foreach ($sourceFiles as $filename) {
