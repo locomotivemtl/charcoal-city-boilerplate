@@ -102,6 +102,9 @@
             },
             "city/setup": {
                 "ident": "city/script/setup"
+            },
+            "city/config": {
+                "ident": "city/script/config"
             }
         }
     }

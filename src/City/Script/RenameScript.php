@@ -97,16 +97,20 @@ class RenameScript extends AbstractScript
 
     /**
      * Create a new rename script and runs it while passing arguments.
-     * @param string|null $source The source name to be rename.
-     * @param string|null $target The replacing name.
+     * @param array $data The data passed.
      * @return void
      */
-    public static function start($source = null, $target = null)
+    public static function start(array $data = [])
     {
-        $renameScript             = new RenameScript();
-        $renameScript->sourceName = $source;
-        $renameScript->targetName = $target;
-        $renameScript->rename();
+        $script = new RenameScript();
+
+        // Parse data
+        foreach ($data as $key => $value) {
+            if (property_exists(self::class, $key)) {
+                $script->{$key} = $value;
+            }
+        }
+        $script->rename();
     }
 
     /**
@@ -148,9 +152,10 @@ class RenameScript extends AbstractScript
             return;
         }
 
+        // Parse arguments
         $climate->arguments->parse();
-        $sourceName = $climate->arguments->get('sourceName') || $this->sourceName;
-        $targetName = $climate->arguments->get('targetName') || $this->targetName;
+        $sourceName = $climate->arguments->get('sourceName') ?: $this->sourceName;
+        $targetName = $climate->arguments->get('targetName') ?: $this->targetName;
         $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
@@ -182,9 +187,10 @@ class RenameScript extends AbstractScript
     private function promptSourceName($name = null)
     {
         if (!$name) {
-            $input = $this->climate()->input(
-                sprintf('What is the project <red>source</red> namespace? [default: %s]', $this->defaultSourceName)
-            );
+            $input = $this->climate()->input(sprintf(
+                'What is the project <red>source</red> namespace? [default: <green>%s</green>]',
+                $this->defaultSourceName
+            ));
             $input->defaultTo($this->defaultSourceName);
             $name = $input->prompt();
         }

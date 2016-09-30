@@ -185,9 +185,12 @@ class SetupScript extends AbstractScript
         $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
 
         // Rename the project's files and content
-        RenameScript::start('Boilerplate', $this->projectName());
+        RenameScript::start([
+            'source' => 'Boilerplate',
+            'target' => $this->projectName()
+        ]);
         // Configure the project
-
+        ConfigScript::start();
         // Create a user
 
         // Open a browser tab to admin
@@ -225,7 +228,7 @@ class SetupScript extends AbstractScript
         if (!$name) {
             $generatedNamespace = self::studly($this->projectName());
             $input              = $this->climate()->input(sprintf(
-                'What is the <red>namespace</red> of the project? [default: <red>%s</red>]',
+                'What is the <red>namespace</red> of the project? [default: <green>%s</green>]',
                 $generatedNamespace
             ));
             $input->defaultTo($generatedNamespace);

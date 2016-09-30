@@ -1,9 +1,13 @@
 {
     "type": "project",
     "name": "locomotivemtl/charcoal-city-boilerplate",
-    "description": "A Charcoal City Project Boilerplate",
+    "description": "Boilerplate, a Charcoal City Project",
     "keywords": ["charcoal", "project", "boilerplate"],
     "homepage": "https://locomotive.ca",
+    "support": {
+        "source": "https://github.com/locomotivemtl/charcoal-city-boilerplate/src",
+        "issues": "https://github.com/locomotivemtl/charcoal-city-boilerplate/issues"
+    },
     "license": "MIT",
     "minimum-stability": "dev",
     "extra": {
@@ -49,7 +53,7 @@
         "phpcs": "php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1;php vendor/bin/phpcs -ps --colors --standard=phpcs.xml src/",
         "phpcbf": "php vendor/bin/phpcbf -ps --colors --standard=phpcs.xml src/ tests/",
         "post-create-project-cmd": [
-            "php vendor/bin/charcoal city/setup"
+            "City\\Script\\SetupScript::start"
         ], "setup": [
             "City\\Script\\SetupScript::start"
         ]

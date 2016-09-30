@@ -1,10 +1,11 @@
 {
-  "databases": {
-    "default": {
-      "database": "charcoal_boilerplate",
-      "username": "root",
-      "password": ""
-    }
-  },
-  "default_database": "default"
+    "databases": {
+        "default": {
+            "database": "charcoal_boilerplate",
+            "username": "root",
+            "password": "",
+            "hostname": ""
+        }
+    },
+    "default_database": "default"
 }
