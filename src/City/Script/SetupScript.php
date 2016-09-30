@@ -22,30 +22,37 @@ use \Charcoal\App\Script\AbstractScript;
 class SetupScript extends AbstractScript
 {
     use KeyNormalizerTrait;
+
     /**
      * @var string $sourceName The default string to search and replace.
      */
     protected $defaultSourceName = 'boilerplate';
+
     /**
      * @var string $projectName The user-provided name of the project.
      */
     protected $projectName;
+
     /**
      * @var string $projectNamespace The namespace of the project.
      */
     protected $projectNamespace;
+
     /**
      * @var string $projectRepo The VCS repository of the project.
      */
     protected $projectRepo;
+
     /**
      * @var string $projectUrl The Url of the site.
      */
     protected $siteUrl;
+
     /**
      * @var string $illegalNames Names that will return an error.
      */
     protected $illegalNames = '*^(charcoal|city)$*i';
+
     // ==========================================================================
     // DEFAULTS
     // ==========================================================================
@@ -88,7 +95,7 @@ class SetupScript extends AbstractScript
     }
 
     // ==========================================================================
-    // FUNCTIONS
+    // INIT
     // ==========================================================================
 
     /**
@@ -101,13 +108,13 @@ class SetupScript extends AbstractScript
     }
 
     /**
-     * Create a new setup scripts and runs it
+     * Create a new setup script and runs it
      * @return void
      */
-    public static function create()
+    public static function start()
     {
-        $instance = new SetupScript();
-        $instance->setup();
+        $setupScript = new SetupScript();
+        $setupScript->setup();
     }
 
     /**
@@ -122,6 +129,10 @@ class SetupScript extends AbstractScript
         unset($request, $response);
         $this->setup();
     }
+
+    // ==========================================================================
+    // FUNCTIONS
+    // ==========================================================================
 
     /**
      * Interactively setup a City project.
@@ -174,6 +185,7 @@ class SetupScript extends AbstractScript
         $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
 
         // Rename the project's files and content
+        RenameScript::start('Boilerplate', $this->projectName());
         // Configure the project
 
         // Create a user
@@ -189,7 +201,7 @@ class SetupScript extends AbstractScript
     protected function promptName($name = null)
     {
         if (!$name) {
-            $input = $this->climate()->input('What is the name of the project?');
+            $input = $this->climate()->input('What is the <red>name</red> of the project?');
             $name  = ucfirst($input->prompt());
         }
 
@@ -213,7 +225,7 @@ class SetupScript extends AbstractScript
         if (!$name) {
             $generatedNamespace = self::studly($this->projectName());
             $input              = $this->climate()->input(sprintf(
-                'What is the namespace of the project? [default: %s]',
+                'What is the <red>namespace</red> of the project? [default: <red>%s</red>]',
                 $generatedNamespace
             ));
             $input->defaultTo($generatedNamespace);
@@ -238,7 +250,7 @@ class SetupScript extends AbstractScript
     protected function promptRepo($repo = null)
     {
         if (!$repo) {
-            $input = $this->climate()->input('What is the VCS repository of the project?');
+            $input = $this->climate()->input('What is the <red>VCS repository</red> of the project?');
             $repo  = strtolower($input->prompt());
         }
 
@@ -260,7 +272,7 @@ class SetupScript extends AbstractScript
     protected function promptUrl($url = null)
     {
         if (!$url) {
-            $input = $this->climate()->input('What is the project website url? (optional)');
+            $input = $this->climate()->input('What is the project <red>website url</red>? (optional)');
             $url   = strtolower($input->prompt());
         }
 

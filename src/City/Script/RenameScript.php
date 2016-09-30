@@ -22,6 +22,7 @@ use \Charcoal\App\Script\AbstractScript;
 class RenameScript extends AbstractScript
 {
     use KeyNormalizerTrait;
+
     /**
      * @var string $sourceName The original string to search and replace.
      */
@@ -43,14 +44,9 @@ class RenameScript extends AbstractScript
     protected $excludeFromGlob = '!(\/city|vendor|node_modules|bower_components|mustache_cache'.
     '|www\/assets\/admin|www\/uploads|\.log)($|/)!i';
 
-    /**
-     * RenameScript constructor Register the action's arguments..
-     */
-    public function __construct()
-    {
-        $arguments = $this->defaultArguments();
-        $this->setArguments($arguments);
-    }
+    // ==========================================================================
+    // DEFAULTS
+    // ==========================================================================
 
     /**
      * Retrieve the available default arguments of this action.
@@ -86,117 +82,34 @@ class RenameScript extends AbstractScript
         return $arguments;
     }
 
+    // ==========================================================================
+    // INIT
+    // ==========================================================================
+
     /**
-     * Set the current project name.
-     *
-     * @param string $targetName The target name of the project.
-     * @throws InvalidArgumentException If the project name is invalid.
-     * @return RenameScript Chainable
+     * RenameScript constructor Register the action's arguments..
      */
-    public function setTargetName($targetName)
+    public function __construct()
     {
-        if (!is_string($targetName)) {
-            throw new InvalidArgumentException(
-                'Invalid project name. Must be a string.'
-            );
-        }
-
-        if (!$targetName) {
-            throw new InvalidArgumentException(
-                'Invalid project name. Must contain at least one character.'
-            );
-        }
-
-        if (!preg_match('/^[-a-z_ ]+$/i', $targetName)) {
-            throw new InvalidArgumentException(
-                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
-            );
-        }
-
-        // Convert to camel case
-        $targetName = self::camel($targetName);
-
-        $this->targetName = $targetName;
-
-        return $this;
+        $arguments = $this->defaultArguments();
+        $this->setArguments($arguments);
     }
 
     /**
-     * Set the current source name.
-     *
-     * @param string $sourceName The name of the project.
-     * @throws InvalidArgumentException If the project name is invalid.
-     * @return RenameScript Chainable
+     * Create a new rename script and runs it while passing arguments.
+     * @param string|null $source The source name to be rename.
+     * @param string|null $target The replacing name.
+     * @return void
      */
-    public function setSourceName($sourceName)
+    public static function start($source = null, $target = null)
     {
-        if (!is_string($sourceName)) {
-            throw new InvalidArgumentException(
-                'Invalid source namespace name. Must be a string.'
-            );
-        }
-
-        if (!$sourceName) {
-            throw new InvalidArgumentException(
-                'Invalid source namespace name. Must contain at least one character.'
-            );
-        }
-
-        if (!preg_match('/^[-a-z_ ]+$/i', $sourceName)) {
-            throw new InvalidArgumentException(
-                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
-            );
-        }
-
-        // Convert to camel case
-        $sourceName = self::camel($sourceName);
-
-        $this->sourceName = $sourceName;
-
-        return $this;
+        $renameScript             = new RenameScript();
+        $renameScript->sourceName = $source;
+        $renameScript->targetName = $target;
+        $renameScript->rename();
     }
 
     /**
-     * Retrieve the current project target name.
-     *
-     * @return string
-     */
-    public function targetName()
-    {
-        return $this->targetName;
-    }
-
-    /**
-     * Retrieve the current source name.
-     *
-     * @return string
-     */
-    public function sourceName()
-    {
-        return $this->sourceName;
-    }
-
-    /**
-     * Retrieve the response to the action.
-     *
-     * @return array
-     */
-    public function response()
-    {
-        return [
-            'success' => $this->success()
-        ];
-    }
-
-    /**
-     * Interactively setup a Charcoal module.
-     *
-     * The action will ask the user a series of questions,
-     * and then update the current module for them.
-     *
-     * It attempts to rename all occurrences of the "source name"
-     * with the provided Project name_.
-     *
      * @see \League\CLImate\CLImate Used by `CliActionTrait`
      * @param RequestInterface  $request  PSR-7 request.
      * @param ResponseInterface $response PSR-7 response.
@@ -206,7 +119,25 @@ class RenameScript extends AbstractScript
     {
         // Never Used
         unset($request, $response);
+        $this->rename();
+    }
 
+    // ==========================================================================
+    // FUNCTIONS
+    // ==========================================================================
+
+    /**
+     * Interactively setup a Charcoal module.
+     *
+     * The action will ask the user a series of questions,
+     * and then update the current module for them.
+     *
+     * It attempts to rename all occurrences of the "source name"
+     * with the provided Project name_.
+     * @return void
+     */
+    private function rename()
+    {
         $climate = $this->climate();
 
         $climate->underline()->out('Charcoal batch rename script');
@@ -218,46 +149,77 @@ class RenameScript extends AbstractScript
         }
 
         $climate->arguments->parse();
-        $sourceName = $climate->arguments->get('sourceName');
-        $targetName = $climate->arguments->get('targetName');
+        $sourceName = $climate->arguments->get('sourceName') || $this->sourceName;
+        $targetName = $climate->arguments->get('targetName') || $this->targetName;
         $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
-        if (!$sourceName) {
-            $input = $climate->input(
-                sprintf('What is the project source namespace? [default: %s]', $this->defaultSourceName)
-            );
-            $input->defaultTo($this->defaultSourceName);
-            $sourceName = $input->prompt();
-        }
-
-        try {
-            $this->setSourceName($sourceName);
-        } catch (Exception $e) {
-            $climate->error($e->getMessage());
-        }
-
-        if (!$targetName) {
-            $input      = $climate->input('What is the project target namespace?');
-            $targetName = $input->prompt();
-        }
-
-        try {
-            $this->setTargetName($targetName);
-        } catch (Exception $e) {
-            $climate->error($e->getMessage());
-        }
+        // Prompt for source name until correctly entered
+        do {
+            $sourceName = $this->promptSourceName($sourceName);
+        } while (!$sourceName);
+        // Prompt for source name until correctly entered
+        do {
+            $targetName = $this->promptTargetName($targetName);
+        } while (!$targetName);
 
         $climate->bold()->out(sprintf('Using "%s" as project name...', $targetName));
         $climate->out(sprintf('Using "%s" as namespace...', ucfirst($targetName)));
 
         // Replace file contents
-        $this->replaceFileContent();
+        // $this->replaceFileContent();
 
         // Rename files
-        $this->renameFiles();
+        // $this->renameFiles();
 
         $climate->green()->out("\n".'Success!');
+    }
+
+    /**
+     * @param string|null $name The source name of the project.
+     * @return string|null
+     */
+    private function promptSourceName($name = null)
+    {
+        if (!$name) {
+            $input = $this->climate()->input(
+                sprintf('What is the project <red>source</red> namespace? [default: %s]', $this->defaultSourceName)
+            );
+            $input->defaultTo($this->defaultSourceName);
+            $name = $input->prompt();
+        }
+
+        try {
+            $this->setSourceName($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
+    }
+
+    /**
+     * @param string|null $name The target name of the project.
+     * @return string|null
+     */
+    private function promptTargetName($name = null)
+    {
+        if (!$name) {
+            $input = $this->climate()->input('What is the project <red>target</red> namespace?');
+            $name  = $input->prompt();
+        }
+
+        try {
+            $this->setTargetName($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
     }
 
     /**
@@ -395,6 +357,120 @@ class RenameScript extends AbstractScript
             }
         }
     }
+
+    // ==========================================================================
+    // SETTERS
+    // ==========================================================================
+
+    /**
+     * Set the current project name.
+     *
+     * @param string $targetName The target name of the project.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return RenameScript Chainable
+     */
+    public function setTargetName($targetName)
+    {
+        if (!is_string($targetName)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Must be a string.'
+            );
+        }
+
+        if (!$targetName) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Must contain at least one character.'
+            );
+        }
+
+        if (!preg_match('/^[-a-z_ ]+$/i', $targetName)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
+            );
+        }
+
+        // Convert to camel case
+        $targetName = self::camel($targetName);
+
+        $this->targetName = $targetName;
+
+        return $this;
+    }
+
+    /**
+     * Set the current source name.
+     *
+     * @param string $sourceName The name of the project.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return RenameScript Chainable
+     */
+    public function setSourceName($sourceName)
+    {
+        if (!is_string($sourceName)) {
+            throw new InvalidArgumentException(
+                'Invalid source namespace name. Must be a string.'
+            );
+        }
+
+        if (!$sourceName) {
+            throw new InvalidArgumentException(
+                'Invalid source namespace name. Must contain at least one character.'
+            );
+        }
+
+        if (!preg_match('/^[-a-z_ ]+$/i', $sourceName)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
+            );
+        }
+
+        // Convert to camel case
+        $sourceName = self::camel($sourceName);
+
+        $this->sourceName = $sourceName;
+
+        return $this;
+    }
+
+    // ==========================================================================
+    // GETTERS
+    // ==========================================================================
+
+    /**
+     * Retrieve the current project target name.
+     *
+     * @return string
+     */
+    public function targetName()
+    {
+        return $this->targetName;
+    }
+
+    /**
+     * Retrieve the current source name.
+     *
+     * @return string
+     */
+    public function sourceName()
+    {
+        return $this->sourceName;
+    }
+
+    /**
+     * Retrieve the response to the action.
+     *
+     * @return array
+     */
+    public function response()
+    {
+        return [
+            'success' => $this->success()
+        ];
+    }
+
+    // ==========================================================================
+    // UTILS
+    // ==========================================================================
 
     /**
      * Recursively find pathnames matching a pattern

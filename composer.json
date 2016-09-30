@@ -51,7 +51,7 @@
         "post-create-project-cmd": [
             "php vendor/bin/charcoal city/setup"
         ], "setup": [
-            "City\\Script\\SetupScript::create"
+            "City\\Script\\SetupScript::start"
         ]
     },
     "repositories": [
