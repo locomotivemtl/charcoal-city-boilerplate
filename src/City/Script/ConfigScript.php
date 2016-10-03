@@ -180,7 +180,7 @@ class ConfigScript extends AbstractScript
     {
         $climate = $this->climate();
 
-        $climate->underline()->out('Charcoal city config script');
+        $climate->underline()->green()->out('Charcoal city config script');
 
         if ($climate->arguments->defined('help')) {
             $climate->usage();

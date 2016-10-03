@@ -144,7 +144,7 @@ class RenameScript extends AbstractScript
     {
         $climate = $this->climate();
 
-        $climate->underline()->out('Charcoal batch rename script');
+        $climate->underline()->green()->out('Charcoal batch rename script');
 
         if ($climate->arguments->defined('help')) {
             $climate->usage();
@@ -172,10 +172,10 @@ class RenameScript extends AbstractScript
         $climate->out(sprintf('Using "%s" as namespace...', ucfirst($targetName)));
 
         // Replace file contents
-        // $this->replaceFileContent();
+        $this->replaceFileContent();
 
         // Rename files
-        // $this->renameFiles();
+        $this->renameFiles();
 
         $climate->green()->out("\n".'Success!');
     }

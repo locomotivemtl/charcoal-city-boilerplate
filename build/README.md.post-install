@@ -7,9 +7,9 @@ The installation is fully automated.
 # Table of Content
 
 - [How to Install](#how-to-install)
-    - [1. Cloning the project with composer create](#1-clone-the-project-with-composer-create)
+    - [1. Cloning the project with composer create](#1-cloning-the-project-with-composer-create)
     - [2. Test your installation](#2-test-your-installation)
-    - [3. Set up database storage](#3-set-up-database-storage)
+    - [3. Set up a database storage](#3-set-up-a-database-storage)
     - [4. Set up `charcoal-admin`](#4-set-up-charcoal-admin)
 - [Going further](#going-further)
     - More config customizations

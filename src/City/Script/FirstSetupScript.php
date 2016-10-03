@@ -114,7 +114,7 @@ class FirstSetupScript extends AbstractScript
      */
     public static function start()
     {
-        $setupScript = new SetupScript();
+        $setupScript = new FirstSetupScript();
         $setupScript->setup();
     }
 
@@ -146,7 +146,7 @@ class FirstSetupScript extends AbstractScript
     {
         $climate = $this->climate();
 
-        $climate->underline()->out('Charcoal City setup script');
+        $climate->underline()->green()->out('Charcoal City setup script');
 
         if ($climate->arguments->defined('help')) {
             $climate->usage();

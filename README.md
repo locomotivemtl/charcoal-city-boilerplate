@@ -7,9 +7,9 @@ The installation is fully automated.
 # Table of Content
 
 - [How to Install](#how-to-install)
-    - [1. Create / clone the project boilerplate](#1-create-clone-the-project-boilerplate)
+    - [1. Create / clone the city boilerplate](#1-create--clone-the-city-boilerplate)
     - [2. Test your installation](#2-test-your-installation)
-    - [3. Set up database storage](#3-set-up-database-storage)
+    - [3. Set up a database storage](#3-set-up-a-database-storage)
     - [4. Set up `charcoal-admin`](#4-set-up-charcoal-admin)
 - [Going further](#going-further)
     - More config customizations
@@ -30,7 +30,7 @@ The installation is fully automated.
 
 To start a Charcoal project with this Boilerplate, simply:
 
-## 1. **Create / clone the project boilerplate**
+## 1. **Create / clone the city boilerplate**
 
 ```shell
 $ composer create-project locomotivemtl/charcoal-city-boilerplate [path] [version]

@@ -151,7 +151,7 @@ class ComposerScript extends AbstractScript
     {
         $climate = $this->climate();
 
-        $climate->underline()->out('Charcoal city config script');
+        $climate->underline()->green()->out('Charcoal city config script');
 
         if ($climate->arguments->defined('help')) {
             $climate->usage();
@@ -223,7 +223,7 @@ class ComposerScript extends AbstractScript
         $newJsonString = json_encode($data, (JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         file_put_contents($composerPath, $newJsonString);
 
-        $climate->green()->out('Composer file update with success!');
+        $climate->green()->out('Composer file updated with success!');
     }
 
     /**
