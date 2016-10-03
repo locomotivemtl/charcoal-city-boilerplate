@@ -763,12 +763,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-cms.git",
-                "reference": "ae62628e393241a4e2583ab82d42cbf7187996ee"
+                "reference": "4fce2d551d748756cfaa48cdfc9c4958ea22574c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-cms/zipball/ae62628e393241a4e2583ab82d42cbf7187996ee",
-                "reference": "ae62628e393241a4e2583ab82d42cbf7187996ee",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-cms/zipball/4fce2d551d748756cfaa48cdfc9c4958ea22574c",
+                "reference": "4fce2d551d748756cfaa48cdfc9c4958ea22574c",
                 "shasum": ""
             },
             "require": {
@@ -817,7 +817,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-09-26 16:04:02"
+            "time": "2016-10-03 20:28:55"
         },
         {
             "name": "locomotivemtl/charcoal-config",
@@ -878,12 +878,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-core.git",
-                "reference": "08252efcc84cec241cac967b3e289be471dff039"
+                "reference": "1751c3457639ec89d46c5b4164ea0c03db3817f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-core/zipball/08252efcc84cec241cac967b3e289be471dff039",
-                "reference": "08252efcc84cec241cac967b3e289be471dff039",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-core/zipball/1751c3457639ec89d46c5b4164ea0c03db3817f8",
+                "reference": "1751c3457639ec89d46c5b4164ea0c03db3817f8",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +936,7 @@
                 "framework",
                 "locomotive"
             ],
-            "time": "2016-09-21 20:11:20"
+            "time": "2016-10-03 20:26:14"
         },
         {
             "name": "locomotivemtl/charcoal-email",

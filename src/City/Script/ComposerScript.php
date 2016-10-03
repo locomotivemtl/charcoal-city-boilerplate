@@ -109,6 +109,8 @@ class ComposerScript extends AbstractScript
 
         // Parse data
         foreach ($data as $key => $value) {
+            $script->climate()->red($key.':'.$value);
+
             $setter = $script->camel('set'.$key);
             if (is_callable($script, $setter)) {
                 $script->{$setter}($value);
