@@ -40,16 +40,6 @@ class FirstSetupScript extends AbstractScript
     protected $projectNamespace;
 
     /**
-     * @var string $projectRepo The VCS repository of the project.
-     */
-    protected $projectRepo;
-
-    /**
-     * @var string $projectUrl The Url of the site.
-     */
-    protected $siteUrl;
-
-    /**
      * @var string $illegalNames Names that will return an error.
      */
     protected $illegalNames = '~^(charcoal|city)$~i';
@@ -68,25 +58,15 @@ class FirstSetupScript extends AbstractScript
     public function defaultArguments()
     {
         $arguments = [
-            'projectName'       => [
+            'projectName'      => [
                 'prefix'      => 'n',
                 'longPrefix'  => 'name',
                 'description' => 'Project name.'
             ],
-            'projectNamespace'  => [
+            'projectNamespace' => [
                 'prefix'      => 'ns',
                 'longPrefix'  => 'namespace',
                 'description' => 'Project namespace.'
-            ],
-            'projectRepository' => [
-                'prefix'      => 'r',
-                'longPrefix'  => 'repo',
-                'description' => 'Project VCS repository name.'
-            ],
-            'siteUrl'           => [
-                'prefix'      => 'u',
-                'longPrefix'  => 'siteUrl',
-                'description' => 'The project site url'
             ]
         ];
 
@@ -158,8 +138,6 @@ class FirstSetupScript extends AbstractScript
         $climate->arguments->parse();
         $projectName      = $climate->arguments->get('projectName');
         $projectNamespace = $climate->arguments->get('projectNamespace');
-        $projectRepo      = $climate->arguments->get('projectRepository');
-        $siteUrl          = $climate->arguments->get('siteUrl');
         $verbose          = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
@@ -171,30 +149,18 @@ class FirstSetupScript extends AbstractScript
         do {
             $projectNamespace = $this->promptNamespace($projectNamespace);
         } while (!$projectNamespace);
-        // Prompt for project repo until correctly entered
-        do {
-            $projectRepo = $this->promptRepo($projectRepo);
-        } while (!$projectRepo);
-        // Prompt for project site url until correctly entered
-        do {
-            $siteUrl = $this->promptUrl($siteUrl);
-        } while (!$siteUrl);
 
         $climate->bold()->out(sprintf('Using "%s" as project name...', $this->projectName()));
         $climate->out(sprintf('Using "%s" as namespace...', $this->projectNamespace()));
-        $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
-        $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
 
         // Rename the project's files and content
         RenameScript::start([
-            'sourceName' => 'Boilerplate',
-            'targetName' => $this->projectName()
+            'sourceName' => $this->defaultSourceName,
+            'targetName' => $this->projectNamespace()
         ]);
         // Modify the composer file
         ComposerScript::start([
-            'projectName' => $this->projectName(),
-            'projectRepo' => $this->projectRepo(),
-            'siteUrl'     => $this->siteUrl()
+            'projectName' => $this->projectName()
         ]);
         // Configure database and the config file
         ConfigScript::start();
@@ -251,50 +217,6 @@ class FirstSetupScript extends AbstractScript
         }
 
         return $name;
-    }
-
-    /**
-     * @param string $repo The repo of the project.
-     * @return string|null
-     */
-    protected function promptRepo($repo = null)
-    {
-        if (!$repo) {
-            $input = $this->climate()->input('What is the <red>VCS repository</red> of the project?');
-            $repo  = strtolower($input->prompt());
-        }
-
-        try {
-            $this->setProjectRepo($repo);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $repo;
-    }
-
-    /**
-     * @param string $url The url of the project site.
-     * @return string|null
-     */
-    protected function promptUrl($url = null)
-    {
-        if (!$url) {
-            $input = $this->climate()->input('What is the project <red>website url</red>?');
-            $url   = strtolower($input->prompt());
-        }
-
-        try {
-            $this->setSiteUrl($url);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $url;
     }
 
     // ==========================================================================
@@ -378,72 +300,6 @@ class FirstSetupScript extends AbstractScript
         return $this;
     }
 
-    /**
-     * Set the current project namespace.
-     *
-     * @param string $repo The namespace of the project.
-     * @throws InvalidArgumentException If the project name is invalid.
-     * @return self Chainable
-     */
-    public function setProjectRepo($repo)
-    {
-        if (!is_string($repo)) {
-            throw new InvalidArgumentException(
-                'Invalid VCS repository. Must be a string.'
-            );
-        }
-
-        if (!$repo) {
-            throw new InvalidArgumentException(
-                'Invalid VCS repository. Must contain at least one character.'
-            );
-        }
-
-        if (!preg_match(
-            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
-            $repo
-        )
-        ) {
-            throw new InvalidArgumentException(
-                'Invalid VCS repository. Only valid Urls are allowed.'
-            );
-        }
-
-        $this->projectRepo = $repo;
-
-        return $this;
-    }
-
-    /**
-     * Set the current project namespace.
-     *
-     * @param string $url The website url.
-     * @throws InvalidArgumentException If the project name is invalid.
-     * @return self Chainable
-     */
-    public function setSiteUrl($url)
-    {
-        if (!is_string($url)) {
-            throw new InvalidArgumentException(
-                'Invalid site url. Must be a string.'
-            );
-        }
-
-        if (!preg_match(
-            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
-            $url
-        )
-        ) {
-            throw new InvalidArgumentException(
-                'Invalid site url. Only valid Urls are allowed.'
-            );
-        }
-
-        $this->siteUrl = $url;
-
-        return $this;
-    }
-
     // ==========================================================================
     // GETTERS
     // ==========================================================================
@@ -466,26 +322,6 @@ class FirstSetupScript extends AbstractScript
     public function projectNamespace()
     {
         return $this->projectNamespace;
-    }
-
-    /**
-     * Retrieve the current project repository.
-     *
-     * @return string
-     */
-    public function projectRepo()
-    {
-        return $this->projectRepo;
-    }
-
-    /**
-     * Retrieve the current project repository.
-     *
-     * @return string
-     */
-    public function siteUrl()
-    {
-        return $this->siteUrl;
     }
 
     /**

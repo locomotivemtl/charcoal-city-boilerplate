@@ -106,7 +106,7 @@ class RenameScript extends AbstractScript
 
         // Parse data
         foreach ($data as $key => $value) {
-            $setter = $script->camel('set'.$key);
+            $setter = $script->camel('set-'.$key);
             if (is_callable($script, $setter)) {
                 $script->{$setter}($value);
             } else {
@@ -181,10 +181,10 @@ class RenameScript extends AbstractScript
         $climate->out(sprintf('Using "%s" as namespace...', ucfirst($targetName)));
 
         // Replace file contents
-        // $this->replaceFileContent();
+        $this->replaceFileContent();
 
         // Rename files
-        // $this->renameFiles();
+        $this->renameFiles();
 
         $climate->green()->out("\n".'Success!');
     }

@@ -139,7 +139,7 @@ class ConfigScript extends AbstractScript
 
         // Parse data
         foreach ($data as $key => $value) {
-            $setter = $script->camel('set'.$key);
+            $setter = $script->camel('set-'.$key);
             if (is_callable($script, $setter)) {
                 $script->{$setter}($value);
             } else {
@@ -365,7 +365,7 @@ class ConfigScript extends AbstractScript
     {
         if (!$prompt) {
             $input  = $this->climate()->input(
-                'Database <red>name</red> :'
+                'Database <red>name</red> : (Doesn\'t need to exist but if it does, it will be overwritten)'
             );
             $prompt = $input->prompt();
         }

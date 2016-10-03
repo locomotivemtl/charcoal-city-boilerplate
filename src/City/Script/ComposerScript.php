@@ -109,9 +109,7 @@ class ComposerScript extends AbstractScript
 
         // Parse data
         foreach ($data as $key => $value) {
-            $script->climate()->red($key.':'.$value);
-
-            $setter = $script->camel('set'.$key);
+            $setter = $script->camel('set-'.$key);
             if (is_callable($script, $setter)) {
                 $script->{$setter}($value);
             } else {
@@ -183,12 +181,19 @@ class ComposerScript extends AbstractScript
         // Prompt for project repo until correctly entered
         do {
             $projectRepo = $this->promptRepo($projectRepo);
-        } while (!$projectRepo);
+        } while (!$projectRepo || $projectRepo != '');
 
         // Prompt for website url until correctly entered
         do {
             $siteUrl = $this->promptUrl($siteUrl);
-        } while (!$siteUrl);
+        } while (!$siteUrl || $siteUrl != '');
+
+        if (!!$projectRepo) {
+            $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
+        }
+        if (!!$siteUrl) {
+            $climate->out(sprintf('Using "%s" as site url...', $this->siteUrl()));
+        }
 
         // Update the composer file
         $this->updateComposer();
@@ -197,7 +202,9 @@ class ComposerScript extends AbstractScript
         $this->updateReadme();
 
         // Update git vcs repo push url
-        $this->gitSetup();
+        if (!!$projectRepo) {
+            $this->gitSetup();
+        }
 
         // Dump auto-loader
         $this->dumpAutoLoader();
@@ -219,12 +226,21 @@ class ComposerScript extends AbstractScript
         $jsonString   = file_get_contents($composerPath);
         $data         = json_decode($jsonString, true);
 
+        $repo = $this->projectRepo();
+
         // set the data
-        $data['name']              = parse_url($this->projectRepo, PHP_URL_PATH);
-        $data['description']       = sprintf('A project for %s city', $this->projectName);
-        $data['homepage']          = $this->siteUrl;
-        $data['support']['source'] = $this->projectRepo.'/src';
-        $data['support']['issues'] = $this->projectRepo.'/issues';
+        $data['description'] = sprintf('A project for %s city', $this->projectName());
+        if (!!$this->siteUrl()) {
+            $data['homepage'] = $this->siteUrl();
+        }
+
+        // If no repo name get the one from installed git repo
+        if (!$repo) {
+            $repo = shell_exec('git config --get remote.origin.url');
+        }
+        $data['name']              = parse_url($repo, PHP_URL_PATH);
+        $data['support']['source'] = $repo.'/src';
+        $data['support']['issues'] = $repo.'/issues';
         // Change the script called by composer create-project
         $data['scripts']['post-create-project-cmd'] = ['City\\Script\\SetupScript::start'];
 
@@ -245,7 +261,13 @@ class ComposerScript extends AbstractScript
         $newReadme = file_get_contents($this->rootPath.'build/README.md.post-install');
 
         $newReadme = preg_replace('~^<project-name>$~i', $this->projectName(), $newReadme);
-        $newReadme = preg_replace('~^<project-repo-name>$~i', $this->projectRepo(), $newReadme);
+
+        $repo = $this->projectRepo();
+
+        if (!$repo) {
+            $repo = shell_exec('git config --get remote.origin.url');
+        }
+        $newReadme = preg_replace('~^<project-repo-name>$~i', $repo, $newReadme);
 
         file_put_contents($this->rootPath.'README.md', $newReadme);
     }
@@ -260,6 +282,7 @@ class ComposerScript extends AbstractScript
             'Setting the git environment to push to %s...',
             $this->projectRepo()
         ));
+
         exec('rm -rf .git');
         // initialize git.
         exec('git init');
@@ -314,7 +337,8 @@ class ComposerScript extends AbstractScript
     protected function promptRepo($repo = null)
     {
         if (!$repo) {
-            $input = $this->climate()->input('What is the <red>VCS repository</red> of the project?');
+            $input = $this->climate()->input('What is the <red>VCS repository</red> of the project? '.
+                '(<red>let blank to use an already installed VCS</red>)');
             $repo  = strtolower($input->prompt());
         }
 
@@ -336,7 +360,7 @@ class ComposerScript extends AbstractScript
     protected function promptUrl($url = null)
     {
         if (!$url) {
-            $input = $this->climate()->input('What is the project <red>website url</red>?');
+            $input = $this->climate()->input('What is the project <red>website url</red>? (<red>optional</red>)');
             $url   = strtolower($input->prompt());
         }
 
@@ -408,16 +432,11 @@ class ComposerScript extends AbstractScript
             );
         }
 
-        if (!$repo) {
-            throw new InvalidArgumentException(
-                'Invalid VCS repository. Must contain at least one character.'
-            );
-        }
-
-        if (!preg_match(
-            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
-            $repo
-        )
+        if ($repo != ''
+            && !preg_match(
+                '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
+                $repo
+            )
         ) {
             throw new InvalidArgumentException(
                 'Invalid VCS repository. Only valid Urls are allowed.'
@@ -444,10 +463,11 @@ class ComposerScript extends AbstractScript
             );
         }
 
-        if (!preg_match(
-            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
-            $url
-        )
+        if ($url != ''
+            && !preg_match(
+                '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
+                $url
+            )
         ) {
             throw new InvalidArgumentException(
                 'Invalid site url. Only valid Urls are allowed.'
