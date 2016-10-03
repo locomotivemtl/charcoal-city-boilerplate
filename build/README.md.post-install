@@ -1,4 +1,4 @@
-<project-name>
+::project-name::
 ============================
 
 The goal of this project is to provide a fully working "boilerplate" (empty _skeleton_ project) for a _City project_ using the Charcoal framework.
@@ -33,7 +33,7 @@ To clone this project with everything to start programming now, simply:
 ## 1. **Cloning the project with composer create**
 
 ```shell
-$ composer create <project-repo-name> [path] [version]
+$ composer create ::project-repo-name:: [path] [version]
 ```
 
 > **About the Document Root**
