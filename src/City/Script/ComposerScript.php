@@ -32,17 +32,17 @@ class ComposerScript extends AbstractScript
     /**
      * @var string $projectName The project name.
      */
-    protected $projectName = 'myProject';
+    protected $projectName;
 
     /**
      * @var string $projectRepo The project vcs repository.
      */
-    protected $projectRepo = 'https://github.com/joel/my-project';
+    protected $projectRepo;
 
     /**
      * @var string $siteUrl The project website url.
      */
-    protected $siteUrl = 'https://myproject.ca';
+    protected $siteUrl;
 
     /**
      * @var string $illegalNames Names that will return an error.
@@ -242,8 +242,8 @@ class ComposerScript extends AbstractScript
 
         $newReadme = file_get_contents($this->rootPath.'build/README.md.post-install');
 
-        $newReadme = preg_replace('*^<project-name>$*i', $this->projectName(), $newReadme);
-        $newReadme = preg_replace('*^<project-repo-name>$*i', $this->projectRepo(), $newReadme);
+        $newReadme = preg_replace('*^\<project-name\>$*i', $this->projectName(), $newReadme);
+        $newReadme = preg_replace('*^\<project-repo-name\>$*i', $this->projectRepo(), $newReadme);
 
         file_put_contents($this->rootPath.'README.md', $newReadme);
     }
@@ -256,14 +256,14 @@ class ComposerScript extends AbstractScript
     {
         $this->climate()->out(sprintf(
             'Setting the git environment to push to %s...',
-            $this->promptRepo()
+            $this->projectRepo()
         ));
 
         // initialize git.
         exec('git init');
         // set teh remote repo.
         exec(sprintf(
-            'git remote set-url origin',
+            'git remote set-url origin %s',
             $this->projectRepo()
         ));
         // verify the remote repo.
