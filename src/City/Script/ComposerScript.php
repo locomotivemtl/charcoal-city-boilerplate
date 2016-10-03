@@ -181,12 +181,12 @@ class ComposerScript extends AbstractScript
         // Prompt for project repo until correctly entered
         do {
             $projectRepo = $this->promptRepo($projectRepo);
-        } while ($projectRepo != null);
+        } while ($projectRepo === null);
 
         // Prompt for website url until correctly entered
         do {
             $siteUrl = $this->promptUrl($siteUrl);
-        } while ($siteUrl != null);
+        } while ($siteUrl === null);
 
         if (!!$projectRepo) {
             $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
