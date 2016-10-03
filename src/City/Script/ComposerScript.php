@@ -263,11 +263,15 @@ class ComposerScript extends AbstractScript
         exec('git init');
         // set teh remote repo.
         exec(sprintf(
-            'git remote set-url origin %s',
+            'git remote set-url origin %s 2>&1',
             $this->projectRepo()
-        ));
+        ), $output);
+
+        $this->climate()->dim()->out($output);
+
         // verify the remote repo.
-        exec('git remote -v');
+        exec('git remote -v 2>&1', $output);
+        $this->climate()->dim()->out($output);
     }
 
     /**
