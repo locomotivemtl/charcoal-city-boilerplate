@@ -365,7 +365,7 @@ class ConfigScript extends AbstractScript
     {
         if (!$prompt) {
             $input  = $this->climate()->input(
-                'Database <red>name</red> : (Doesn\'t need to exist but if it does, it will be overwritten)'
+                'Database <red>name</red> (<red>Database will be created or overwritten</red>>) :'
             );
             $prompt = $input->prompt();
         }

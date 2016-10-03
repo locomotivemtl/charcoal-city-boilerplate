@@ -507,12 +507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-admin.git",
-                "reference": "228364e9211419f47878a15c73c14a4f2f71780b"
+                "reference": "7a3559b45955b00cf9c6a9692bc8b9cfa8e301e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/228364e9211419f47878a15c73c14a4f2f71780b",
-                "reference": "228364e9211419f47878a15c73c14a4f2f71780b",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/7a3559b45955b00cf9c6a9692bc8b9cfa8e301e1",
+                "reference": "7a3559b45955b00cf9c6a9692bc8b9cfa8e301e1",
                 "shasum": ""
             },
             "require": {
@@ -564,7 +564,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-10-03 16:32:07"
+            "time": "2016-10-03 21:06:40"
         },
         {
             "name": "locomotivemtl/charcoal-app",
@@ -3387,12 +3387,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "a3cb3163988f6ec1646d8a06b2c0c7b30798ce54"
+                "reference": "f93682ae24018ca63a3b2b728d753cdf798ea98a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/a3cb3163988f6ec1646d8a06b2c0c7b30798ce54",
-                "reference": "a3cb3163988f6ec1646d8a06b2c0c7b30798ce54",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f93682ae24018ca63a3b2b728d753cdf798ea98a",
+                "reference": "f93682ae24018ca63a3b2b728d753cdf798ea98a",
                 "shasum": ""
             },
             "require": {
@@ -3457,7 +3457,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-09-25 22:43:32"
+            "time": "2016-10-01 12:32:10"
         },
         {
             "name": "symfony/yaml",
