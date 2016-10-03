@@ -1,0 +1,485 @@
+<?php
+
+namespace City\Script;
+
+use \Exception;
+use \InvalidArgumentException;
+
+// Dependencies from PSR-7 (HTTP Messaging)
+use \Psr\Http\Message\RequestInterface;
+use \Psr\Http\Message\ResponseInterface;
+
+// Dependency from 'charcoal-app'
+use \Charcoal\App\Script\AbstractScript;
+
+// Database dependencies
+use \PDO;
+
+/**
+ * Config the current project
+ *
+ * The current script will alter the project's files
+ * to to the configuration is done for the user.
+ */
+class ComposerScript extends AbstractScript
+{
+
+    /**
+     * @var string $rootPath The project root path.
+     */
+    protected $rootPath = __DIR__.'/../../../';
+
+    /**
+     * @var string $projectName The project name.
+     */
+    protected $projectName = 'myProject';
+
+    /**
+     * @var string $projectRepo The project vcs repository.
+     */
+    protected $projectRepo = 'https://github.com/joel/my-project';
+
+    /**
+     * @var string $siteUrl The project website url.
+     */
+    protected $siteUrl = 'https://myproject.ca';
+
+    /**
+     * @var string $illegalNames Names that will return an error.
+     */
+    protected $illegalNames = '*^(charcoal|city)$*i';
+
+    // ==========================================================================
+    // DEFAULTS
+    // ==========================================================================
+
+    /**
+     * Retrieve the available default arguments of this action.
+     *
+     * @link http://climate.thephpleague.com/arguments/ For descriptions of the options for CLImate.
+     *
+     * @return array
+     */
+    public function defaultArguments()
+    {
+        $arguments = [
+            'projectName' => [
+                'prefix'      => 'p',
+                'longPrefix'  => 'project-name',
+                'description' => 'Database host name'
+            ],
+            'projectRepo' => [
+                'prefix'      => 'r',
+                'longPrefix'  => 'repo',
+                'description' => 'Database host name'
+            ],
+            'siteUrl'     => [
+                'prefix'      => 's',
+                'longPrefix'  => 'site-url',
+                'description' => 'Database host name'
+            ]
+        ];
+
+        $arguments = array_merge(parent::defaultArguments(), $arguments);
+
+        return $arguments;
+    }
+
+    // ==========================================================================
+    // INIT
+    // ==========================================================================
+
+    /**
+     * RenameScript constructor Register the action's arguments..
+     */
+    public function __construct()
+    {
+        $arguments = $this->defaultArguments();
+        $this->setArguments($arguments);
+    }
+
+    /**
+     * Create a new rename script and runs it while passing arguments.
+     * @param array $data The data passed.
+     * @return void
+     */
+    public static function start(array $data = [])
+    {
+        $script = new ComposerScript();
+
+        // parse data
+        foreach ($data as $key => $value) {
+            if (property_exists(self::class, $key)) {
+                $script->{$key} = $value;
+            }
+        }
+        $script->composer();
+    }
+
+    /**
+     * @see \League\CLImate\CLImate Used by `CliActionTrait`
+     * @param RequestInterface  $request  PSR-7 request.
+     * @param ResponseInterface $response PSR-7 response.
+     * @return void
+     */
+    public function run(RequestInterface $request, ResponseInterface $response)
+    {
+        // Never Used
+        unset($request, $response);
+        $this->composer();
+    }
+
+    // ==========================================================================
+    // FUNCTIONS
+    // ==========================================================================
+
+    /**
+     * Interactively setup a Charcoal module.
+     *
+     * The action will ask the user a series of questions,
+     * and then update the current module for them.
+     *
+     * It attempts to config the project including :
+     * - Checking for env var or create it
+     * - Set the composer.json with the correct info
+     * - Change the readme according to the config
+     * - ask and create vcs repository
+     * - dump the auto-loader
+     * @return void
+     */
+    private function composer()
+    {
+        $climate = $this->climate();
+
+        $climate->underline()->out('Charcoal city config script');
+
+        if ($climate->arguments->defined('help')) {
+            $climate->usage();
+
+            return;
+        }
+
+        // Parse the received arguments
+        $climate->arguments->parse();
+        $projectName = $climate->arguments->get('projectName') ?: $this->projectName;
+        $projectRepo = $climate->arguments->get('projectRepo') ?: $this->projectRepo;
+        $siteUrl     = $climate->arguments->get('siteUrl') ?: $this->siteUrl;
+        $verbose     = !!$climate->arguments->get('quiet');
+        $this->setVerbose($verbose);
+
+        // Prompt for project name until correctly entered
+        do {
+            $projectName = $this->promptName($projectName);
+        } while (!$projectName);
+
+        // Prompt for project repo until correctly entered
+        do {
+            $projectRepo = $this->promptRepo($projectRepo);
+        } while (!$projectRepo);
+
+        // Prompt for website url until correctly entered
+        do {
+            $siteUrl = $this->promptUrl($siteUrl);
+        } while (!$siteUrl);
+
+        // Update the composer file
+        $this->updateComposer();
+
+        // Update the README file
+        $this->updateReadme();
+
+        // Update git vcs repo push url
+        $this->gitSetup();
+
+        // Dump auto-loader
+        $this->dumpAutoLoader();
+
+        $climate->green()->out("\n".'The composer was updated with Success!');
+    }
+
+    /**
+     * Update the composer file
+     * @return void
+     */
+    private function updateComposer()
+    {
+        $climate = $this->climate();
+
+        $climate->out('Updating composer file...');
+
+        $composerPath = $this->rootPath.'composer.json';
+        $jsonString   = file_get_contents($composerPath);
+        $data         = json_decode($jsonString, true);
+
+        // set the data
+        $data['name']              = parse_url($this->projectRepo, PHP_URL_PATH);
+        $data['description']       = sprintf('A project for %s city', $this->projectName);
+        $data['homepage']          = $this->siteUrl;
+        $data['support']['source'] = $this->projectRepo.'/src';
+        $data['support']['issues'] = $this->projectRepo.'/issues';
+        // Change the script called by composer create-project
+        $data['scripts']['post-create-project-cmd'] = ['City\\Script\\SetupScript::start'];
+
+        $newJsonString = json_encode($data, (JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        file_put_contents($composerPath, $newJsonString);
+
+        $climate->green()->out('Composer file update with success!');
+    }
+
+    /**
+     * Update the readme to indicate the installation method of a started project.
+     * @return void
+     */
+    private function updateReadme()
+    {
+        $this->climate()->out('Updating the README.md file...');
+
+        $newReadme = file_get_contents($this->rootPath.'build/README.md.post.install');
+
+        $newReadme = preg_replace('*^<project-name>$*i', $this->projectName(), $newReadme);
+        $newReadme = preg_replace('*^<project-repo-name>$*i', $this->projectRepo(), $newReadme);
+
+        file_put_contents($this->rootPath.'README.md', $newReadme);
+    }
+
+    /**
+     * Setup the git configuration to push to the chosen repository
+     * @return void
+     */
+    private function gitSetup()
+    {
+        $this->climate()->out(sprintf(
+            'Setting the git environment to push to %s...',
+            $this->promptRepo()
+        ));
+
+        // initialize git.
+        exec('git init');
+        // set teh remote repo.
+        exec(sprintf(
+            'git remote set-url origin',
+            $this->projectRepo()
+        ));
+        // verify the remote repo.
+        exec('git remote -v');
+    }
+
+    /**
+     * Dump the auto-loader to refresh the src paths
+     * @return void
+     */
+    private function dumpAutoLoader()
+    {
+        $this->climate()->out('refreshing the auto-loader...');
+
+        exec('composer dump-autoload');
+    }
+
+    /**
+     * @param string $name The name of the project.
+     * @return string|null
+     */
+    protected function promptName($name = null)
+    {
+        if (!$name) {
+            $input = $this->climate()->input('What is the <red>name</red> of the project?');
+            $name  = ucfirst($input->prompt());
+        }
+
+        try {
+            $this->setProjectName($name);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $name;
+    }
+
+    /**
+     * @param string $repo The repo of the project.
+     * @return string|null
+     */
+    protected function promptRepo($repo = null)
+    {
+        if (!$repo) {
+            $input = $this->climate()->input('What is the <red>VCS repository</red> of the project?');
+            $repo  = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setProjectRepo($repo);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $repo;
+    }
+
+    /**
+     * @param string $url The url of the project site.
+     * @return string|null
+     */
+    protected function promptUrl($url = null)
+    {
+        if (!$url) {
+            $input = $this->climate()->input('What is the project <red>website url</red>? (optional)');
+            $url   = strtolower($input->prompt());
+        }
+
+        try {
+            $this->setSiteUrl($url);
+        } catch (Exception $e) {
+            $this->climate()->error($e->getMessage());
+
+            return null;
+        }
+
+        return $url;
+    }
+
+    // ==========================================================================
+    // SETTERS
+    // ==========================================================================
+
+    /**
+     * Set the current project name.
+     *
+     * @param string $name The name of the project.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return self Chainable
+     */
+    public function setProjectName($name)
+    {
+        if (!is_string($name)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Must be a string.'
+            );
+        }
+
+        if (!$name) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Must contain at least one character.'
+            );
+        }
+
+        if (preg_match($this->illegalNames, $name)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. The name chosen is illegal.'
+            );
+        }
+
+        if (!preg_match('/^[-a-z_ ]+$/i', $name)) {
+            throw new InvalidArgumentException(
+                'Invalid project name. Only characters A-Z, dashes, underscores and spaces are allowed.'
+            );
+        }
+
+        $this->projectName = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set the current project namespace.
+     *
+     * @param string $repo The namespace of the project.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return self Chainable
+     */
+    public function setProjectRepo($repo)
+    {
+        if (!is_string($repo)) {
+            throw new InvalidArgumentException(
+                'Invalid VCS repository. Must be a string.'
+            );
+        }
+
+        if (!$repo) {
+            throw new InvalidArgumentException(
+                'Invalid VCS repository. Must contain at least one character.'
+            );
+        }
+
+        if (!preg_match(
+            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
+            $repo
+        )
+        ) {
+            throw new InvalidArgumentException(
+                'Invalid VCS repository. Only valid Urls are allowed.'
+            );
+        }
+
+        $this->projectRepo = $repo;
+
+        return $this;
+    }
+
+    /**
+     * Set the current project namespace.
+     *
+     * @param string $url The website url.
+     * @throws InvalidArgumentException If the project name is invalid.
+     * @return self Chainable
+     */
+    public function setSiteUrl($url)
+    {
+        if (!is_string($url)) {
+            throw new InvalidArgumentException(
+                'Invalid site url. Must be a string.'
+            );
+        }
+
+        if (!preg_match(
+            '~^(http|https)://[a-z0-9_]+([-.]{1}[a-z_0-9]+)*\.[_a-z]{2,5}((:[0-9]{1,5})?/.*)?$~i',
+            $url
+        )
+        ) {
+            throw new InvalidArgumentException(
+                'Invalid site url. Only valid Urls are allowed.'
+            );
+        }
+
+        $this->siteUrl = $url;
+
+        return $this;
+    }
+
+    // ==========================================================================
+    // GETTERS
+    // ==========================================================================
+
+    /**
+     * Retrieve the current project name.
+     *
+     * @return string
+     */
+    public function projectName()
+    {
+        return $this->projectName;
+    }
+
+    /**
+     * Retrieve the current project repository.
+     *
+     * @return string
+     */
+    public function projectRepo()
+    {
+        return $this->projectRepo;
+    }
+
+    /**
+     * Retrieve the current project repository.
+     *
+     * @return string
+     */
+    public function siteUrl()
+    {
+        return $this->siteUrl;
+    }
+}

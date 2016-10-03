@@ -53,8 +53,12 @@
         "phpcs": "php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1;php vendor/bin/phpcs -ps --colors --standard=phpcs.xml src/",
         "phpcbf": "php vendor/bin/phpcbf -ps --colors --standard=phpcs.xml src/ tests/",
         "post-create-project-cmd": [
-            "City\\Script\\SetupScript::start"
-        ], "setup": [
+            "City\\Script\\FirstSetupScript::start"
+        ],
+        "first-setup": [
+            "City\\Script\\FirstSetupScript::start"
+        ],
+        "setup": [
             "City\\Script\\SetupScript::start"
         ]
     },

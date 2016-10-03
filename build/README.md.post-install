@@ -1,4 +1,4 @@
-Charcoal City Boilerplate
+<project-name>
 ============================
 
 The goal of this project is to provide a fully working "boilerplate" (empty _skeleton_ project) for a _City project_ using the Charcoal framework.
@@ -7,7 +7,7 @@ The installation is fully automated.
 # Table of Content
 
 - [How to Install](#how-to-install)
-    - [1. Create / clone the project boilerplate](#1-create-clone-the-project-boilerplate)
+    - [1. Cloning the project with composer create](#1-clone-the-project-with-composer-create)
     - [2. Test your installation](#2-test-your-installation)
     - [3. Set up database storage](#3-set-up-database-storage)
     - [4. Set up `charcoal-admin`](#4-set-up-charcoal-admin)
@@ -28,12 +28,12 @@ The installation is fully automated.
 
 # How to Install
 
-To start a Charcoal project with this Boilerplate, simply:
+To clone this project with everything to start programming now, simply:
 
-## 1. **Create / clone the project boilerplate**
+## 1. **Cloning the project with composer create**
 
 ```shell
-$ composer create-project locomotivemtl/charcoal-city-boilerplate [path] [version]
+$ composer create <project-repo-name> [path] [version]
 ```
 
 > **About the Document Root**

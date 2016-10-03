@@ -74,21 +74,6 @@ class ConfigScript extends AbstractScript
      */
     protected $env;
 
-    /**
-     * @var string $projectName The project name.
-     */
-    protected $projectName = 'myProject';
-
-    /**
-     * @var string $projectRepo The project vcs repository.
-     */
-    protected $projectRepo = 'https://github.com/joel/my-project';
-
-    /**
-     * @var string $websiteUrl The project website url.
-     */
-    protected $websiteUrl = 'https://myproject.ca';
-
     // ==========================================================================
     // DEFAULTS
     // ==========================================================================
@@ -189,10 +174,6 @@ class ConfigScript extends AbstractScript
      * - Create a config.json file
      * - Setting the database and renaming it
      * - Adjust some database data
-     * - Set the composer.json with the correct info
-     * - Change the readme according to the config
-     * - ask and create vcs repository
-     * - dump the auto-loader
      * @return void
      */
     private function config()
@@ -209,10 +190,10 @@ class ConfigScript extends AbstractScript
 
         // Parse the received arguments
         $climate->arguments->parse();
-        $dbName     = $climate->arguments->get('sourceName') ?: $this->dbName;
-        $dbUser     = $climate->arguments->get('targetName') ?: $this->dbUser;
-        $dbPassword = $climate->arguments->get('targetName') ?: $this->dbPassword;
-        $dbHost     = $climate->arguments->get('targetName') ?: $this->dbHost;
+        $dbName     = $climate->arguments->get('databaseName') ?: $this->dbName;
+        $dbUser     = $climate->arguments->get('databaseUser') ?: $this->dbUser;
+        $dbPassword = $climate->arguments->get('databasePassword') ?: $this->dbPassword;
+        $dbHost     = $climate->arguments->get('databaseHost') ?: $this->dbHost;
         $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
@@ -249,8 +230,8 @@ class ConfigScript extends AbstractScript
         // Create the config.env.json file.
         $this->createConfigFile();
 
-        // Update the composer file
-        $this->updateComposer();
+        // Modify database data
+        $this->updateDatabaseData();
 
         $climate->green()->out("\n".'The project was configured with Success!');
     }
@@ -362,37 +343,12 @@ class ConfigScript extends AbstractScript
     }
 
     /**
-     * Update the composer file
+     * Update the database with data that match current dates.
+     * @todo Update the database with dates baesd on today().
      * @return void
      */
-    private function updateComposer()
+    private function updateDatabaseData()
     {
-        $climate = $this->climate();
-
-        $climate->out('Updating composer file...');
-
-        $composerPath = $this->rootPath.'composer.json';
-        $jsonString   = file_get_contents($composerPath);
-        $data         = json_decode($jsonString, true);
-
-        // set the data
-        $data['name']              = str_replace(
-            '~^(http|https)://(github.com|bitbucket.org)$~i',
-            '',
-            $this->projectRepo
-        );
-        $data['description']       = sprintf(
-            'A project for %s city',
-            $this->projectName
-        );
-        $data['homepage']          = $this->websiteUrl;
-        $data['support']['source'] = $this->projectRepo.'/src';
-        $data['support']['issues'] = $this->projectRepo.'/issues';
-
-        $newJsonString = json_encode($data, (JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-        file_put_contents($composerPath, $newJsonString);
-
-        $climate->green()->out('Composer file update with success!');
     }
 
     /**
