@@ -23,7 +23,7 @@ use \PDO;
  */
 class ConfigScript extends AbstractScript
 {
-
+    use KeyNormalizerTrait;
     /**
      * @var string $dbName The database name.
      */
@@ -139,7 +139,7 @@ class ConfigScript extends AbstractScript
 
         // Parse data
         foreach ($data as $key => $value) {
-            $setter = 'set'.$key;
+            $setter = $script->camel('set'.$key);
             if (is_callable($script, $setter)) {
                 $script->{$setter}($value);
             } else {
