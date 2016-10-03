@@ -258,12 +258,12 @@ class ComposerScript extends AbstractScript
             'Setting the git environment to push to %s...',
             $this->projectRepo()
         ));
-
+        exec('rm -rf .git');
         // initialize git.
         exec('git init');
         // set teh remote repo.
         exec(sprintf(
-            'git remote set-url origin %s',
+            'git remote add origin %s',
             $this->projectRepo()
         ));
 
