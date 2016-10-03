@@ -59,7 +59,7 @@ class RenameScript extends AbstractScript
     {
         $arguments = [
             'sourceName' => [
-                'prefix'      => 's',
+                'prefix'      => 'src',
                 'longPrefix'  => 'source',
                 'description' => sprintf(
                     'Project (module) source. The source namespace. '.

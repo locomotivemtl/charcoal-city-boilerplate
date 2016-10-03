@@ -74,7 +74,7 @@ class ComposerScript extends AbstractScript
                 'description' => 'Database host name'
             ],
             'siteUrl'     => [
-                'prefix'      => 's',
+                'prefix'      => 'su',
                 'longPrefix'  => 'site-url',
                 'description' => 'Database host name'
             ]
@@ -181,12 +181,12 @@ class ComposerScript extends AbstractScript
         // Prompt for project repo until correctly entered
         do {
             $projectRepo = $this->promptRepo($projectRepo);
-        } while (!$projectRepo || $projectRepo != '');
+        } while ($projectRepo != null);
 
         // Prompt for website url until correctly entered
         do {
             $siteUrl = $this->promptUrl($siteUrl);
-        } while (!$siteUrl || $siteUrl != '');
+        } while ($siteUrl != null);
 
         if (!!$projectRepo) {
             $climate->out(sprintf('Using "%s" as vcs repository...', $this->projectRepo()));
@@ -338,7 +338,7 @@ class ComposerScript extends AbstractScript
     {
         if (!$repo) {
             $input = $this->climate()->input('What is the <red>VCS repository</red> of the project? '.
-                '(<red>let blank to use an already installed VCS</red>)');
+                '(<red>let blank to use an already installed VCS</red>) :');
             $repo  = strtolower($input->prompt());
         }
 
@@ -360,7 +360,7 @@ class ComposerScript extends AbstractScript
     protected function promptUrl($url = null)
     {
         if (!$url) {
-            $input = $this->climate()->input('What is the project <red>website url</red>? (<red>optional</red>)');
+            $input = $this->climate()->input('What is the project <red>website url</red>? (<red>optional</red>) :');
             $url   = strtolower($input->prompt());
         }
 
