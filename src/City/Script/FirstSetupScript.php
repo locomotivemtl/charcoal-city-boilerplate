@@ -52,7 +52,7 @@ class FirstSetupScript extends AbstractScript
     /**
      * @var string $illegalNames Names that will return an error.
      */
-    protected $illegalNames = '*^(charcoal|city)$*i';
+    protected $illegalNames = '~^(charcoal|city)$~i';
 
     // ==========================================================================
     // DEFAULTS
