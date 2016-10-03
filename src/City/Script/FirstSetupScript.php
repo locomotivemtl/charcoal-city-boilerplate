@@ -282,7 +282,7 @@ class FirstSetupScript extends AbstractScript
     protected function promptUrl($url = null)
     {
         if (!$url) {
-            $input = $this->climate()->input('What is the project <red>website url</red>? (optional)');
+            $input = $this->climate()->input('What is the project <red>website url</red>?');
             $url   = strtolower($input->prompt());
         }
 
