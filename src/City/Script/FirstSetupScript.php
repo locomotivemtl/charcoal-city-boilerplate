@@ -187,8 +187,8 @@ class FirstSetupScript extends AbstractScript
 
         // Rename the project's files and content
         RenameScript::start([
-            'source' => 'Boilerplate',
-            'target' => $this->projectName()
+            'sourceName' => 'Boilerplate',
+            'targetName' => $this->projectName()
         ]);
         // Modify the composer file
         ComposerScript::start([

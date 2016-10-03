@@ -159,6 +159,9 @@ class RenameScript extends AbstractScript
         $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
+        $climate->dump($sourceName);
+        $climate->dump($targetName);
+
         // Prompt for source name until correctly entered
         do {
             $sourceName = $this->promptSourceName($sourceName);
