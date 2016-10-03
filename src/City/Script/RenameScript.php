@@ -106,8 +106,14 @@ class RenameScript extends AbstractScript
 
         // Parse data
         foreach ($data as $key => $value) {
-            if (property_exists(self::class, $key)) {
-                $script->{$key} = $value;
+            $setter = 'set'.$key;
+            if (is_callable($script, $setter)) {
+                $script->{$setter}($value);
+            } else {
+                $script->climate()->to('error')->red(sprintf(
+                    'the setter "%s" was passed to the start function but doesn\'t exist!',
+                    $setter
+                ));
             }
         }
         $script->rename();
@@ -175,10 +181,10 @@ class RenameScript extends AbstractScript
         $climate->out(sprintf('Using "%s" as namespace...', ucfirst($targetName)));
 
         // Replace file contents
-        $this->replaceFileContent();
+        // $this->replaceFileContent();
 
         // Rename files
-        $this->renameFiles();
+        // $this->renameFiles();
 
         $climate->green()->out("\n".'Success!');
     }

@@ -107,10 +107,16 @@ class ComposerScript extends AbstractScript
     {
         $script = new ComposerScript();
 
-        // parse data
+        // Parse data
         foreach ($data as $key => $value) {
-            if (property_exists(self::class, $key)) {
-                $script->{$key} = $value;
+            $setter = 'set'.$key;
+            if (is_callable($script, $setter)) {
+                $script->{$setter}($value);
+            } else {
+                $script->climate()->to('error')->red(sprintf(
+                    'the setter "%s" was passed to the start function but doesn\'t exist!',
+                    $setter
+                ));
             }
         }
         $script->composer();
@@ -234,7 +240,7 @@ class ComposerScript extends AbstractScript
     {
         $this->climate()->out('Updating the README.md file...');
 
-        $newReadme = file_get_contents($this->rootPath.'build/README.md.post.install');
+        $newReadme = file_get_contents($this->rootPath.'build/README.md.post-install');
 
         $newReadme = preg_replace('*^<project-name>$*i', $this->projectName(), $newReadme);
         $newReadme = preg_replace('*^<project-repo-name>$*i', $this->projectRepo(), $newReadme);

@@ -137,10 +137,16 @@ class ConfigScript extends AbstractScript
     {
         $script = new ConfigScript();
 
-        // parse data
+        // Parse data
         foreach ($data as $key => $value) {
-            if (property_exists(self::class, $key)) {
-                $script->{$key} = $value;
+            $setter = 'set'.$key;
+            if (is_callable($script, $setter)) {
+                $script->{$setter}($value);
+            } else {
+                $script->climate()->to('error')->red(sprintf(
+                    'the setter "%s" was passed to the start function but doesn\'t exist!',
+                    $setter
+                ));
             }
         }
         $script->config();
