@@ -170,14 +170,13 @@ class FirstSetupScript extends AbstractScript
             'projectName' => $this->projectName()
         ]);
 
-        set_exception_handler(null);
         try {
             // Configure database and the config file
             ConfigScript::start();
             // Create a user
             new CreateUser();
-        } catch (Exception $e) {
-            $climate->out($e);
+        } catch (CancelledScriptException $e) {
+            $climate->out($e->getMessage());
         }
 
         $climate->green()->out("\n".'Success!');

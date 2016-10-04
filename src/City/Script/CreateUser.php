@@ -40,7 +40,7 @@ class CreateUser
     /**
      * Create an admin user by prompting the client.
      * @return void
-     * @throws Exception When a cancel action is made by the user.
+     * @throws CancelledScriptException When a cancel action is made by the user.
      */
     protected function createUser()
     {
@@ -50,7 +50,7 @@ class CreateUser
         } while ($userName === null);
 
         if (!$userName) {
-            throw new Exception(
+            throw new CancelledScriptException(
                 'The admin user creation as been skipped.'
             );
         }
