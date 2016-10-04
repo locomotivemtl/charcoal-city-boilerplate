@@ -97,12 +97,8 @@ class SetupScript extends AbstractScript
             ConfigScript::start();
             // Create a user
             new CreateUser();
-        } catch (\Exception $e) {
-            if ($e instanceof CancelledScriptException) {
-                $climate->out($e);
-            } else {
-                throw $e;
-            }
+        } catch (CancelledScriptException $e) {
+            $climate->out($e->getMessage());
         }
 
         $climate->green()->out("\n".'Success!');
