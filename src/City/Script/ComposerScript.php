@@ -14,6 +14,7 @@ use \Charcoal\App\Script\AbstractScript;
 
 // Database dependencies
 use \PDO;
+use Psr\Log\NullLogger;
 
 /**
  * Config the current project
@@ -90,10 +91,16 @@ class ComposerScript extends AbstractScript
     // ==========================================================================
 
     /**
-     * RenameScript constructor Register the action's arguments..
+     * @param array|\ArrayAccess $data The dependencies (app and logger).
      */
-    public function __construct()
+    public function __construct($data = null)
     {
+        if (!isset($data['logger'])) {
+            $data['logger'] = new NullLogger();
+        }
+
+        parent::__construct($data);
+
         $arguments = $this->defaultArguments();
         $this->setArguments($arguments);
     }

@@ -2,16 +2,13 @@
 
 namespace City\Script;
 
-use Charcoal\Admin\Script\User\CreateScript;
-use \Exception;
-use \InvalidArgumentException;
-
 // Dependencies from PSR-7 (HTTP Messaging)
 use \Psr\Http\Message\RequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 
 // Dependency from 'charcoal-app'
 use \Charcoal\App\Script\AbstractScript;
+use Psr\Log\NullLogger;
 
 /**
  * Renames the current module's name
@@ -27,10 +24,16 @@ class SetupScript extends AbstractScript
     // ==========================================================================
 
     /**
-     * SetupScript constructor Register the action's arguments..
+     * @param array|\ArrayAccess $data The dependencies (app and logger).
      */
-    public function __construct()
+    public function __construct($data = null)
     {
+        if (!isset($data['logger'])) {
+            $data['logger'] = new NullLogger();
+        }
+
+        parent::__construct($data);
+
         $arguments = $this->defaultArguments();
         $this->setArguments($arguments);
     }
@@ -86,10 +89,14 @@ class SetupScript extends AbstractScript
         $verbose = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
-        // Configure database and the config file
-        ConfigScript::start();
-        // Create a user
-        CreateScript::start();
+        try {
+            // Configure database and the config file
+            ConfigScript::start();
+            // Create a user
+            new CreateUser();
+        } catch (CancelledScriptException $e) {
+            $climate->out($e);
+        }
 
         $climate->green()->out("\n".'Success!');
     }

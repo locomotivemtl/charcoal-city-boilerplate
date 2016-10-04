@@ -14,6 +14,7 @@ use \Charcoal\App\Script\AbstractScript;
 
 // Database dependencies
 use \PDO;
+use Psr\Log\NullLogger;
 
 /**
  * Config the current project
@@ -120,10 +121,16 @@ class ConfigScript extends AbstractScript
     // ==========================================================================
 
     /**
-     * RenameScript constructor Register the action's arguments..
+     * @param array|\ArrayAccess $data The dependencies (app and logger).
      */
-    public function __construct()
+    public function __construct($data = null)
     {
+        if (!isset($data['logger'])) {
+            $data['logger'] = new NullLogger();
+        }
+
+        parent::__construct($data);
+
         $arguments = $this->defaultArguments();
         $this->setArguments($arguments);
     }
@@ -181,6 +188,7 @@ class ConfigScript extends AbstractScript
      * - Setting the database and renaming it
      * - Adjust some database data
      * @return void
+     * @throws CancelledScriptException When the user skip the database creation.
      */
     private function config()
     {
@@ -213,7 +221,13 @@ class ConfigScript extends AbstractScript
         // Prompt for database name until correctly entered
         do {
             $dbName = $this->promptDbName($dbName);
-        } while (!$dbName);
+        } while ($dbName === null);
+
+        if (!$dbName) {
+            throw new CancelledScriptException(
+                'The database configuration has been skipped.'
+            );
+        }
 
         // Prompt for database user name until correctly entered
         do {
@@ -365,7 +379,8 @@ class ConfigScript extends AbstractScript
     {
         if (!$prompt) {
             $input  = $this->climate()->input(
-                'Database <red>name</red> (<red>Database will be created or overwritten</red>>) :'
+                'Database <red>name</red> (<red>Database will be created or overwritten, '.
+                'let blank to use another database</red>>) :'
             );
             $prompt = $input->prompt();
         }
@@ -477,13 +492,7 @@ class ConfigScript extends AbstractScript
             );
         }
 
-        if (!$name) {
-            throw new InvalidArgumentException(
-                'Invalid project name. Must contain at least one character.'
-            );
-        }
-
-        if (!preg_match('/^[-a-z_ ]+$/i', $name)) {
+        if ($name != '' && !preg_match('/^[-a-z_ ]+$/i', $name)) {
             throw new InvalidArgumentException(
                 'Invalid database name. Only characters A-Z, dashes, underscores and spaces are allowed.'
             );
@@ -511,7 +520,7 @@ class ConfigScript extends AbstractScript
 
         if (!$name) {
             throw new InvalidArgumentException(
-                'Invalid project username. Must contain at least one character.'
+                'Invalid database username. Must contain at least one character.'
             );
         }
 
@@ -563,7 +572,7 @@ class ConfigScript extends AbstractScript
 
         if (!$name) {
             throw new InvalidArgumentException(
-                'Invalid project username. Must contain at least one character.'
+                'Invalid database username. Must contain at least one character.'
             );
         }
 
