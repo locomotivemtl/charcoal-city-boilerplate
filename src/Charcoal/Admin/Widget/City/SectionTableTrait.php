@@ -3,6 +3,7 @@
 namespace Charcoal\Admin\Widget\city;
 
 use Exception;
+use RuntimeException;
 
 // From 'charcoal-core'
 use Charcoal\Model\ModelInterface;
@@ -91,26 +92,23 @@ trait SectionTableTrait
                 }
                 break;
 
-            case 'menu_label':
-                $propertyValue = $object->menuLabelOrFallback();
-
             case 'title':
             case 'menu_label':
                 $sectionTag  = null;
                 $sectionType = $object->sectionType();
-                // $taggedTypes = [ Section::TYPE_EXTERNAL, Section::TYPE_GROUPING ];
 
                 switch ($sectionType) {
                     case Section::TYPE_EXTERNAL:
                         $externalUrl = (string)$object->externalUrl();
                         $linkExcerpt = '';
-                        $tagTemplate = '<span class="glyphicon glyphicon-link" data-toggle="tooltip" data-placement="auto" title="%1$s"></span>';
+                        $tagTemplate = '<span class="glyphicon glyphicon-link" data-toggle="tooltip" '.
+                            'data-placement="auto" title="%1$s"></span>';
 
                         if ($externalUrl) {
                             $tagTemplate = '<a class="btn btn-default btn-xs" href="%2$s" target="_blank">'.
-                                                '<span class="glyphicon glyphicon-link" aria-hidden="true"></span> '.
-                                                '<span class="sr-only">URL:</span> %3$s'.
-                                            '</a>';
+                                '<span class="glyphicon glyphicon-link" aria-hidden="true"></span> '.
+                                '<span class="sr-only">URL:</span> %3$s'.
+                                '</a>';
 
                             $linkExcerpt = $this->abridgeUri($externalUrl);
                         }
@@ -123,24 +121,16 @@ trait SectionTableTrait
                             $linkExcerpt
                         );
                         break;
-
-                    // case Section::TYPE_GROUPING:
-                    //  $p = $object->p('section_type');
-                    //     $propertyValue .= sprintf(
-                    //         ' &nbsp; '.
-                    //         '<span class="glyphicon glyphicon-folder-close" data-toggle="tooltip" data-placement="auto" title="%s"></span>',
-                    //         $p->displayVal($p->val())
-                    //     );
-                    //     break;
                 }
                 break;
         }
 
         if ($propertyIdent === 'title') {
-            if (is_callable([ $object, 'navMenu' ]) && $object->navMenu()) {
+            if (is_callable([$object, 'navMenu']) && $object->navMenu()) {
                 $propertyValue .= sprintf(
                     ' &nbsp; '.
-                    '<span class="glyphicon glyphicon-list" data-toggle="tooltip" data-placement="auto" title="%s"></span>',
+                    '<span class="glyphicon glyphicon-list" data-toggle="tooltip" '.
+                    'data-placement="auto" title="%s"></span>',
                     new TranslationString([
                         'en' => 'Present in a menu',
                         'fr' => 'Présent dans un menu'
@@ -148,10 +138,11 @@ trait SectionTableTrait
                 );
             }
 
-            if (is_callable([ $object, 'locked' ]) && $object->locked()) {
+            if (is_callable([$object, 'locked']) && $object->locked()) {
                 $propertyValue .= sprintf(
                     ' &nbsp; '.
-                    '<span class="glyphicon glyphicon-lock" data-toggle="tooltip" data-placement="auto" title="%s"></span>',
+                    '<span class="glyphicon glyphicon-lock" data-toggle="tooltip" '.
+                    'data-placement="auto" title="%s"></span>',
                     $object->p('locked')->label()
                 );
             }

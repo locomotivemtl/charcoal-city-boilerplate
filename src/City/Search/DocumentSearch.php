@@ -11,7 +11,6 @@ use \Charcoal\Loader\CollectionLoader;
 use \City\Object\Attachment\Document;
 use \Charcoal\Attachment\Object\File;
 
-
 /**
  *
  */
@@ -23,7 +22,7 @@ class DocumentSearch extends AbstractSearch
      */
     public function search($keyword)
     {
-        $document = $this->modelFactory()->get(File::class);
+        $document      = $this->modelFactory()->get(File::class);
         $documentTable = $document->source()->table();
 
         $searchWord = '%'.$keyword.'%';
@@ -46,7 +45,7 @@ class DocumentSearch extends AbstractSearch
                 OR
                     document.title_'.$this->currentLang().' LIKE \''.$searchWord.'\'
                 OR
-                    document.keywords_'.$this->currentLang() .' LIKE \''.$searchWord.'\'
+                    document.keywords_'.$this->currentLang().' LIKE \''.$searchWord.'\'
                 OR
                     FIND_IN_SET(\''.$rawKeyword.'\', document.keywords_'.$this->currentLang().')
             )
@@ -61,7 +60,7 @@ class DocumentSearch extends AbstractSearch
         ';
 
         $loader = new CollectionLoader([
-            'logger' => $this->logger,
+            'logger'  => $this->logger,
             'factory' => $this->modelFactory()
         ]);
         $loader->setModel($document);
@@ -70,24 +69,28 @@ class DocumentSearch extends AbstractSearch
 
         $out = ['attachments' => []];
         foreach ($collection as $c) {
-
             $out['attachments'][] = [
                 'isFile' => $c->isFile(),
                 'isLink' => $c->isLink(),
-                'title' => (string)$c->title(),
-                'file' => $c->file(),
-                'link' => $c->link(),
-                'id' => $c->id()
+                'title'  => (string)$c->title(),
+                'file'   => $c->file(),
+                'link'   => $c->link(),
+                'id'     => $c->id()
             ];
         }
 
         $this->setResults($out);
+
         return $out;
     }
 
+    /**
+     * @return string
+     */
     public function currentLang()
     {
         $translator = new TranslationString();
+
         return $translator->currentLanguage();
     }
 }

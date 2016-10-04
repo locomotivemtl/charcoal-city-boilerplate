@@ -10,7 +10,7 @@ php:
 env:
   global:
     - secure: "RXRr93fTs89A7D/BvK5s2SnnvdsGgedjHBBfQjzChP3J/sgVQ0sAK9krqJ3HL45dR2nCxJ7JKJRdwWVB2ZurihzAoCXt5c/R8D5MdlW56KaI7fPLhyXSV9vm4c3NMRYS22gXbPWjK6y41tNMSeyIarjYROBMJXf8oC67E7QVivw="
-    - GH_REPO: github.com/locomotivemtl/charcoal-project-boilerplate.git
+    - GH_REPO: github.com/locomotivemtl/charcoal-city-boilerplate.git
 
 matrix:
   allow_failures:

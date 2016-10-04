@@ -2,7 +2,6 @@
 
 namespace City\Search;
 
-
 use \Charcoal\Search\AbstractSearch;
 
 /**
@@ -19,6 +18,7 @@ class EventSearch extends AbstractSearch
     {
         $results = ['event '.$keyword];
         $this->setResults($results);
+
         return $results;
     }
 }

@@ -10,7 +10,6 @@ use \Charcoal\Loader\CollectionLoader;
 
 use \City\Object\Section;
 
-
 /**
  *
  */
@@ -22,9 +21,8 @@ class SectionSearch extends AbstractSearch
      */
     public function search($keyword)
     {
-        $section = $this->modelFactory()->get(Section::class);
+        $section      = $this->modelFactory()->get(Section::class);
         $sectionTable = $section->source()->table();
-
 
         $searchWord = '%'.$keyword.'%';
         $rawKeyword = $keyword;
@@ -48,7 +46,7 @@ class SectionSearch extends AbstractSearch
             AND
                 section.title_'.$this->currentLang().' LIKE \''.$searchWord.'\'
             OR
-                section.content_'.$this->currentLang() .' LIKE \''.$searchWord.'\'
+                section.content_'.$this->currentLang().' LIKE \''.$searchWord.'\'
             OR
                 FIND_IN_SET(\''.$rawKeyword.'\', section.keywords_'.$this->currentLang().')
             OR
@@ -70,7 +68,7 @@ class SectionSearch extends AbstractSearch
         ';
 
         $loader = new CollectionLoader([
-            'logger' => $this->logger,
+            'logger'  => $this->logger,
             'factory' => $this->modelFactory()
         ]);
         $loader->setModel($section);
@@ -79,20 +77,25 @@ class SectionSearch extends AbstractSearch
         $out = [];
         foreach ($collection as $c) {
             $out[] = [
-                'title' => (string)$c->title(),
-                'url' => $c->url(),
-                'id' => $c->id(),
-                'description' => substr(strip_tags((string)$c->metaDescription()), 0, 1000),
+                'title'         => (string)$c->title(),
+                'url'           => $c->url(),
+                'id'            => $c->id(),
+                'description'   => substr(strip_tags((string)$c->metaDescription()), 0, 1000),
                 'isExternalUrl' => $c->isExternalUrl()
             ];
         }
         $this->setResults($out);
+
         return $out;
     }
 
+    /**
+     * @return string
+     */
     public function currentLang()
     {
         $translator = new TranslationString();
+
         return $translator->currentLanguage();
     }
 }

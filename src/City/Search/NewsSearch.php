@@ -21,9 +21,8 @@ class NewsSearch extends AbstractSearch
      */
     public function search($keyword)
     {
-        $news = $this->modelFactory()->get(News::class);
+        $news      = $this->modelFactory()->get(News::class);
         $newsTable = $news->source()->table();
-
 
         $searchWord = '%'.$keyword.'%';
         $rawKeyword = $keyword;
@@ -47,9 +46,9 @@ class NewsSearch extends AbstractSearch
             AND
                 news.title_'.$this->currentLang().' LIKE \''.$searchWord.'\'
             OR
-                news.subtitle_'.$this->currentLang() .' LIKE \''.$searchWord.'\'
+                news.subtitle_'.$this->currentLang().' LIKE \''.$searchWord.'\'
             OR
-                news.content_'.$this->currentLang() .' LIKE \''.$searchWord.'\'
+                news.content_'.$this->currentLang().' LIKE \''.$searchWord.'\'
             OR
                 attachment.keywords_'.$this->currentLang().' LIKE \''.$searchWord.'\'
             OR
@@ -69,7 +68,7 @@ class NewsSearch extends AbstractSearch
         ';
 
         $loader = new CollectionLoader([
-            'logger' => $this->logger,
+            'logger'  => $this->logger,
             'factory' => $this->modelFactory()
         ]);
         $loader->setModel($news);
@@ -78,22 +77,26 @@ class NewsSearch extends AbstractSearch
         $out = [];
         foreach ($collection as $c) {
             $out[] = [
-                'title' => (string)$c->title(),
-                'url' => $c->url(),
-                'id' => $c->id(),
-                'displayDate' => $c->displayDate(),
+                'title'        => (string)$c->title(),
+                'url'          => $c->url(),
+                'id'           => $c->id(),
+                'displayDate'  => $c->displayDate(),
                 'categoryName' => $c->categoryName(),
-                'description' => strip_tags((string)$c->metaDescription())
+                'description'  => strip_tags((string)$c->metaDescription())
             ];
         }
         $this->setResults($out);
+
         return $out;
     }
 
-
+    /**
+     * @return string
+     */
     public function currentLang()
     {
         $translator = new TranslationString();
+
         return $translator->currentLanguage();
     }
 }

@@ -269,14 +269,14 @@ class ComposerScript extends AbstractScript
 
         $newReadme = file_get_contents($this->rootPath.'build/README.md.post-install');
 
-        $newReadme = preg_replace('~^<project-name>$~i', $this->projectName(), $newReadme);
+        $newReadme = preg_replace('~<project-name>~i', $this->projectName(), $newReadme);
 
         $repo = $this->projectRepo();
 
         if (!$repo) {
             $repo = shell_exec('git config --get remote.origin.url');
         }
-        $newReadme = preg_replace('~^<project-repo-name>$~i', $repo, $newReadme);
+        $newReadme = preg_replace('~<project-repo-name>~i', $repo, $newReadme);
 
         file_put_contents($this->rootPath.'README.md', $newReadme);
     }
