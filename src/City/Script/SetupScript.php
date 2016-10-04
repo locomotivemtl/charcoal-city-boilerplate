@@ -71,6 +71,7 @@ class SetupScript extends AbstractScript
      * The action will ask the user a series of questions,
      * and then update the current city project for them.
      * @return void
+     * @throws \Exception If fatal error occurs.
      */
     public function setup()
     {
@@ -94,8 +95,12 @@ class SetupScript extends AbstractScript
             ConfigScript::start();
             // Create a user
             new CreateUser();
-        } catch (CancelledScriptException $e) {
-            $climate->out($e);
+        } catch (\Exception $e) {
+            if ($e instanceof CancelledScriptException) {
+                $climate->out($e);
+            } else {
+                throw $e;
+            }
         }
 
         $climate->green()->out("\n".'Success!');
