@@ -507,12 +507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-admin.git",
-                "reference": "7a3559b45955b00cf9c6a9692bc8b9cfa8e301e1"
+                "reference": "571cb2ba29c21c1ef295fc8ff1b0f333a9405bd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/7a3559b45955b00cf9c6a9692bc8b9cfa8e301e1",
-                "reference": "7a3559b45955b00cf9c6a9692bc8b9cfa8e301e1",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/571cb2ba29c21c1ef295fc8ff1b0f333a9405bd7",
+                "reference": "571cb2ba29c21c1ef295fc8ff1b0f333a9405bd7",
                 "shasum": ""
             },
             "require": {
@@ -564,7 +564,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-10-03 21:06:40"
+            "time": "2016-10-04 14:35:58"
         },
         {
             "name": "locomotivemtl/charcoal-app",
@@ -2102,12 +2102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "a053ca4a8653f1cf80383d95dc4787816d1ffd6c"
+                "reference": "f0b161191b428e1a6c52e5dae3f0c5af07b6a84e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/a053ca4a8653f1cf80383d95dc4787816d1ffd6c",
-                "reference": "a053ca4a8653f1cf80383d95dc4787816d1ffd6c",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/f0b161191b428e1a6c52e5dae3f0c5af07b6a84e",
+                "reference": "f0b161191b428e1a6c52e5dae3f0c5af07b6a84e",
                 "shasum": ""
             },
             "require": {
@@ -2152,7 +2152,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-10-03 16:00:13"
+            "time": "2016-10-04 14:58:29"
         },
         {
             "name": "tedivm/stash",
@@ -3387,12 +3387,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "f93682ae24018ca63a3b2b728d753cdf798ea98a"
+                "reference": "01ee3606e57746e496fd27ef5a83ce87128b547d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f93682ae24018ca63a3b2b728d753cdf798ea98a",
-                "reference": "f93682ae24018ca63a3b2b728d753cdf798ea98a",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/01ee3606e57746e496fd27ef5a83ce87128b547d",
+                "reference": "01ee3606e57746e496fd27ef5a83ce87128b547d",
                 "shasum": ""
             },
             "require": {
@@ -3457,7 +3457,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-10-01 12:32:10"
+            "time": "2016-10-04 01:00:27"
         },
         {
             "name": "symfony/yaml",

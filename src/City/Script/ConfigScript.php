@@ -380,7 +380,7 @@ class ConfigScript extends AbstractScript
         if (!$prompt) {
             $input  = $this->climate()->input(
                 'Database <red>name</red> (<red>Database will be created or overwritten, '.
-                'let blank to use another database</red>>) :'
+                'let blank to use another database</red>) :'
             );
             $prompt = $input->prompt();
         }

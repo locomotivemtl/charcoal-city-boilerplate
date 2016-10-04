@@ -65,12 +65,14 @@ class CreateUser
         } while (!$userPassword);
 
         // Create the admin user
-        shell_exec(sprintf(
-            'vendor/bin/charcoal admin/user/create -u %s -e %s -p $s -r admin',
+        exec(sprintf(
+            'vendor/bin/charcoal admin/user/create -u %s -e %s -p $s -r admin 2>&1',
             $userName,
             $userEmail,
             $userPassword
-        ));
+        ), $output);
+
+        $this->climate()->dim()->out($output);
     }
 
     /**
