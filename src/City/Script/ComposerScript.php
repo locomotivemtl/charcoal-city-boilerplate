@@ -243,7 +243,7 @@ class ComposerScript extends AbstractScript
 
         // If no repo name get the one from installed git repo
         if (!$repo) {
-            exec('git config --get remote.origin.url 2>&1', $repo);
+            exec('git config --get remote.origin.url 2>&1', $repoArray, $repo);
         }
         if ($repo) {
             $data['name']              = parse_url($repo, PHP_URL_PATH);
