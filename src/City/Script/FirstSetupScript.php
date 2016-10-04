@@ -177,11 +177,7 @@ class FirstSetupScript extends AbstractScript
             // Create a user
             new CreateUser();
         } catch (Exception $e) {
-            if ($e instanceof CancelledScriptException) {
-                $climate->out($e);
-            } else {
-                throw $e;
-            }
+            $climate->out($e);
         }
 
         $climate->green()->out("\n".'Success!');
