@@ -295,11 +295,13 @@ class ComposerScript extends AbstractScript
         exec('rm -rf .git');
         // initialize git.
         exec('git init');
-        // set teh remote repo.
+        // set the remote repo.
         exec(sprintf(
             'git remote add origin %s',
             $this->projectRepo()
         ));
+
+        exec('git branch --set-upstream-to origin/master');
 
         // verify the remote repo.
         exec('git remote -v 2>&1', $output);

@@ -4,7 +4,7 @@
             "templates": {
                 "home": {
                     "route": "[/[home]]",
-                    "redirect": "admin/object/collection?obj_type=city/object/section"
+                    "redirect": "admin/object/collection?main_menu=section&obj_type=city/object/section"
                 }
             },
             "actions": {
@@ -42,14 +42,14 @@
                     "url": "object/collection?main_menu=section&obj_type=city/object/section",
                     "has_children": false
                 },
-                "map":{
-                    "active":true,
-                    "label":{
-                        "fr":"Carte interactive",
-                        "en":"Interactive map"
+                "map": {
+                    "active": true,
+                    "label": {
+                        "fr": "Carte interactive",
+                        "en": "Interactive map"
                     },
-                    "icon":"map-marker",
-                    "url":"object/collection?main_menu=map&obj_type=city/object/location"
+                    "icon": "map-marker",
+                    "url": "object/collection?main_menu=map&obj_type=city/object/location"
                 },
                 "contact": {
                     "active": true,

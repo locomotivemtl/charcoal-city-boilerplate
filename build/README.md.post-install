@@ -33,7 +33,7 @@ To clone this project with everything to start programming now, simply:
 ## 1. **Cloning the project with composer create**
 
 ```shell
-$ composer create <project-repo-name> [path] [version]
+$ composer create-project <project-repo-name> [path] [version]
 ```
 
 > **About the Document Root**
