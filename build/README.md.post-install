@@ -250,6 +250,7 @@ The charcoal-base module follows the Charcoal coding-style:
 # Authors
 
 - Mathieu Ducharme, mat@locomotive.ca
+- Joel Alphonso, joel@locomotive.ca
 
 # Changelog
 
