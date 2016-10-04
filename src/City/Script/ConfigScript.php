@@ -305,11 +305,11 @@ class ConfigScript extends AbstractScript
             $climate->out('database does not exist...');
             $climate->out('creating database...');
 
-            $q = 'CREATE DATABASE IF NOT EXISTS '.$name.'';
+            $q = 'CREATE DATABASE IF NOT EXISTS `'.$name.'`';
             $db->query($q);
         }
 
-        $q = 'USE '.$name.'';
+        $q = 'USE `'.$name.'`';
         $db->query($q);
 
         $q = file_get_contents($this->rootPath.$this->sqlPath);
@@ -492,9 +492,9 @@ class ConfigScript extends AbstractScript
             );
         }
 
-        if ($name != '' && !preg_match('/^[-a-z_ ]+$/i', $name)) {
+        if ($name != '' && !preg_match('/^[-a-z_0-9]+$/i', $name)) {
             throw new InvalidArgumentException(
-                'Invalid database name. Only characters A-Z, dashes, underscores and spaces are allowed.'
+                'Invalid database name. Only alphanumeric characters, dashes and underscores are allowed.'
             );
         }
 

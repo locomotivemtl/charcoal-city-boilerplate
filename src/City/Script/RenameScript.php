@@ -172,9 +172,6 @@ class RenameScript extends AbstractScript
         $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
-        $climate->dump($sourceName);
-        $climate->dump($targetName);
-
         // Prompt for source name until correctly entered
         do {
             $sourceName = $this->promptSourceName($sourceName);
@@ -184,8 +181,7 @@ class RenameScript extends AbstractScript
             $targetName = $this->promptTargetName($targetName);
         } while (!$targetName);
 
-        $climate->bold()->out(sprintf('Using "%s" as project name...', $targetName));
-        $climate->out(sprintf('Using "%s" as namespace...', ucfirst($targetName)));
+        $climate->bold()->out(sprintf('Replacing "%s" with "%s"', $this->sourceName(), $this->targetName()));
 
         // Replace file contents
         $this->replaceFileContent();
@@ -308,10 +304,8 @@ class RenameScript extends AbstractScript
                 file_put_contents($filename, $content);
                 $climate->dim()->out(
                     sprintf(
-                        '%d occurence(s) of "%s" have been changed to "%s" in file "%s"',
+                        '%d occurence(s) have been changed in file "%s"',
                         $numReplacements,
-                        $sourceName,
-                        $targetName,
                         $filename
                     )
                 );
