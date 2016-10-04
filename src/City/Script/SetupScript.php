@@ -90,13 +90,19 @@ class SetupScript extends AbstractScript
         $verbose = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
+        set_exception_handler(null);
+
         try {
             // Configure database and the config file
             ConfigScript::start();
             // Create a user
             new CreateUser();
         } catch (\Exception $e) {
-            $climate->out($e);
+            if ($e instanceof CancelledScriptException) {
+                $climate->out($e);
+            } else {
+                throw $e;
+            }
         }
 
         $climate->green()->out("\n".'Success!');

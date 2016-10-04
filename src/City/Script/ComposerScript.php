@@ -243,11 +243,11 @@ class ComposerScript extends AbstractScript
 
         // If no repo name get the one from installed git repo
         if (!$repo) {
-            $repo = shell_exec('git config --get remote.origin.url');
+            exec('git config --get remote.origin.url 2>&1', $repo);
         }
         if ($repo) {
             $data['name']              = parse_url($repo, PHP_URL_PATH);
-            $data['support']['source'] = $repo.'/src';
+            $data['support']['source'] = $repo;
             $data['support']['issues'] = $repo.'/issues';
         }
         // Change the script called by composer create-project
