@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.5
   - 5.6
   - 7.0
   - hhvm
@@ -9,7 +8,7 @@ php:
 
 env:
   global:
-    - secure: "RXRr93fTs89A7D/BvK5s2SnnvdsGgedjHBBfQjzChP3J/sgVQ0sAK9krqJ3HL45dR2nCxJ7JKJRdwWVB2ZurihzAoCXt5c/R8D5MdlW56KaI7fPLhyXSV9vm4c3NMRYS22gXbPWjK6y41tNMSeyIarjYROBMJXf8oC67E7QVivw="
+    #- secure: "RXRr93fTs89A7D/BvK5s2SnnvdsGgedjHBBfQjzChP3J/sgVQ0sAK9krqJ3HL45dR2nCxJ7JKJRdwWVB2ZurihzAoCXt5c/R8D5MdlW56KaI7fPLhyXSV9vm4c3NMRYS22gXbPWjK6y41tNMSeyIarjYROBMJXf8oC67E7QVivw="
     - GH_REPO: github.com/locomotivemtl/charcoal-city-boilerplate.git
 
 matrix:
@@ -17,6 +16,9 @@ matrix:
     - php: 7.0
     - php: hhvm
     - php: nightly
+
+before_install:
+  - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
 
 before_script:
   ## Init composer
