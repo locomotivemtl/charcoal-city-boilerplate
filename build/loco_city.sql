@@ -146,8 +146,6 @@ CREATE TABLE `city_authors` (
   `last_modified` datetime DEFAULT NULL,
   `last_modified_by` varchar(255) DEFAULT NULL,
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL,
   `user` varchar(255) DEFAULT NULL,
   `name_en` varchar(255) DEFAULT NULL,
   `name_fr` varchar(255) DEFAULT NULL,
