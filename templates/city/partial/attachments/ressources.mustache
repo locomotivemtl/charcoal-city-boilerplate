@@ -1,0 +1,36 @@
+{{!--
+
+    Ressources Attachment
+    =====================
+
+--}}
+
+<div class="o-page_block">
+    <h2 class="js-wow u-fadeInUp">
+        {{title}}
+    </h2>
+    <div class="js-wow u-fadeInUp">
+        {{&description}}
+    </div>
+
+    <ul class="c-resources">
+        {{#attachments}}
+            <li class="c-resources_item js-wow u-fadeInUp">
+                {{#isFile}}
+                    <a class="c-resources_link no-barba u-truncate" href="{{baseUrl}}{{file}}"
+                       target="_blank">{{title}}</a>
+                    <svg class="c-resources_icon" aria-hidden="true">
+                        <use xlink:href="assets/valdor/images/sprite.svg#icon-document"></use>
+                    </svg>
+                {{/isFile}}
+
+                {{#isLink}}
+                    <a class="c-resources_link no-barba u-truncate" href="{{link}}" target="_blank">{{title}}</a>
+                    <svg class="c-resources_icon" aria-hidden="true">
+                        <use xlink:href="assets/valdor/images/sprite.svg#icon-links"></use>
+                    </svg>
+                {{/isLink}}
+            </li>
+        {{/attachments}}
+    </ul>
+</div>

@@ -1,0 +1,29 @@
+{{!--
+
+    Image Gallery Attachment
+    ========================
+
+--}}
+
+<div class="o-page_block">
+    <h2 class="js-wow u-fadeInUp">
+        {{title}}
+    </h2>
+    <p class="js-wow u-fadeInUp">
+        {{&description}}
+    </p>
+    <div class="o-page_gallery js-wow u-fadeInUp" data-module="Gallery">
+        {{#attachments}}
+            <a href="{{file}}" data-sub-html="#gallery-{{id}}" class="o-page_gallery_item js-gallery-item no-barba"
+               style="background-image:url('{{file}}')">
+            </a>
+        {{/attachments}}
+    </div>
+</div>
+<section class="u-hidden">
+    {{#attachments}}
+        <div id="gallery-{{id}}">
+            {{&description}}
+        </div>
+    {{/attachments}}
+</section>

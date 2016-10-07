@@ -26,7 +26,7 @@
     },
 
     "locales": {
-        "languages: ": {
+        "languages": {
             "fr": {
                 "locale": "fr-FR"
             },
@@ -58,6 +58,36 @@
         "default_controller": "\\City\\Template\\Generic"
     },
 
+    "templates": [
+        {
+            "value": "home",
+            "label": {
+                "en": "Front Page",
+                "fr": "Page d'accueil"
+            },
+            "template": "city/template/home",
+            "controller": "\\City\\Template\\Home"
+        },
+        {
+            "value": "news-list",
+            "label": {
+                "en": "News Index",
+                "fr": "Index des nouvelles"
+            },
+            "template": "city/template/news/index",
+            "controller": "\\City\\Template\\News\\Index"
+        },
+        {
+            "value": "news-entry",
+            "label": {
+                "en": "News Index",
+                "fr": "Index des nouvelles"
+            },
+            "template": "city/template/news/entry",
+            "controller": "\\City\\Template\\News\\Entry"
+        }
+    ],
+
     "metadata": {
         "paths": [
             "metadata/",
@@ -86,26 +116,5 @@
         "charcoal/ui/service-provider/ui": {},
         "city/service-provider/city": {},
         "city/": {}
-    },
-
-    "routes": {
-        "templates": {
-            "/": {
-                "template": "city/template/home",
-                "controller": "city/template/home"
-            }
-        },
-        "actions": {},
-        "scripts": {
-            "city/rename": {
-                "ident": "city/script/rename"
-            },
-            "city/setup": {
-                "ident": "city/script/setup"
-            },
-            "city/config": {
-                "ident": "city/script/config"
-            }
-        }
     }
 }

@@ -1,0 +1,25 @@
+{
+    "routes": {
+        "templates": {
+            "/": {
+                "template": "city/template/home",
+                "controller": "city/template/home"
+            }
+        },
+        "actions": {},
+        "scripts": {
+            "city/rename": {
+                "ident": "city/script/rename"
+            },
+            "city/setup": {
+                "ident": "city/script/setup"
+            },
+            "city/config": {
+                "ident": "city/script/config"
+            }
+        }
+    },
+    "routables": {
+        "charcoal/cms/route/generic": {}
+    }
+}

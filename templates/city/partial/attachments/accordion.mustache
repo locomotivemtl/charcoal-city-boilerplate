@@ -1,0 +1,35 @@
+{{!--
+
+    Accrordion Attachment
+    =====================
+
+--}}
+<div class="o-page_block">
+    <div class="c-accordion" data-module="Accordion">
+        {{#attachments}}
+            <article class="c-accordion_item js-accordion-item js-wow u-fadeInUp">
+                <h2 class="c-accordion_item_title js-accordion-title">
+                    {{title}}
+                </h2>
+                {{#isText}}
+                    <div class="c-accordion_item_content js-accordion-content">
+                        {{&description}}
+                    </div>
+                {{/isText}}
+
+                {{#isTextImage}}
+                    <div class="c-accordion_item_content js-accordion-content o-page_block_image o-grid js-wow">
+                        <figure class="o-grid_13" data-bottom-top="transform:translate3d(0,15%,0)"
+                                data-top-bottom="transform:translate3d(0,-15%,0)">
+                            <img src="{{file}}" alt="Block image placeholder">
+                        </figure>
+                        <div class="o-grid_23 o-page_block_image_content">
+                            {{&description}}
+                        </div>
+                    </div>
+                {{/isTextImage}}
+            </article>
+        {{/attachments}}
+
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{{#contentBlocks}}
+    {{#isText}}
+        {{> city/partial/attachments/text }}
+    {{/isText}}
+
+    {{#isTextImage}}
+        {{> city/partial/attachments/text-image }}
+    {{/isTextImage}}
+
+    {{#isGallery}}
+        {{> city/partial/attachments/image-gallery }}
+    {{/isGallery}}
+
+    {{#isAccordion}}
+        {{> city/partial/attachments/accordion }}
+    {{/isAccordion}}
+
+    {{#isDocument}}
+        {{> city/partial/attachments/resources }}
+    {{/isDocument}}
+
+    {{#isVideo}}
+        {{> city/partial/attachments/video }}
+    {{/isVideo}}
+{{/contentBlocks}}
