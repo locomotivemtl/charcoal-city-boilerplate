@@ -38,8 +38,7 @@ usable tags from News object (inside tag currentNews):
         <li>summary: {{ summary }}</li>
         <li>content: {{ content }}</li>
         <li>image: {{ image }}</li>
-        <li>displayDate: {{ displayDate }}</li>
-        <li>dateTimeData: {{ dateTimeData }}</li>
+        <li>date: {{ date }}</li>
         {{# hasContentBlocks }}
             {{> city/partial/content-blocks }}
         {{/ hasContentBlocks }}
@@ -56,24 +55,20 @@ usable tags from News object (inside tag currentNews):
             {{# prevNews }}
                 <ul>
                     <li>title: {{ title }}</li>
-                    <li>displayDate: {{ displayDate }}</li>
-                    <li>dateTimeData: {{ dateTimeData }}</li>
+                    <li>date: {{ date }}</li>
                     <li><a href="{{ url }}">{{ url }}</a></li>
                 </ul>
             {{/ prevNews }}
-
         </li>
         <li>
             next :
             {{# nextNews }}
                 <ul>
                     <li>title: {{ title }}</li>
-                    <li>displayDate: {{ displayDate }}</li>
-                    <li>dateTimeData: {{ dateTimeData }}</li>
+                    <li>date: {{ date }}</li>
                     <li><a href="{{ url }}">{{ url }}</a></li>
                 </ul>
             {{/ nextNews }}
-
         </li>
     </ul>
 {{/ currentNews }}

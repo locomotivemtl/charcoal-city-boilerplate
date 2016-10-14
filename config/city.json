@@ -1,6 +1,22 @@
 {
     "city": {
-        "num_per_page": 10,
-        "entry_cycle": true
+        "config_obj": "City\\Object\\Config",
+        "news": {
+            "num_per_page": 10,
+            "entry_cycle": true,
+            "default_expiry": "2 month",
+            "median": "now",
+            "obj_type": "City\\Object\\News",
+            "category": "City\\Object\\NewsCategory",
+            "config_feat_ident": "homeNews"
+        },
+        "event": {
+            "num_per_page": 10,
+            "entry_cycle": true,
+            "lifespan": "-2 month",
+            "obj_type": "City\\Object\\Event",
+            "category": "City\\Object\\EventCategory",
+            "config_feat_ident": "homeEvents"
+        }
     }
 }

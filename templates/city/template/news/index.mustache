@@ -21,8 +21,7 @@ usable tags from News object (inside tag newsList, nextNews, prevNews):
 | TAG                       | DESCRIPTION                  | TYPE              |
 | ----                      | ----                         | ----              |
 | title                     | The news title               | TranslationString |
-| displayDate               | The formatted date           | TranslationString |
-| dateTimeDate              | The unformatted date         | Date              |
+| date                      | The formatted date           | TranslationString |
 | url                       | The news url                 | TranslationString |
 | active (only in newsList) | Is the news currently active | boolean           |
 
@@ -35,8 +34,7 @@ usable tags from News object (inside tag currentNews):
 | summary          | The news summary                          | TranslationString |
 | content          | The news content                          | TranslationString |
 | image            | The news image                            | string            |
-| displayDate      | The formatted date                        | TranslationString |
-| dateTimeDate     | The unformatted date                      | Date              |
+| date             | The formatted date                        | TranslationString |
 | contentBlocks    | The news contentBlocks (flexible content) | Attachments       |
 | hasContentBlocks | Check for content blocks                  | boolean           |
 | document         | The news document attachments             | Attachments       |
@@ -57,8 +55,7 @@ usable tags from News object (inside tag currentNews):
             <li>
                 <ul>
                     <li> {{ title }} </li>
-                    <li>{{ displayDate }}</li>
-                    <li>{{ dateTimeDate }}</li>
+                    <li>{{ date }}</li>
                     <li><a href="{{ url }}">{{ url }}</a></li>
                 </ul>
             </li>
@@ -69,8 +66,7 @@ usable tags from News object (inside tag currentNews):
             <ul>
                 {{# currentNews }}
                     <li> {{ title }} </li>
-                    <li>{{ displayDate }}</li>
-                    <li>{{ dateTimeDate }}</li>
+                    <li>{{ date }}</li>
                     <li><a href="{{ url }}">{{ url }}</a></li>
                 {{/ currentNews }}
             </ul>
@@ -79,8 +75,7 @@ usable tags from News object (inside tag currentNews):
             <ul>
                 {{# nextNews }}
                     <li> {{ title }} </li>
-                    <li>{{ displayDate }}</li>
-                    <li>{{ dateTimeDate }}</li>
+                    <li>{{ date }}</li>
                     <li><a href="{{ url }}">{{ url }}</a></li>
                 {{/ nextNews }}
             </ul>
@@ -89,10 +84,32 @@ usable tags from News object (inside tag currentNews):
             <ul>
                 {{# prevNews }}
                     <li> {{ title }} </li>
-                    <li>{{ displayDate }}</li>
-                    <li>{{ dateTimeDate }}</li>
+                    <li>{{ date }}</li>
                     <li><a href="{{ url }}">{{ url }}</a></li>
                 {{/ prevNews }}
+            </ul>
+        </li>
+        <li>featured news:
+            {{# featNews }}
+                <ul>
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ featNews }}
+        </li>
+        <li>
+            <ul> archive
+                {{# archiveList }}
+                    <li>
+                        <ul>
+                            <li> {{ title }} </li>
+                            <li>{{ date }}</li>
+                            <li><a href="{{ url }}">{{ url }}</a></li>
+                        </ul>
+                    </li>
+                    <br>
+                {{/ archiveList }}
             </ul>
         </li>
     </ul>

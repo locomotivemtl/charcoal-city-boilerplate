@@ -21,6 +21,7 @@ $this['base_path'] = dirname(__DIR__).'/';
 $this->addFile(__DIR__.'/admin.json');
 $this->addFile(__DIR__.'/config.json');
 $this->addFile(__DIR__.'/city.json');
+$this->addFile(__DIR__.'/date-formats.json');
 
 // Load routes
 $this->addFile(__DIR__.'/routes.json');

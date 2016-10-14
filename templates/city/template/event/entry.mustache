@@ -1,0 +1,77 @@
+{{!--
+
+Event entry template
+====================
+
+usable tags from Event object (inside tag currentEvent):
+
+| TAG              | DESCRIPTION                                | TYPE              |
+| ----             | ----                                       | ----              |
+| id               | The event id                               | Integer           |
+| title            | The event title                            | TranslationString |
+| summary          | The event summary                          | TranslationString |
+| content          | The event content                          | TranslationString |
+| image            | The event image                            | string            |
+| displayDate      | The formatted date                         | TranslationString |
+| dateTimeDate     | The unformatted date                       | Date              |
+| contentBlocks    | The event contentBlocks (flexible content) | Attachments       |
+| hasContentBlocks | Check for content blocks                   | boolean           |
+| document         | The event document attachments             | Attachments       |
+| hasDocument      | Check for documents                        | boolean           |
+| gallery          | The event gallery attachments              | Attachments       |
+| hasGallery       | Check for gallery attachments              | boolean           |
+| url              | The event url                              | TranslationString |
+| metaTitle        | The event metaTitle                        | TranslationString |
+| nextEvent        | The next event                             | Event             |
+| prevEvent        | The previous event                         | Event             |
+
+--}}
+
+{{>city/partial/site/header}}
+
+{{# currentEvent }}
+    <ul>
+        <h1>{{title}}</h1>
+
+        <li>id : {{ id }}</li>
+        <li>title : {{ title }}</li>
+        <li>summary: {{ summary }}</li>
+        <li>content: {{ content }}</li>
+        <li>image: {{ image }}</li>
+        <li>date: {{ date }}</li>
+        <li>time: {{ time }}</li>
+        {{# hasContentBlocks }}
+            {{> city/partial/content-blocks }}
+        {{/ hasContentBlocks }}
+        {{# hasDocuments }}
+            {{> city/partial/attachments/ressources }}
+        {{/ hasDocuments }}
+        {{# hasGallery }}
+            {{> city/partial/attachments/image-gallery }}
+        {{/ hasGallery }}
+        <li><a href="{{ url }}">{{ url }}</a></li>
+        <li>{{ metaTitle }}</li>
+        <li>
+            prev :
+            {{# prevEvent }}
+                <ul>
+                    <li>title: {{ title }}</li>
+                    <li>date: {{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ prevEvent }}
+        </li>
+        <li>
+            next :
+            {{# nextEvent }}
+                <ul>
+                    <li>title: {{ title }}</li>
+                    <li>date: {{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ nextEvent }}
+        </li>
+    </ul>
+{{/ currentEvent }}
+
+{{>city/partial/site/footer}}
