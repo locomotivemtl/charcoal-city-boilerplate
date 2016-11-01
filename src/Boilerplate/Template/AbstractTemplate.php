@@ -3,6 +3,8 @@
 namespace Boilerplate\Template;
 
 // Dependencies from Pimple
+use Boilerplate\Object\Section;
+use Charcoal\Model\ModelInterface;
 use Pimple\Container;
 
 // Dependencies from Charcoal-Support
@@ -31,6 +33,19 @@ abstract class AbstractTemplate extends AbstractCityTemplate
         parent::setDependencies($container);
 
         $this->setSectionLoader($container['city/section/loader']);
+    }
+
+    /**
+     * @param ModelInterface $context The current context.
+     * @return AbstractCityTemplate
+     */
+    public function setContextObject(ModelInterface $context)
+    {
+        if ($context instanceof Section) {
+            $this->setSection($context);
+        }
+
+        return parent::setContextObject($context);
     }
 
     /**

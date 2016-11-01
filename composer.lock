@@ -565,12 +565,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "06e2d14d3bc50293c5799638029497266706f28f"
+                "reference": "54831cecf511cb2898ccbd85331d3fc6393274a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/06e2d14d3bc50293c5799638029497266706f28f",
-                "reference": "06e2d14d3bc50293c5799638029497266706f28f",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/54831cecf511cb2898ccbd85331d3fc6393274a1",
+                "reference": "54831cecf511cb2898ccbd85331d3fc6393274a1",
                 "shasum": ""
             },
             "require": {
@@ -614,7 +614,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2016-10-26 13:26:49"
+            "time": "2016-11-01 18:52:54"
         },
         {
             "name": "league/climate",
@@ -673,12 +673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-admin.git",
-                "reference": "a8a1f886d57b1c34c74ad242301e85fdf74cdf82"
+                "reference": "9da1a15b65e2c2746ed01168ef35afdd36e71397"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/a8a1f886d57b1c34c74ad242301e85fdf74cdf82",
-                "reference": "a8a1f886d57b1c34c74ad242301e85fdf74cdf82",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/9da1a15b65e2c2746ed01168ef35afdd36e71397",
+                "reference": "9da1a15b65e2c2746ed01168ef35afdd36e71397",
                 "shasum": ""
             },
             "require": {
@@ -730,7 +730,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-10-31 19:15:43"
+            "time": "2016-11-01 15:58:59"
         },
         {
             "name": "locomotivemtl/charcoal-app",
@@ -871,7 +871,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-city",
-                "reference": "3c07a45b93811337834fdc4ca6b61148719835fc"
+                "reference": "72c6beb53fca1f6de9fefee7a06cfb98cfd102f7"
             },
             "require": {
                 "beneroch/charcoal-attachment": "dev-master",
@@ -921,7 +921,7 @@
                 "charcoal",
                 "city"
             ],
-            "time": "2016-11-01 14:22:21"
+            "time": "2016-11-01 20:49:51"
         },
         {
             "name": "locomotivemtl/charcoal-cms",
@@ -1272,12 +1272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-property.git",
-                "reference": "230a9c7244df81fcaa18d8a1360415b51290330a"
+                "reference": "87f631de618e82039cb30a3a00fb594c248a834f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-property/zipball/230a9c7244df81fcaa18d8a1360415b51290330a",
-                "reference": "230a9c7244df81fcaa18d8a1360415b51290330a",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-property/zipball/87f631de618e82039cb30a3a00fb594c248a834f",
+                "reference": "87f631de618e82039cb30a3a00fb594c248a834f",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1325,7 @@
             "keywords": [
                 "charcoal"
             ],
-            "time": "2016-10-26 17:45:52"
+            "time": "2016-11-01 20:29:57"
         },
         {
             "name": "locomotivemtl/charcoal-queue",
