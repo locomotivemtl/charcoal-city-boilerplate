@@ -1,0 +1,117 @@
+{
+    "default_data": {
+        "editor_options": {
+            "body_class": "s-wysiwyg",
+            "toolbar": "undo redo | styleselect formatselect | alignment | bullist numlist outdent indent | link table hr | removeformat",
+            "advlist_bullet_styles": "default",
+            "advlist_number_styles": "default",
+            "image_caption": true,
+            "content_css": "/assets/styles/editor.css",
+            "typekit_options": {
+                "kitId": "xmk5bjh"
+            },
+            "block_formats": "Paragraph=p;Title=h3",
+            "formats": {
+                "alignleft": [
+                    {
+                        "selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+                        "classes": "u-align-left"
+                    },
+                    {
+                        "selector": "img,table,figure,blockquote,dl",
+                        "classes": "u-pull-left"
+                    },
+                    {
+                        "selector": "figcaption",
+                        "classes": "u-pull-left"
+                    }
+                ],
+                "aligncenter": [
+                    {
+                        "selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+                        "classes": "u-align-center"
+                    },
+                    {
+                        "selector": "img,table,figure,blockquote,dl",
+                        "classes": "u-centered"
+                    }
+                ],
+                "alignright": [
+                    {
+                        "selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+                        "classes": "u-align-right"
+                    },
+                    {
+                        "selector": "img,table,figure,blockquote,dl",
+                        "classes": "u-pull-right"
+                    },
+                    {
+                        "selector": "figcaption",
+                        "classes": "u-pull-right"
+                    }
+                ],
+                "alignjustify": [
+                    {
+                        "selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+                        "classes": "u-align-justify"
+                    },
+                    {
+                        "selector": "table",
+                        "classes": "u-full-width"
+                    }
+                ],
+                "underline": {"inline": "span", "classes": "u-underline", "exact": true},
+                "strikethrough": {"inline": "del", "exact": true}
+            },
+            "style_formats": [
+                {
+                    "title": "Inline",
+                    "items": [
+                        {
+                            "title": "Bold",
+                            "icon": "bold",
+                            "format": "bold"
+                        },
+                        {
+                            "title": "Italic",
+                            "icon": "italic",
+                            "format": "italic"
+                        },
+                        {
+                            "title": "Underline",
+                            "icon": "underline",
+                            "format": "underline"
+                        },
+                        {
+                            "title": "Strikethrough",
+                            "icon": "strikethrough",
+                            "format": "strikethrough"
+                        },
+                        {
+                            "title": "Superscript",
+                            "icon": "superscript",
+                            "format": "superscript"
+                        },
+                        {
+                            "title": "Subscript",
+                            "icon": "subscript",
+                            "format": "subscript"
+                        }
+                    ]
+                },
+                {
+                    "title": "Block",
+                    "items": [
+                        {
+                            "title": "Quotes",
+                            "block": "blockquote",
+                            "wrapper": true,
+                            "exact": true
+                        }
+                    ]
+                }
+            ],
+            "style_formats_merge": false
+        }
+    }
+}
