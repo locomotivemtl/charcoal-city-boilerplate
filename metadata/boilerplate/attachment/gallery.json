@@ -1,0 +1,59 @@
+{
+    "default_data": {
+        "type": "boilerplate/attachment/gallery"
+    },
+
+    "attachments": {
+        "default_widget": "images",
+        "attachable_objects": {
+            "charcoal/attachment/object/image": {
+                "active": false
+            },
+            "boilerplate/attachment/image": {
+                "label": "Image"
+            }
+        }
+    },
+
+    "admin": {
+        "forms": {
+            "full": {
+                "groups": {
+                    "images": {
+                        "title": {
+                            "fr": "Images",
+                            "en": "Images"
+                        },
+                        "type": "charcoal/admin/widget/form-group/attachment",
+                        "template": "charcoal/admin/widget/form-group/attachment",
+                        "form_ident": "default",
+                        "group": "inception-gallery",
+                        "show_attachment_preview": true,
+                        "show_attachment_heading": false,
+                        "attachable_objects": {
+                            "boilerplate/attachment/image": {
+                                "label": "Image"
+                            }
+                        }
+                    }
+                },
+                "sidebars": {
+                    "action": {
+                        "title": "Actions",
+                        "properties": [],
+                        "actions": {}
+                    }
+                }
+            }
+        },
+        "dashboards": {
+            "admin.edit": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/attachment/gallery"
+                    }
+                }
+            }
+        }
+    }
+}

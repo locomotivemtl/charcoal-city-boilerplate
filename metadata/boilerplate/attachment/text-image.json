@@ -1,0 +1,65 @@
+{
+    "default_data": {
+        "type": "boilerplate/attachment/text-image",
+        "preview": "{{> city/partial/attachments/text-image }}"
+    },
+
+    "data": {
+        "type": "boilerplate/attachment/text-image"
+    },
+
+    "properties": {
+        "description": {
+            "label": {
+                "en": "Content",
+                "fr": "Contenu"
+            },
+            "input_type": "charcoal/admin/property/input/tinymce/content"
+        },
+        "file": {
+            "label": "Image"
+        }
+    },
+
+    "admin": {
+        "forms": {
+            "quick": {
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "properties": [
+                            "title",
+                            "active",
+                            "description",
+                            "file"
+                        ]
+                    }
+                }
+            }
+        },
+        "dashboards": {
+            "admin.table": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/object/attachment/text-image"
+                    }
+                }
+            },
+            "admin.edit": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/object/attachment/text-image"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "default_data": {
+        "type": "boilerplate/attachment/video",
+        "preview": "{{> city/partial/attachments/video }}"
+    },
+    "admin": {
+        "dashboards": {
+            "edit": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/object/attachment/video"
+                    }
+                }
+            }
+        }
+    }
+}

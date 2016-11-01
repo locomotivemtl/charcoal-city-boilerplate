@@ -1,0 +1,17 @@
+{
+    "default_data": {
+        "type": "boilerplate/attachment/image",
+        "preview": "{{> city/partial/attachments/image }}"
+    },
+    "admin": {
+        "dashboards": {
+            "edit": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/object/attachment/image"
+                    }
+                }
+            }
+        }
+    }
+}

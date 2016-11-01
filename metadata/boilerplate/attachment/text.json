@@ -1,0 +1,35 @@
+{
+    "default_data": {
+        "type": "boilerplate/attachment/text",
+        "preview": "{{> city/partial/attachments/text }}"
+    },
+
+    "data": {
+        "type": "boilerplate/attachment/text"
+    },
+
+    "properties": {
+        "description": {
+            "input_type": "charcoal/admin/property/input/tinymce/content"
+        }
+    },
+
+    "admin": {
+        "dashboards": {
+            "admin.table": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/object/attachment/text"
+                    }
+                }
+            },
+            "admin.edit": {
+                "widgets": {
+                    "form": {
+                        "obj_type": "boilerplate/object/attachment/text"
+                    }
+                }
+            }
+        }
+    }
+}
