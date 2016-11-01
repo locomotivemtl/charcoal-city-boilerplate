@@ -3,7 +3,8 @@
 
 config/config.*.*
 !config/config.sample.*
-www/uploads/
+www/uploads/*
+!www/uploads/.gitkeep
 
 # General
 # ------------------

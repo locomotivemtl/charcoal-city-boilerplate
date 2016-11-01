@@ -4,7 +4,7 @@
             "templates": {
                 "home": {
                     "route": "[/[home]]",
-                    "redirect": "admin/object/collection?main_menu=section&obj_type=city/object/section"
+                    "redirect": "admin/object/collection?main_menu=section&obj_type=boilerplate/object/section"
                 }
             },
             "actions": {
