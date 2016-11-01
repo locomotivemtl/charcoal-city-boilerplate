@@ -137,11 +137,6 @@
                                     "fr": "Image",
                                     "en": "Image"
                                 }
-                            }, "boilerplate/attachment/text-image": {
-                                "label": {
-                                    "fr": "Image avec texte",
-                                    "en": "Image with text"
-                                }
                             }, "boilerplate/attachment/gallery": {
                                 "label": {
                                     "fr": "Gallerie",
