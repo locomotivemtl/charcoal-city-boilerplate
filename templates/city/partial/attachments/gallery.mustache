@@ -1,0 +1,16 @@
+{{!--
+
+    Image Gallery Attachment
+    ========================
+
+--}}
+
+{{# title }}
+    <h3>{{& . }}</h3>
+{{/ title }}
+{{&description}}
+{{#attachments}}
+    <a href="{{file}}" data-id="{{id}}" data-caption="{{ caption }}"
+       style="background-image:url('{{file}}')">
+    </a>
+{{/attachments}}

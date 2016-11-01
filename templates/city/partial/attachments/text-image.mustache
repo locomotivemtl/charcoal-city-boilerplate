@@ -5,13 +5,8 @@
 
 --}}
 
-<div class="o-page_block o-page_block_image o-grid js-wow">
-    <figure class="o-grid_13" data-bottom-top="transform:translate3d(0,15%,0)"
-            data-top-bottom="transform:translate3d(0,-15%,0)">
-        <img class="js-wow u-fadeInUp" src="{{file}}" alt="Block image placeholder">
-    </figure>
-    <div class="o-grid_23 o-page_block_image_content js-wow u-fadeInUp">
-        <h3>{{title}}</h3>
-        {{&description}}
-    </div>
-</div>
+<h4>{{& title }}</h4>
+{{& description }}
+<img class="c-content-boxes_image"
+     src="{{#withBaseUrl}}{{file}}{{/withBaseUrl}}{{^withBaseUrl}}{{file}}{{/withBaseUrl}}"
+     alt="">

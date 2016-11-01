@@ -5,8 +5,12 @@
 
 --}}
 
-<div class="o-page_block js-wow u-fadeInUp">
-    <div class="o-iframe_container">
-        {{&embed}}
-    </div>
+{{# title }}
+    <h3>{{ . }}</h3>
+{{/ title }}
+{{# description }}
+    <p>{{&.}}</p>
+{{/ description }}
+<div class="o-video">
+    {{&embed}}
 </div>
