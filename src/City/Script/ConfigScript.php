@@ -235,9 +235,7 @@ class ConfigScript extends AbstractScript
         } while (!$dbUser);
 
         // Prompt for database password until correctly entered
-        do {
-            $dbPassword = $this->promptDbPassword($dbPassword);
-        } while (!$dbPassword);
+        $dbPassword = $this->promptDbPassword($dbPassword);
 
         // Prompt for database host until correctly entered
         do {
