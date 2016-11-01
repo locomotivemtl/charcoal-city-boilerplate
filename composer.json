@@ -29,6 +29,7 @@
         "beneroch/charcoal-attachment": "dev-master",
         "locomotivemtl/charcoal-city": "dev-master",
         "mcaskill/charcoal-support": "dev-master",
+        "mcaskill/slim-polyglot": "dev-master",
         "mustache/mustache": "^2.10"
     },
     "require-dev": {
@@ -74,6 +75,10 @@
         {
             "type": "git",
             "url": "https://github.com/locomotivemtl/charcoal-city"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mcaskill/Slim-Polyglot"
         }
     ]
 }

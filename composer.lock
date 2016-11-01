@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3b6df03c90c1e379342a1199003ef05a",
-    "content-hash": "ccc9fb94be7528b4af810560bf4e62b7",
+    "hash": "c70f656dd90bccccad4cc83f306c5c7c",
+    "content-hash": "15db7c53c117c7c5e2af57c33eed5114",
     "packages": [
         {
             "name": "beneroch/charcoal-attachment",
@@ -1686,6 +1686,64 @@
             "time": "2016-10-15 20:02:47"
         },
         {
+            "name": "mcaskill/slim-polyglot",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mcaskill/Slim-Polyglot.git",
+                "reference": "34a2abc0a0496d5903a9e2a356c4f49507422044"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mcaskill/Slim-Polyglot/zipball/34a2abc0a0496d5903a9e2a356c4f49507422044",
+                "reference": "34a2abc0a0496d5903a9e2a356c4f49507422044",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "willdurand/negotiation": "^2.0"
+            },
+            "require-dev": {
+                "slim/slim": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "McAskill\\Slim\\Polyglot\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Slim\\Slim\\Polyglot\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chauncey McAskill",
+                    "email": "chauncey@mcaskill.ca",
+                    "homepage": "https://mcaskill.ca"
+                }
+            ],
+            "description": "Slim Framework language resolution middleware",
+            "homepage": "https://github.com/mcaskill/Slim-Polyglot",
+            "keywords": [
+                "framework",
+                "language",
+                "middleware",
+                "multilingual",
+                "polylingual",
+                "slim"
+            ],
+            "support": {
+                "source": "https://github.com/mcaskill/Slim-Polyglot/tree/master",
+                "issues": "https://github.com/mcaskill/Slim-Polyglot/issues"
+            },
+            "time": "2016-09-22 14:47:13"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.x-dev",
             "source": {
@@ -2443,6 +2501,58 @@
                 "geoip"
             ],
             "time": "2015-12-06 20:17:20"
+        },
+        {
+            "name": "willdurand/negotiation",
+            "version": "2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/Negotiation.git",
+                "reference": "1f210db45723b21edd69f39794662b8d64656b93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/1f210db45723b21edd69f39794662b8d64656b93",
+                "reference": "1f210db45723b21edd69f39794662b8d64656b93",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Negotiation\\": "src/Negotiation"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "will+git@drnd.me"
+                }
+            ],
+            "description": "Content Negotiation tools for PHP provided as a standalone library.",
+            "homepage": "http://williamdurand.fr/Negotiation/",
+            "keywords": [
+                "accept",
+                "content",
+                "format",
+                "header",
+                "negotiation"
+            ],
+            "time": "2016-10-14 09:17:47"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -3741,7 +3851,8 @@
         "beneroch/charcoal-utils": 20,
         "beneroch/charcoal-attachment": 20,
         "locomotivemtl/charcoal-city": 20,
-        "mcaskill/charcoal-support": 20
+        "mcaskill/charcoal-support": 20,
+        "mcaskill/slim-polyglot": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
