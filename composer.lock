@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/beneroch/charcoal-attachment.git",
-                "reference": "5620932c6c97aabec9adc6f37a39786d5858dd86"
+                "reference": "dc582e6b37bfa79c56bb6632c3f3f3a7d22eab01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/beneroch/charcoal-attachment/get/5620932c6c97aabec9adc6f37a39786d5858dd86.zip",
-                "reference": "5620932c6c97aabec9adc6f37a39786d5858dd86",
+                "url": "https://bitbucket.org/beneroch/charcoal-attachment/get/dc582e6b37bfa79c56bb6632c3f3f3a7d22eab01.zip",
+                "reference": "dc582e6b37bfa79c56bb6632c3f3f3a7d22eab01",
                 "shasum": ""
             },
             "require": {
@@ -75,7 +75,7 @@
                 "issues": "https://bitbucket.org/beneroch/charcoal-attachment/issues",
                 "source": "https://bitbucket.org/beneroch/charcoal-attachment"
             },
-            "time": "2016-10-06 16:23:33"
+            "time": "2016-10-26 15:06:39"
         },
         {
             "name": "beneroch/charcoal-utils",
@@ -147,6 +147,73 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
+        },
+        {
+            "name": "doctrine/inflector",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/inflector.git",
+                "reference": "803a2ed9fea02f9ca47cd45395089fe78769a392"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/803a2ed9fea02f9ca47cd45395089fe78769a392",
+                "reference": "803a2ed9fea02f9ca47cd45395089fe78769a392",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Inflector\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "inflection",
+                "pluralize",
+                "singularize",
+                "string"
+            ],
+            "time": "2016-05-12 17:23:41"
         },
         {
             "name": "egeloen/http-adapter",
@@ -233,12 +300,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "9061956e6ad81cc90e7f36d54f2eaa944ae74065"
+                "reference": "0118099daf4afd2ab648efedf8790645315aa6c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9061956e6ad81cc90e7f36d54f2eaa944ae74065",
-                "reference": "9061956e6ad81cc90e7f36d54f2eaa944ae74065",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0118099daf4afd2ab648efedf8790645315aa6c4",
+                "reference": "0118099daf4afd2ab648efedf8790645315aa6c4",
                 "shasum": ""
             },
             "require": {
@@ -287,7 +354,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-10-13 05:38:46"
+            "time": "2016-10-28 00:09:06"
         },
         {
             "name": "guzzlehttp/promises",
@@ -451,6 +518,105 @@
             "time": "2015-01-07 21:56:59"
         },
         {
+            "name": "illuminate/contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/contracts.git",
+                "reference": "0c5741a1b9b7b1ed75d0694bbf91ede5656be03b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/0c5741a1b9b7b1ed75d0694bbf91ede5656be03b",
+                "reference": "0c5741a1b9b7b1ed75d0694bbf91ede5656be03b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Contracts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Contracts package.",
+            "homepage": "https://laravel.com",
+            "time": "2016-10-28 14:27:40"
+        },
+        {
+            "name": "illuminate/support",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/support.git",
+                "reference": "06e2d14d3bc50293c5799638029497266706f28f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/06e2d14d3bc50293c5799638029497266706f28f",
+                "reference": "06e2d14d3bc50293c5799638029497266706f28f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/inflector": "~1.0",
+                "ext-mbstring": "*",
+                "illuminate/contracts": "5.4.*",
+                "paragonie/random_compat": "~1.4|~2.0",
+                "php": ">=5.6.4"
+            },
+            "replace": {
+                "tightenco/collect": "self.version"
+            },
+            "suggest": {
+                "illuminate/filesystem": "Required to use the composer class (5.2.*).",
+                "symfony/process": "Required to use the composer class (3.2.*).",
+                "symfony/var-dumper": "Required to use the dd function (3.2.*)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Support\\": ""
+                },
+                "files": [
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Support package.",
+            "homepage": "https://laravel.com",
+            "time": "2016-10-26 13:26:49"
+        },
+        {
             "name": "league/climate",
             "version": "3.2.1",
             "source": {
@@ -507,12 +673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-admin.git",
-                "reference": "b1472c7f6c10f14feaafd0e73895c66fe780ca86"
+                "reference": "a8a1f886d57b1c34c74ad242301e85fdf74cdf82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/b1472c7f6c10f14feaafd0e73895c66fe780ca86",
-                "reference": "b1472c7f6c10f14feaafd0e73895c66fe780ca86",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-admin/zipball/a8a1f886d57b1c34c74ad242301e85fdf74cdf82",
+                "reference": "a8a1f886d57b1c34c74ad242301e85fdf74cdf82",
                 "shasum": ""
             },
             "require": {
@@ -564,7 +730,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-10-13 17:47:55"
+            "time": "2016-10-31 19:15:43"
         },
         {
             "name": "locomotivemtl/charcoal-app",
@@ -572,12 +738,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-app.git",
-                "reference": "17fd83e786e9eb4044e8f29ee10c587412d37ce7"
+                "reference": "1b67e12c43f02ac6fc225fd95966be980130a217"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-app/zipball/17fd83e786e9eb4044e8f29ee10c587412d37ce7",
-                "reference": "17fd83e786e9eb4044e8f29ee10c587412d37ce7",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-app/zipball/1b67e12c43f02ac6fc225fd95966be980130a217",
+                "reference": "1b67e12c43f02ac6fc225fd95966be980130a217",
                 "shasum": ""
             },
             "require": {
@@ -634,7 +800,7 @@
                 "framework",
                 "slim"
             ],
-            "time": "2016-10-14 18:47:45"
+            "time": "2016-10-26 15:14:29"
         },
         {
             "name": "locomotivemtl/charcoal-base",
@@ -642,12 +808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-base.git",
-                "reference": "9bb04b8c5ee7e3fe17ee802c15ab493e809e6e33"
+                "reference": "9e820bceb342d42c24c5ec756ac1813d7f982cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-base/zipball/9bb04b8c5ee7e3fe17ee802c15ab493e809e6e33",
-                "reference": "9bb04b8c5ee7e3fe17ee802c15ab493e809e6e33",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-base/zipball/9e820bceb342d42c24c5ec756ac1813d7f982cd5",
+                "reference": "9e820bceb342d42c24c5ec756ac1813d7f982cd5",
                 "shasum": ""
             },
             "require": {
@@ -697,7 +863,7 @@
                 "cms",
                 "framework"
             ],
-            "time": "2016-10-14 21:21:13"
+            "time": "2016-10-25 21:04:18"
         },
         {
             "name": "locomotivemtl/charcoal-city",
@@ -705,7 +871,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-city",
-                "reference": "c161ad7c6c85efda1817eba4233359c85b5cf4b8"
+                "reference": "3c07a45b93811337834fdc4ca6b61148719835fc"
             },
             "require": {
                 "beneroch/charcoal-attachment": "dev-master",
@@ -755,7 +921,7 @@
                 "charcoal",
                 "city"
             ],
-            "time": "2016-10-14 21:50:46"
+            "time": "2016-11-01 14:22:21"
         },
         {
             "name": "locomotivemtl/charcoal-cms",
@@ -763,12 +929,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-cms.git",
-                "reference": "9764362716513cde2bc82ccc225341d71cd5efa5"
+                "reference": "d32aa6f1abfbb4eb45cc2123570682a60a931492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-cms/zipball/9764362716513cde2bc82ccc225341d71cd5efa5",
-                "reference": "9764362716513cde2bc82ccc225341d71cd5efa5",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-cms/zipball/d32aa6f1abfbb4eb45cc2123570682a60a931492",
+                "reference": "d32aa6f1abfbb4eb45cc2123570682a60a931492",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +984,7 @@
                 "charcoal",
                 "cms"
             ],
-            "time": "2016-10-05 22:53:19"
+            "time": "2016-10-25 20:59:32"
         },
         {
             "name": "locomotivemtl/charcoal-config",
@@ -879,12 +1045,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-core.git",
-                "reference": "066054d64400f2d2e317bd2743acceff20ad10dd"
+                "reference": "9b26fc1247a9ed976067332f51d652c4ced9fba7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-core/zipball/066054d64400f2d2e317bd2743acceff20ad10dd",
-                "reference": "066054d64400f2d2e317bd2743acceff20ad10dd",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-core/zipball/9b26fc1247a9ed976067332f51d652c4ced9fba7",
+                "reference": "9b26fc1247a9ed976067332f51d652c4ced9fba7",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +1103,7 @@
                 "framework",
                 "locomotive"
             ],
-            "time": "2016-10-13 15:27:10"
+            "time": "2016-10-25 13:19:03"
         },
         {
             "name": "locomotivemtl/charcoal-email",
@@ -1106,12 +1272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-property.git",
-                "reference": "572f9edd214b1831f2221642f5854c093d23d9ee"
+                "reference": "230a9c7244df81fcaa18d8a1360415b51290330a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-property/zipball/572f9edd214b1831f2221642f5854c093d23d9ee",
-                "reference": "572f9edd214b1831f2221642f5854c093d23d9ee",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-property/zipball/230a9c7244df81fcaa18d8a1360415b51290330a",
+                "reference": "230a9c7244df81fcaa18d8a1360415b51290330a",
                 "shasum": ""
             },
             "require": {
@@ -1159,7 +1325,7 @@
             "keywords": [
                 "charcoal"
             ],
-            "time": "2016-10-14 21:22:58"
+            "time": "2016-10-26 17:45:52"
         },
         {
             "name": "locomotivemtl/charcoal-queue",
@@ -1219,12 +1385,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-search.git",
-                "reference": "6863c804d50a75ec140e2d139cc7c3c0f980d8d0"
+                "reference": "904c19a5cca5f5cea622fe8dc6fb348c898a288f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-search/zipball/6863c804d50a75ec140e2d139cc7c3c0f980d8d0",
-                "reference": "6863c804d50a75ec140e2d139cc7c3c0f980d8d0",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-search/zipball/904c19a5cca5f5cea622fe8dc6fb348c898a288f",
+                "reference": "904c19a5cca5f5cea622fe8dc6fb348c898a288f",
                 "shasum": ""
             },
             "require": {
@@ -1272,7 +1438,7 @@
                 "charcoal",
                 "search"
             ],
-            "time": "2016-10-14 21:47:54"
+            "time": "2016-10-31 18:45:44"
         },
         {
             "name": "locomotivemtl/charcoal-translation",
@@ -1280,12 +1446,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-translation.git",
-                "reference": "26e2b286932bc4b5482aa547dd54588bfd527aeb"
+                "reference": "4effcb11804db9440cfaac0f68d5b2b35bd80cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-translation/zipball/26e2b286932bc4b5482aa547dd54588bfd527aeb",
-                "reference": "26e2b286932bc4b5482aa547dd54588bfd527aeb",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-translation/zipball/4effcb11804db9440cfaac0f68d5b2b35bd80cb0",
+                "reference": "4effcb11804db9440cfaac0f68d5b2b35bd80cb0",
                 "shasum": ""
             },
             "require": {
@@ -1334,7 +1500,7 @@
                 "l10n",
                 "translation"
             ],
-            "time": "2016-09-16 04:18:06"
+            "time": "2016-10-25 21:28:59"
         },
         {
             "name": "locomotivemtl/charcoal-ui",
@@ -1411,12 +1577,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-view.git",
-                "reference": "073f1fce4fd9a384c9b103aadf90ca7a9df17d45"
+                "reference": "0b1a938cdabd0621d18794275a10dd46b4cb60a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-view/zipball/073f1fce4fd9a384c9b103aadf90ca7a9df17d45",
-                "reference": "073f1fce4fd9a384c9b103aadf90ca7a9df17d45",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-view/zipball/0b1a938cdabd0621d18794275a10dd46b4cb60a8",
+                "reference": "0b1a938cdabd0621d18794275a10dd46b4cb60a8",
                 "shasum": ""
             },
             "require": {
@@ -1470,7 +1636,7 @@
                 "twig",
                 "view"
             ],
-            "time": "2016-09-22 22:17:50"
+            "time": "2016-10-28 15:27:03"
         },
         {
             "name": "mcaskill/charcoal-support",
@@ -1478,16 +1644,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mcaskill/charcoal-support.git",
-                "reference": "fefc13d96f4df102b93753675763d87dcfa9bc91"
+                "reference": "8473eb1a28bc9bd8bda03a12506a18655b489215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mcaskill/charcoal-support/zipball/fefc13d96f4df102b93753675763d87dcfa9bc91",
-                "reference": "fefc13d96f4df102b93753675763d87dcfa9bc91",
+                "url": "https://api.github.com/repos/mcaskill/charcoal-support/zipball/8473eb1a28bc9bd8bda03a12506a18655b489215",
+                "reference": "8473eb1a28bc9bd8bda03a12506a18655b489215",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
+                "illuminate/support": "~5.3",
                 "php": ">=5.6"
             },
             "require-dev": {
@@ -1516,7 +1683,7 @@
                 }
             ],
             "description": "Support package for Charcoal.",
-            "time": "2016-09-26 18:55:37"
+            "time": "2016-10-15 20:02:47"
         },
         {
             "name": "monolog/monolog",
@@ -1739,12 +1906,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "90532789b666ca84ca3f2626e2a9d4755973307b"
+                "reference": "281170a26a88a776617725ec5f037ebcb4bdf927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/90532789b666ca84ca3f2626e2a9d4755973307b",
-                "reference": "90532789b666ca84ca3f2626e2a9d4755973307b",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/281170a26a88a776617725ec5f037ebcb4bdf927",
+                "reference": "281170a26a88a776617725ec5f037ebcb4bdf927",
                 "shasum": ""
             },
             "require": {
@@ -1755,10 +1922,12 @@
                 "phpunit/phpunit": "4.*"
             },
             "suggest": {
+                "ext-mbstring": "Needed to send email in multibyte encoding charset",
                 "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
                 "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
                 "psr/log": "For optional PSR-3 debug logging",
-                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication"
+                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
             },
             "type": "library",
             "autoload": {
@@ -1788,7 +1957,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2016-10-05 16:36:21"
+            "time": "2016-10-26 20:11:23"
         },
         {
             "name": "pimple/pimple",
@@ -2103,12 +2272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "10ce53a0b26d4ceeb996435dda3f870ab4326355"
+                "reference": "6d1c49a18a1c52eb1bd1af432e5aa6884661099a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/10ce53a0b26d4ceeb996435dda3f870ab4326355",
-                "reference": "10ce53a0b26d4ceeb996435dda3f870ab4326355",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/6d1c49a18a1c52eb1bd1af432e5aa6884661099a",
+                "reference": "6d1c49a18a1c52eb1bd1af432e5aa6884661099a",
                 "shasum": ""
             },
             "require": {
@@ -2153,7 +2322,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-10-14 15:22:57"
+            "time": "2016-10-31 14:54:46"
         },
         {
             "name": "tedivm/stash",
@@ -2217,7 +2386,7 @@
         },
         {
             "name": "willdurand/geocoder",
-            "version": "v3.3.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geocoder-php/Geocoder.git",
@@ -3388,12 +3557,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "11d5cac9b8a778baead1712692dd0ad5633f43d5"
+                "reference": "aeeade9b38be8d2d64f0ca4e42d32ae34b353b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/11d5cac9b8a778baead1712692dd0ad5633f43d5",
-                "reference": "11d5cac9b8a778baead1712692dd0ad5633f43d5",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/aeeade9b38be8d2d64f0ca4e42d32ae34b353b07",
+                "reference": "aeeade9b38be8d2d64f0ca4e42d32ae34b353b07",
                 "shasum": ""
             },
             "require": {
@@ -3458,7 +3627,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-10-12 05:38:45"
+            "time": "2016-10-30 23:38:16"
         },
         {
             "name": "symfony/yaml",
@@ -3466,12 +3635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f3abbc0c63c0c7803db79a7398bb983e5b089f53"
+                "reference": "d2cab32980d8de786744fabdec95991a0ebd7ea8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f3abbc0c63c0c7803db79a7398bb983e5b089f53",
-                "reference": "f3abbc0c63c0c7803db79a7398bb983e5b089f53",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/d2cab32980d8de786744fabdec95991a0ebd7ea8",
+                "reference": "d2cab32980d8de786744fabdec95991a0ebd7ea8",
                 "shasum": ""
             },
             "require": {
@@ -3513,7 +3682,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-28 14:20:56"
+            "time": "2016-10-24 18:44:12"
         },
         {
             "name": "webmozart/assert",
@@ -3521,12 +3690,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "9350cea5bf343b657f24e68980490021791935d8"
+                "reference": "c0c92082a2ffef8fab7941d4f6fd6a6a72ed627c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/9350cea5bf343b657f24e68980490021791935d8",
-                "reference": "9350cea5bf343b657f24e68980490021791935d8",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/c0c92082a2ffef8fab7941d4f6fd6a6a72ed627c",
+                "reference": "c0c92082a2ffef8fab7941d4f6fd6a6a72ed627c",
                 "shasum": ""
             },
             "require": {
@@ -3563,7 +3732,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2016-10-14 13:57:37"
+            "time": "2016-10-17 06:50:33"
         }
     ],
     "aliases": [],
