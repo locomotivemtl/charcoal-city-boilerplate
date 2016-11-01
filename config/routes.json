@@ -3,7 +3,7 @@
         "templates": {
             "/": {
                 "template": "city/template/home",
-                "controller": "city/template/home"
+                "controller": "boilerplate/template/home"
             }
         },
         "actions": {},

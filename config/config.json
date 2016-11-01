@@ -60,13 +60,22 @@
 
     "templates": [
         {
+            "value": "generic",
+            "label": {
+                "en": "Generic",
+                "fr": "Générique"
+            },
+            "template": "city/template/generic",
+            "controller": "\\Boilerplate\\Template\\Generic"
+        },
+        {
             "value": "home",
             "label": {
                 "en": "Front Page",
                 "fr": "Page d'accueil"
             },
             "template": "city/template/home",
-            "controller": "\\City\\Template\\Home"
+            "controller": "\\Boilerplate\\Template\\Home"
         },
         {
             "value": "news-list",
@@ -75,7 +84,7 @@
                 "fr": "Liste des actualités"
             },
             "template": "city/template/news/index",
-            "controller": "\\City\\Template\\News\\Index"
+            "controller": "\\Boilerplate\\Template\\News\\Index"
         },
         {
             "value": "news-entry",
@@ -84,7 +93,7 @@
                 "fr": "Actualité"
             },
             "template": "city/template/news/entry",
-            "controller": "\\City\\Template\\News\\Entry"
+            "controller": "\\Boilerplate\\Template\\News\\Entry"
         },
         {
             "value": "event-list",
@@ -93,7 +102,7 @@
                 "fr": "Liste des Événements"
             },
             "template": "city/template/event/index",
-            "controller": "\\City\\Template\\Event\\Index"
+            "controller": "\\Boilerplate\\Template\\Event\\Index"
         },
         {
             "value": "event-entry",
@@ -102,7 +111,14 @@
                 "fr": "Événement"
             },
             "template": "city/template/event/entry",
-            "controller": "\\City\\Template\\Event\\Entry"
+            "controller": "\\Boilerplate\\Template\\Event\\Entry"
+        },
+        {
+            "value": "grouping",
+            "label": {
+                "en": "Grouping",
+                "fr": "Groupement"
+            }
         }
     ],
 

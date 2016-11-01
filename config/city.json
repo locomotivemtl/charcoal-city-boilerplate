@@ -1,22 +1,35 @@
 {
     "city": {
         "config_obj": "City\\Object\\Config",
+        "section": {
+            "obj_type": "boilerplate/object/section"
+        },
         "news": {
             "num_per_page": 10,
             "entry_cycle": true,
             "default_expiry": "2 month",
             "median": "now",
-            "obj_type": "City\\Object\\News",
+            "obj_type": "Boilerplate\\Object\\News",
             "category": "City\\Object\\NewsCategory",
-            "config_feat_ident": "homeNews"
+            "config_feat_ident": "homeNews",
+            "thumbnail": {
+                "resize": {
+                    "width": 1000
+                }
+            }
         },
         "event": {
             "num_per_page": 10,
             "entry_cycle": true,
             "lifespan": "-2 month",
-            "obj_type": "City\\Object\\Event",
+            "obj_type": "Boilerplate\\Object\\Event",
             "category": "City\\Object\\EventCategory",
-            "config_feat_ident": "homeEvents"
+            "config_feat_ident": "homeEvents",
+            "thumbnail": {
+                "resize": {
+                    "width": 1000
+                }
+            }
         }
     }
 }

@@ -1,5 +1,24 @@
 {
     "date_formats": {
+        "DOCUMENTATION": [
+            "You have to give the date formatter each use case of a date format",
+            "So that that the date formatter use the matching formatter for each case scenarios",
+            "There is for supported cases :",
+            {
+                "single": "This is in the case of a single day date",
+                "different_day": "This is when two dates from the same month and year but of different days are supplied",
+                "different_month": "This is when two dates from different months in the same year are supplied",
+                "different_year": "This is when two dates from different years is supplied"
+            },
+            "For each of these cases, you can give different content string and date formats",
+            {
+                "content": "This is the string to output as formatted date. Must use sprintf syntax to inject formatted dates",
+                "formats": "This is an strftime compatible string, meaning it can contain translatable formats from strftime"
+            },
+            "content and formats are translatable",
+            "So what's the magic? For each cases, the formats block is injected in the content block.",
+            "you can make multiple formatter and use the as param to the formatter call method (default: default)"
+        ],
         "default": {
             "single": {
                 "content": {
@@ -126,6 +145,25 @@
         }
     },
     "time_formats": {
+        "DOCUMENTATION": [
+            "You have to give the time formatter each use case of a time format",
+            "So that that the time formatter use the matching formatter for each case scenarios",
+            "There is for supported cases :",
+            {
+                "single": "This is in the case of a single time",
+                "single_round": "This is in the case of a single time when the hour is round",
+                "different_time": "This is in the case of two different times",
+                "different_time_round": "This is in the case of two different times with rounded hours"
+            },
+            "For each of these cases, you can give different content string and time formats",
+            {
+                "content": "This is the string to output as formatted time. Must use sprintf syntax to inject formatted times",
+                "formats": "This is an strftime compatible string, meaning it can contain translatable formats from strftime"
+            },
+            "content and formats are translatable",
+            "So what's the magic? For each cases, the formats block is injected in the content block.",
+            "you can make multiple formatter and use the as param to the formatter call method (default: default)"
+        ],
         "default": {
             "single": {
                 "content": {
