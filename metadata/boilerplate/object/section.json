@@ -1,0 +1,234 @@
+{
+    "admin": {
+        "lists": {
+            "default": {
+                "list_actions": [
+                    {
+                        "label": {
+                            "en": "New Page",
+                            "fr": "Nouvelle Page"
+                        },
+                        "ident": "create",
+                        "url": "object/edit?obj_type=boilerplate/object/section"
+                    },
+                    {
+                        "ident": "main_menu",
+                        "label": {
+                            "en": "Pages in menu",
+                            "fr": "Pages dans le menu"
+                        },
+                        "url": "object/collection?obj_type=boilerplate/object/section&dashboard_ident=admin.table&collection_ident=menu.main_menu"
+                    }
+                ],
+                "object_actions": {
+                    "edit": {
+                        "label": {
+                            "en": "Modify",
+                            "fr": "Modifier"
+                        },
+                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/section&obj_id={{id}}",
+                        "priority": 1
+                    },
+                    "goto": {
+                        "label": {
+                            "en": "Go to page",
+                            "fr": "Voir la page"
+                        },
+                        "url": "{{baseUrl}}{{url}}",
+                        "priority": 2
+                    },
+                    "clone": {
+                        "label": {
+                            "en": "Clone",
+                            "fr": "Cloner"
+                        },
+                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/section&clone_id={{id}}",
+                        "priority": 3
+                    },
+                    "delete": {
+                        "label": {
+                            "en": "Delete",
+                            "fr": "Supprimer"
+                        },
+                        "priority": 4
+                    }
+                }
+            },
+            "menu.main_menu": {
+                "list_actions": [
+                    {
+                        "label": {
+                            "en": "New Page",
+                            "fr": "Nouvelle Page"
+                        },
+                        "ident": "create",
+                        "url": "object/edit?obj_type=boilerplate/object/section"
+                    },
+                    {
+                        "ident": "sidebar",
+                        "label": {
+                            "en": "All Pages",
+                            "fr": "Toutes les pages"
+                        },
+                        "url": "object/collection?obj_type=boilerplate/object/section"
+                    }
+                ],
+                "object_actions": [
+                    {
+                        "label": {
+                            "en": "Modify",
+                            "fr": "Modifier"
+                        },
+                        "ident": "edit",
+                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/section&obj_id={{id}}"
+                    },
+                    {
+                        "label": {
+                            "en": "Go to page",
+                            "fr": "Voir la page"
+                        },
+                        "url": "{{baseUrl}}{{url}}",
+                        "priority": 2
+                    },
+                    {
+                        "label": {
+                            "en": "Clone",
+                            "fr": "Cloner"
+                        },
+                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/section&clone_id={{id}}",
+
+                        "priority": 3
+                    },
+                    {
+                        "label": {
+                            "en": "Delete",
+                            "fr": "Supprimer"
+                        },
+                        "priority": 4
+                    }
+                ]
+            }
+        },
+        "forms": {
+            "default": {
+                "groups": {
+                    "content": {
+                        "title": {
+                            "fr": "Contenu",
+                            "en": "Content"
+                        },
+                        "show_title": false,
+                        "show_header": false,
+                        "icon": "edit",
+                        "priority": 200,
+                        "type": "charcoal/admin/widget/form-group/attachment",
+                        "template": "charcoal/admin/widget/form-group/attachment",
+                        "group": "content",
+                        "show_attachment_preview": true,
+                        "show_attachment_heading": false,
+                        "attachable_objects": {
+                            "boilerplate/attachment/text": {
+                                "label": {
+                                    "fr": "Texte",
+                                    "en": "Text"
+                                }
+                            }, "boilerplate/attachment/image": {
+                                "label": {
+                                    "fr": "Image",
+                                    "en": "Image"
+                                }
+                            }, "boilerplate/attachment/text-image": {
+                                "label": {
+                                    "fr": "Image avec texte",
+                                    "en": "Image with text"
+                                }
+                            }, "boilerplate/attachment/gallery": {
+                                "label": {
+                                    "fr": "Gallerie",
+                                    "en": "Gallery"
+                                }
+                            },
+                            "boilerplate/attachment/video": {
+                                "label": {
+                                    "fr": "Vidéo",
+                                    "en": "Video"
+                                }
+                            }
+                        }
+                    },
+                    "table": {
+                        "title": {
+                            "fr": "Hiérarchie",
+                            "en": "Hierarchy"
+                        },
+                        "show_title": false,
+                        "show_header": false,
+                        "icon": "sitemap",
+                        "template": "utils/widget/form-group/widget",
+                        "type": "utils/widget/form-group/widget",
+                        "widget_type": "charcoal/admin/widget/table",
+                        "obj_type": "boilerplate/object/section",
+                        "collection_ident": "default",
+                        "priority": 7000,
+                        "sortable": true,
+                        "renderable_data": {
+                            "collection_config": {
+                                "properties": [
+                                    "title",
+                                    "slug"
+                                ],
+                                "orders": [
+                                    {
+                                        "property": "position",
+                                        "mode": "asc"
+                                    }
+                                ],
+                                "filters": [
+                                    {
+                                        "property": "master",
+                                        "val": "{{id}}"
+                                    }
+                                ],
+                                "list_actions": [
+                                    {
+                                        "label": {
+                                            "en": "New Page",
+                                            "fr": "Nouvelle Page"
+                                        },
+                                        "ident": "create",
+                                        "url": "object/edit?obj_type=boilerplate/object/section&form_data[master]={{id}}"
+                                    }
+                                ],
+                                "pagination": {
+                                    "num_per_page": 100
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "dashboards": {
+            "admin.edit": {
+                "widgets": {
+                    "form": {
+                        "priority": 10,
+                        "type": "charcoal/admin/widget/objectForm",
+                        "form_ident": "default",
+                        "obj_type": "boilerplate/object/section",
+                        "group_display_mode": "tab"
+                    }
+                }
+            },
+            "admin.table": {
+                "widgets": {
+                    "form": {
+                        "type": "charcoal/admin/widget/table",
+                        "collection_ident": "default",
+                        "obj_type": "boilerplate/object/section"
+                    }
+                }
+            }
+        }
+    }
+}
