@@ -22,6 +22,7 @@ $this->addFile(__DIR__.'/admin.json');
 $this->addFile(__DIR__.'/config.json');
 $this->addFile(__DIR__.'/city.json');
 $this->addFile(__DIR__.'/date-formats.json');
+$this->addFile(__DIR__.'/templates.json');
 
 // Load routes
 $this->addFile(__DIR__.'/routes.json');
