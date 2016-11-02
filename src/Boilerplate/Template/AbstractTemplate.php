@@ -5,6 +5,7 @@ namespace Boilerplate\Template;
 // Dependencies from Pimple
 use Boilerplate\Object\Section;
 use Charcoal\Model\ModelInterface;
+use City\Support\Traits\BreadcrumbAwareTrait;
 use Pimple\Container;
 
 // Dependencies from Charcoal-Support
@@ -23,6 +24,7 @@ abstract class AbstractTemplate extends AbstractCityTemplate
     use ParsableValueTrait;
     use ManufacturableModelCollectionTrait;
     use SectionLoaderAwareTrait;
+    use BreadcrumbAwareTrait;
 
     /**
      * @param Container $container Pimple/Container.
@@ -46,6 +48,20 @@ abstract class AbstractTemplate extends AbstractCityTemplate
         }
 
         return parent::setContextObject($context);
+    }
+
+    /**
+     * @return array
+     */
+    public function beforeBreadcrumb()
+    {
+        return [
+            'label' => $this->parseAsTranslatable([
+                'en' => 'Home',
+                'fr' => 'Accueil'
+            ]),
+            'url'   => $this->baseUrl()
+        ];
     }
 
     /**
