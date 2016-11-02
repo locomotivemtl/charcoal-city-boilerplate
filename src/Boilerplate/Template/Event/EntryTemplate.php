@@ -2,7 +2,6 @@
 
 namespace Boilerplate\Template\Event;
 
-use Boilerplate\Object\Section;
 use Charcoal\Model\ModelInterface;
 use Boilerplate\Object\Event;
 
@@ -12,32 +11,11 @@ use Boilerplate\Object\Event;
 class EntryTemplate extends IndexTemplate
 {
     /**
-     * @var Section $parentSection The parent Section.
-     */
-    protected $parentSection;
-
-    /**
      * @return string
      */
     public function templateIdent()
     {
         return 'event-entry';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function parentSection()
-    {
-        if ($this->parentSection) {
-            return $this->parentSection;
-        }
-
-        $id                  = $this->sectionLoader()->resolveSectionId('/fr/evenements');
-        $section             = $this->sectionLoader()->fromId($id);
-        $this->parentSection = $section;
-
-        return $this->parentSection;
     }
 
     // ==========================================================================
@@ -54,7 +32,7 @@ class EntryTemplate extends IndexTemplate
     {
         if ($context instanceof Event) {
             $this->eventManager()->setCurrentEvent($context);
-            $this->setSection($this->parentSection());
+            $this->setSection($this->parentSection('/fr/evenements'));
         }
 
         parent::setContextObject($context);

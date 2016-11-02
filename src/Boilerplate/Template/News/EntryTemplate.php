@@ -2,7 +2,6 @@
 
 namespace Boilerplate\Template\News;
 
-use Boilerplate\Object\Section;
 use Charcoal\Model\ModelInterface;
 use Boilerplate\Object\News;
 
@@ -12,32 +11,11 @@ use Boilerplate\Object\News;
 class EntryTemplate extends IndexTemplate
 {
     /**
-     * @var Section $parentSection The parent Section.
-     */
-    protected $parentSection;
-
-    /**
      * @return string
      */
     public function templateIdent()
     {
         return 'news-entry';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function parentSection()
-    {
-        if ($this->parentSection) {
-            return $this->parentSection;
-        }
-
-        $id                  = $this->sectionLoader()->resolveSectionId('/fr/actualite');
-        $section             = $this->sectionLoader()->fromId($id);
-        $this->parentSection = $section;
-
-        return $this->parentSection;
     }
 
     // ==========================================================================
@@ -54,7 +32,7 @@ class EntryTemplate extends IndexTemplate
     {
         if ($context instanceof News) {
             $this->newsManager()->setCurrentNews($context);
-            $this->setSection($this->parentSection());
+            $this->setSection($this->parentSection('/fr/actualite'));
         }
 
         parent::setContextObject($context);
