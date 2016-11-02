@@ -32,7 +32,7 @@ class EntryTemplate extends IndexTemplate
     {
         if ($context instanceof Event) {
             $this->eventManager()->setCurrentEvent($context);
-            $this->setSection($this->parentSection('/fr/evenements'));
+            $this->setSection($this->sectionFromSlug('/fr/evenements'));
         }
 
         parent::setContextObject($context);

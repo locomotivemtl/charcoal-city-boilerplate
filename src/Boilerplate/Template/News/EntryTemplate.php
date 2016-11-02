@@ -32,7 +32,7 @@ class EntryTemplate extends IndexTemplate
     {
         if ($context instanceof News) {
             $this->newsManager()->setCurrentNews($context);
-            $this->setSection($this->parentSection('/fr/actualite'));
+            $this->setSection($this->sectionFromSlug('/fr/actualite'));
         }
 
         parent::setContextObject($context);
