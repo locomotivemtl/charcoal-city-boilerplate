@@ -6,6 +6,7 @@ namespace Boilerplate\Template\News;
 use Pimple\Container;
 
 // City dependencies
+use City\Support\Interfaces\NewsManagerAwareInterface;
 use City\Support\Traits\DateHelperAwareTrait;
 use City\Support\Traits\NewsManagerAwareTrait;
 
@@ -15,7 +16,8 @@ use Boilerplate\Template\AbstractTemplate;
 /**
  * Class IndexTemplate
  */
-class IndexTemplate extends AbstractTemplate
+class IndexTemplate extends AbstractTemplate implements
+    NewsManagerAwareInterface
 {
     use NewsManagerAwareTrait;
     use DateHelperAwareTrait;

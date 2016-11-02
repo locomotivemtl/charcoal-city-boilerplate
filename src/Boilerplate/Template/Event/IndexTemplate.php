@@ -6,6 +6,7 @@ namespace Boilerplate\Template\Event;
 use Pimple\Container;
 
 // City dependencies
+use City\Support\Interfaces\EventManagerAwareInterface;
 use City\Support\Traits\DateHelperAwareTrait;
 use City\Support\Traits\EventManagerAwareTrait;
 
@@ -15,7 +16,8 @@ use Boilerplate\Template\AbstractTemplate;
 /**
  * Class IndexTemplate
  */
-class IndexTemplate extends AbstractTemplate
+class IndexTemplate extends AbstractTemplate implements
+    EventManagerAwareInterface
 {
     use EventManagerAwareTrait;
     use DateHelperAwareTrait;

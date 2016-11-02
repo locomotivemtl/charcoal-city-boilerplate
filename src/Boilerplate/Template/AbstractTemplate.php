@@ -5,6 +5,8 @@ namespace Boilerplate\Template;
 // Dependencies from Pimple
 use Boilerplate\Object\Section;
 use Charcoal\Model\ModelInterface;
+use City\Support\Interfaces\BreadcrumbAwareInterface;
+use City\Support\Interfaces\SectionLoaderAwareInterface;
 use City\Support\Traits\BreadcrumbAwareTrait;
 use Pimple\Container;
 
@@ -19,7 +21,9 @@ use City\Support\Traits\SectionLoaderAwareTrait;
 /**
  * Class AbstractTemplate
  */
-abstract class AbstractTemplate extends AbstractCityTemplate
+abstract class AbstractTemplate extends AbstractCityTemplate implements
+    SectionLoaderAwareInterface,
+    BreadcrumbAwareInterface
 {
     use ParsableValueTrait;
     use ManufacturableModelCollectionTrait;
