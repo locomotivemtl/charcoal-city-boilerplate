@@ -329,6 +329,17 @@ CREATE TABLE `city_events` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `city_events` WRITE;
+/*!40000 ALTER TABLE `city_events` DISABLE KEYS */;
+
+INSERT INTO `city_events` (`active`, `position`, `created`, `created_by`, `last_modified`, `last_modified_by`, `category`, `id`, `title_en`, `title_fr`, `subtitle_en`, `subtitle_fr`, `summary_en`, `summary_fr`, `content_en`, `content_fr`, `image_en`, `image_fr`, `start_date`, `end_date`, `info_url_en`, `info_url_fr`, `meta_title_en`, `meta_title_fr`, `meta_description_en`, `meta_description_fr`, `meta_image_en`, `meta_image_fr`, `meta_author_en`, `meta_author_fr`, `publish_date`, `expiry_date`, `publish_status`, `slug_en`, `slug_fr`, `template_options`, `template_ident`, `hours_en`, `hours_fr`, `location_name_en`, `location_name_fr`, `address_en`, `address_fr`, `postal_code`, `city_en`, `city_fr`, `state_en`, `state_fr`, `country_en`, `country_fr`, `external_url_en`, `external_url_fr`, `keywords`, `author`)
+VALUES
+	(1,0,'2016-11-02 14:22:55','jalphonso','2016-11-02 14:22:55','jalphonso',1,1,'Event 1','Événement 1',NULL,NULL,'This is the event 1','Ceci est l\'événement 1',NULL,NULL,NULL,NULL,'2016-11-02 14:22:55','2016-11-02 14:22:55',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-11-02 14:22:55',NULL,'published','/en/events/event-1','/fr/evenements/evenement-1','[]','event-entry',NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,'','','','',NULL,NULL,'',0),
+	(1,0,'2016-11-02 14:23:12','jalphonso','2016-11-02 14:23:12','jalphonso',2,2,'Event 2','Événement 2',NULL,NULL,'This is the event 2','Ceci est l\'événement 2',NULL,NULL,NULL,NULL,'2016-11-02 14:22:55','2016-11-02 14:22:55',NULL,NULL,'Event 1','Événement 1',NULL,NULL,NULL,NULL,NULL,NULL,'2016-11-02 14:22:55',NULL,'published','/en/events/event-2','/fr/evenements/evenement-2','[]','event-entry',NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,'','','','',NULL,NULL,'',0),
+	(1,0,'2016-11-02 14:23:30','jalphonso','2016-11-02 14:23:30','jalphonso',3,3,'Event 3','Événement 3',NULL,NULL,'This is the event 3','Ceci est l\'événement 3',NULL,NULL,NULL,NULL,'2016-11-02 14:22:55','2016-11-02 14:22:55',NULL,NULL,'Event 1','Événement 1',NULL,NULL,NULL,NULL,NULL,NULL,'2016-11-02 14:22:55',NULL,'published','/en/events/event-3','/fr/evenements/evenement-3','[]','event-entry',NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,'','','','',NULL,NULL,'',0);
+
+/*!40000 ALTER TABLE `city_events` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Affichage de la table city_events_categories
@@ -349,6 +360,17 @@ CREATE TABLE `city_events_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `city_events_categories` WRITE;
+/*!40000 ALTER TABLE `city_events_categories` DISABLE KEYS */;
+
+INSERT INTO `city_events_categories` (`active`, `position`, `created`, `created_by`, `last_modified`, `last_modified_by`, `id`, `name_en`, `name_fr`)
+VALUES
+	(1,'0','2016-11-02 14:19:54','jalphonso','2016-11-02 14:19:54','jalphonso',1,'Category 1','Catégorie 1'),
+	(1,'0','2016-11-02 14:20:08','jalphonso','2016-11-02 14:20:08','jalphonso',2,'Category 2','Catégorie 2'),
+	(1,'0','2016-11-02 14:20:21','jalphonso','2016-11-02 14:20:21','jalphonso',3,'Category 3','Catégorie 3');
+
+/*!40000 ALTER TABLE `city_events_categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Affichage de la table city_locations
@@ -456,6 +478,17 @@ CREATE TABLE `city_news` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `city_news` WRITE;
+/*!40000 ALTER TABLE `city_news` DISABLE KEYS */;
+
+INSERT INTO `city_news` (`active`, `position`, `created`, `created_by`, `last_modified`, `last_modified_by`, `category`, `meta_title_en`, `meta_title_fr`, `meta_description_en`, `meta_description_fr`, `meta_image_en`, `meta_image_fr`, `meta_author_en`, `meta_author_fr`, `id`, `title_en`, `title_fr`, `subtitle_en`, `subtitle_fr`, `summary_en`, `summary_fr`, `content_en`, `content_fr`, `image_en`, `image_fr`, `news_date`, `info_url_en`, `info_url_fr`, `publish_date`, `expiry_date`, `publish_status`, `slug_en`, `slug_fr`, `template_options`, `template_ident`, `alert`, `keywords`, `author`)
+VALUES
+	(1,0,'2016-11-02 14:20:59','jalphonso','2016-11-02 14:21:14','jalphonso',1,NULL,'Nouvelle 1',NULL,NULL,NULL,NULL,NULL,NULL,1,'News 1','Nouvelle 1',NULL,NULL,'This is the news 1','Ceci est la nouvelle 1',NULL,NULL,NULL,NULL,'2016-11-02 14:20:59',NULL,NULL,'2016-11-02 14:20:59','2017-01-02 14:20:59','published','/en/news/nouvelle-1','/fr/actualites/nouvelle-1','[]','news-entry',0,'',0),
+	(1,0,'2016-11-02 14:21:45','jalphonso','2016-11-02 14:21:45','jalphonso',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,'News 2','Nouvelle 2',NULL,NULL,'This is the news 2','Ceci est la nouvelle 2',NULL,NULL,NULL,NULL,'2016-11-02 14:21:45',NULL,NULL,'2016-11-02 14:21:45','2017-01-02 14:21:45','published','/en/news/news-2','/fr/actualites/nouvelle-2','[]','news-entry',0,'',0),
+	(1,0,'2016-11-02 14:22:14','jalphonso','2016-11-02 14:22:14','jalphonso',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,'News 3','Nouvelle 3',NULL,NULL,'This is the news 3','Ceci est la nouvelle 3',NULL,NULL,NULL,NULL,'2016-11-02 14:22:14',NULL,NULL,'2016-11-02 14:22:14','2017-01-02 14:22:14','published','/en/news/news-3','/fr/actualites/nouvelle-3','[]','news-entry',0,'',0);
+
+/*!40000 ALTER TABLE `city_news` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Affichage de la table city_news_categories
@@ -476,6 +509,17 @@ CREATE TABLE `city_news_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `city_news_categories` WRITE;
+/*!40000 ALTER TABLE `city_news_categories` DISABLE KEYS */;
+
+INSERT INTO `city_news_categories` (`active`, `position`, `created`, `created_by`, `last_modified`, `last_modified_by`, `id`, `name_en`, `name_fr`)
+VALUES
+	(1,'0','2016-11-02 14:18:47','jalphonso','2016-11-02 14:18:47','jalphonso',1,'Category 1','Catégorie 1'),
+	(1,'0','2016-11-02 14:19:09','jalphonso','2016-11-02 14:19:09','jalphonso',2,'Category 2','Catégory 2'),
+	(1,'0','2016-11-02 14:19:30','jalphonso','2016-11-02 14:19:30','jalphonso',3,'Category 3','Catégorie 3');
+
+/*!40000 ALTER TABLE `city_news_categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Affichage de la table city_newsletter_subscriptions
@@ -531,15 +575,28 @@ CREATE TABLE `city_sections` (
   `template_options` longtext,
   `template_ident` varchar(255) NOT NULL,
   `locked` tinyint(1) unsigned DEFAULT NULL,
-  `summary` text,
   `external_url_en` varchar(255) DEFAULT NULL,
   `external_url_fr` varchar(255) DEFAULT NULL,
   `main_menu` tinyint(1) unsigned DEFAULT NULL,
   `nav_menu` text,
   `keywords` text,
+  `controller_ident` varchar(255) DEFAULT NULL,
+  `summary_fr` text,
+  `summary_en` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `city_sections` WRITE;
+/*!40000 ALTER TABLE `city_sections` DISABLE KEYS */;
+
+INSERT INTO `city_sections` (`active`, `position`, `created`, `created_by`, `last_modified`, `last_modified_by`, `master`, `meta_title_en`, `meta_title_fr`, `meta_description_en`, `meta_description_fr`, `meta_image_en`, `meta_image_fr`, `meta_author_en`, `meta_author_fr`, `slug_en`, `slug_fr`, `id`, `section_type`, `title_en`, `title_fr`, `subtitle_en`, `subtitle_fr`, `content_en`, `content_fr`, `image_en`, `image_fr`, `template_options`, `template_ident`, `locked`, `external_url_en`, `external_url_fr`, `main_menu`, `nav_menu`, `keywords`, `controller_ident`, `summary_fr`, `summary_en`)
+VALUES
+	(1,0,'2016-11-01 14:59:23','jalphonso','2016-11-01 15:06:55','jalphonso',NULL,NULL,'Page exemple',NULL,NULL,NULL,NULL,NULL,NULL,'/en/exemple-page','/fr/page-exemple',2,'charcoal/cms/section/content','Exemple page','Page exemple',NULL,NULL,NULL,NULL,NULL,NULL,'[]','generic',NULL,'','',0,NULL,'',NULL,'Ceci est un exemple de page générique','This is an exemple of a generic page.'),
+	(1,0,'2016-11-01 15:04:03','jalphonso','2016-11-01 15:05:40','jalphonso',NULL,'News','Actualité',NULL,NULL,NULL,NULL,NULL,NULL,'/en/news','/fr/actualite',3,'charcoal/cms/section/content','News','Actualité',NULL,NULL,NULL,NULL,NULL,NULL,'[]','news-list',NULL,'','',0,NULL,'',NULL,'Ceci est la liste des actualités','This is the news list'),
+	(1,0,'2016-11-01 15:08:28','jalphonso','2016-11-01 15:08:28','jalphonso',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/en/events','/fr/evenements',4,'charcoal/cms/section/content','Events','Événements',NULL,NULL,NULL,NULL,NULL,NULL,'[]','event-list',NULL,'','',0,NULL,'',NULL,'Ceci est la liste des événements','This the event\'s list.');
+
+/*!40000 ALTER TABLE `city_sections` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Affichage de la table city_team_categories
@@ -629,6 +686,21 @@ CREATE TABLE `object_revisions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `object_revisions` WRITE;
+/*!40000 ALTER TABLE `object_revisions` DISABLE KEYS */;
+
+INSERT INTO `object_revisions` (`id`, `target_type`, `target_id`, `rev_num`, `rev_ts`, `rev_user`, `data_prev`, `data_obj`, `data_diff`)
+VALUES
+	(1,'charcoal/admin/user','jalphonso',1,'2016-11-01 14:57:50',NULL,'[]','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:57:42-04:00\",\"created_by\":null,\"last_modified\":\"2016-11-01T14:57:42-04:00\",\"last_modified_by\":null,\"username\":\"jalphonso\",\"email\":\"joel@locomotive.ca\",\"roles\":[\"admin\"],\"password\":\"$2y$10$sieTOT6Ny2mFw8gJKvxiwuHFukLPYkhSvpIizLanRp49ckpjsmc7.\",\"last_login_date\":\"2016-11-01T14:57:50-04:00\",\"last_login_ip\":\"127.0.0.1\",\"last_password_date\":\"2016-11-01T14:57:42-04:00\",\"last_password_ip\":\"0.0.0.0\",\"login_token\":null}','{\"1\":{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:57:42-04:00\",\"created_by\":null,\"last_modified\":\"2016-11-01T14:57:42-04:00\",\"last_modified_by\":null,\"username\":\"jalphonso\",\"email\":\"joel@locomotive.ca\",\"roles\":[\"admin\"],\"password\":\"$2y$10$sieTOT6Ny2mFw8gJKvxiwuHFukLPYkhSvpIizLanRp49ckpjsmc7.\",\"last_login_date\":\"2016-11-01T14:57:50-04:00\",\"last_login_ip\":\"127.0.0.1\",\"last_password_date\":\"2016-11-01T14:57:42-04:00\",\"last_password_ip\":\"0.0.0.0\",\"login_token\":null}}'),
+	(2,'boilerplate/object/section','1',1,'2016-11-01 15:03:02','jalphonso','[]','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:58:36-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T14:58:36-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"home\",\"controller_ident\":null,\"id\":\"1\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Accueil\",\"en\":\"Home\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/accueil\",\"en\":\"\\/en\\/home\"},\"meta_title\":{\"fr\":\"Accueuil\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est la page d\'accueuil\",\"en\":\"This is the home page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','{\"1\":{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:58:36-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T14:58:36-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"home\",\"controller_ident\":null,\"id\":\"1\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Accueil\",\"en\":\"Home\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/accueil\",\"en\":\"\\/en\\/home\"},\"meta_title\":{\"fr\":\"Accueuil\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est la page d\'accueuil\",\"en\":\"This is the home page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}}'),
+	(3,'boilerplate/object/section','2',1,'2016-11-01 15:03:29','jalphonso','[]','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:59:23-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T14:59:23-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"generic\",\"controller_ident\":null,\"id\":\"2\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Page exemple\",\"en\":\"Exemple page\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/page-exemple\",\"en\":\"\\/en\\/exemple-page\"},\"meta_title\":{\"fr\":\"Page exemple\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est une page générique d\'exemple.\",\"en\":\"This is an exemple of a generic page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','{\"1\":{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:59:23-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T14:59:23-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"generic\",\"controller_ident\":null,\"id\":\"2\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Page exemple\",\"en\":\"Exemple page\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/page-exemple\",\"en\":\"\\/en\\/exemple-page\"},\"meta_title\":{\"fr\":\"Page exemple\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est une page générique d\'exemple.\",\"en\":\"This is an exemple of a generic page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}}'),
+	(4,'boilerplate/object/section','3',1,'2016-11-01 15:05:40','jalphonso','[]','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T15:04:03-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T15:04:03-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"news-list\",\"controller_ident\":null,\"id\":\"3\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Actualité\",\"en\":\"News\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/actualite\",\"en\":\"\\/en\\/news\"},\"meta_title\":{\"fr\":\"Actualité\",\"en\":\"News\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est la liste des actualités\",\"en\":\"This is the news list\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','{\"1\":{\"active\":true,\"position\":0,\"created\":\"2016-11-01T15:04:03-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T15:04:03-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"news-list\",\"controller_ident\":null,\"id\":\"3\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Actualité\",\"en\":\"News\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/actualite\",\"en\":\"\\/en\\/news\"},\"meta_title\":{\"fr\":\"Actualité\",\"en\":\"News\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est la liste des actualités\",\"en\":\"This is the news list\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}}'),
+	(5,'boilerplate/object/section','1',2,'2016-11-01 15:06:21','jalphonso','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:58:36-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T14:58:36-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"home\",\"controller_ident\":null,\"id\":\"1\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Accueil\",\"en\":\"Home\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/accueil\",\"en\":\"\\/en\\/home\"},\"meta_title\":{\"fr\":\"Accueuil\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est la page d\'accueuil\",\"en\":\"This is the home page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:58:36-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T15:03:02-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"home\",\"controller_ident\":null,\"id\":\"1\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Accueil\",\"en\":\"Home\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/accueil\",\"en\":\"\\/en\\/home\"},\"meta_title\":{\"fr\":\"Accueuil\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est la page d\'accueil\",\"en\":\"This is the home page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','[{\"last_modified\":\"2016-11-01T14:58:36-04:00\",\"summary\":{\"fr\":\"Ceci est la page d\'accueuil\"}},{\"last_modified\":\"2016-11-01T15:03:02-04:00\",\"summary\":{\"fr\":\"Ceci est la page d\'accueil\"}}]'),
+	(6,'boilerplate/object/section','2',2,'2016-11-01 15:06:55','jalphonso','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:59:23-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T14:59:23-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"generic\",\"controller_ident\":null,\"id\":\"2\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Page exemple\",\"en\":\"Exemple page\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/page-exemple\",\"en\":\"\\/en\\/exemple-page\"},\"meta_title\":{\"fr\":\"Page exemple\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est une page générique d\'exemple.\",\"en\":\"This is an exemple of a generic page\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','{\"active\":true,\"position\":0,\"created\":\"2016-11-01T14:59:23-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-01T15:03:29-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"generic\",\"controller_ident\":null,\"id\":\"2\",\"section_type\":\"charcoal\\/cms\\/section\\/content\",\"title\":{\"fr\":\"Page exemple\",\"en\":\"Exemple page\"},\"subtitle\":null,\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"slug\":{\"fr\":\"\\/fr\\/page-exemple\",\"en\":\"\\/en\\/exemple-page\"},\"meta_title\":{\"fr\":\"Page exemple\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"master\":null,\"locked\":null,\"summary\":{\"fr\":\"Ceci est un exemple de page générique\",\"en\":\"This is an exemple of a generic page.\"},\"keywords\":[],\"external_url\":{\"fr\":\"\",\"en\":\"\"},\"main_menu\":\"0\"}','[{\"last_modified\":\"2016-11-01T14:59:23-04:00\",\"summary\":{\"fr\":\"Ceci est une page générique d\'exemple.\",\"en\":\"This is an exemple of a generic page\"}},{\"last_modified\":\"2016-11-01T15:03:29-04:00\",\"summary\":{\"fr\":\"Ceci est un exemple de page générique\",\"en\":\"This is an exemple of a generic page.\"}}]'),
+	(7,'boilerplate/object/news','1',1,'2016-11-02 14:21:14','jalphonso','[]','{\"active\":true,\"position\":0,\"created\":\"2016-11-02T14:20:59-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-02T14:20:59-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"news-entry\",\"controller_ident\":null,\"slug\":{\"fr\":\"\\/fr\\/actualites\\/nouvelle-1\",\"en\":\"\\/en\\/news\\/nouvelle-1\"},\"publish_date\":\"2016-11-02T14:20:59-04:00\",\"expiry_date\":\"2017-01-02T14:20:59-05:00\",\"publish_status\":\"published\",\"id\":\"1\",\"title\":{\"fr\":\"Nouvelle 1\",\"en\":\"News 1\"},\"subtitle\":null,\"summary\":{\"fr\":\"Ceci est la nouvelle 1\",\"en\":\"This is the news 1\"},\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"news_date\":\"2016-11-02T14:20:59-04:00\",\"info_url\":null,\"meta_title\":{\"fr\":\"Nouvelle 1\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"category\":\"1\",\"alert\":false,\"keywords\":[],\"author\":null}','{\"1\":{\"active\":true,\"position\":0,\"created\":\"2016-11-02T14:20:59-04:00\",\"created_by\":\"jalphonso\",\"last_modified\":\"2016-11-02T14:20:59-04:00\",\"last_modified_by\":\"jalphonso\",\"template_options\":[],\"template_ident\":\"news-entry\",\"controller_ident\":null,\"slug\":{\"fr\":\"\\/fr\\/actualites\\/nouvelle-1\",\"en\":\"\\/en\\/news\\/nouvelle-1\"},\"publish_date\":\"2016-11-02T14:20:59-04:00\",\"expiry_date\":\"2017-01-02T14:20:59-05:00\",\"publish_status\":\"published\",\"id\":\"1\",\"title\":{\"fr\":\"Nouvelle 1\",\"en\":\"News 1\"},\"subtitle\":null,\"summary\":{\"fr\":\"Ceci est la nouvelle 1\",\"en\":\"This is the news 1\"},\"content\":null,\"image\":{\"fr\":\"\",\"en\":\"\"},\"news_date\":\"2016-11-02T14:20:59-04:00\",\"info_url\":null,\"meta_title\":{\"fr\":\"Nouvelle 1\",\"en\":\"\"},\"meta_description\":{\"fr\":\"\",\"en\":\"\"},\"meta_image\":{\"fr\":\"\",\"en\":\"\"},\"meta_author\":null,\"category\":\"1\",\"alert\":false,\"keywords\":[],\"author\":null}}');
+
+/*!40000 ALTER TABLE `object_revisions` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Affichage de la table object_routes
@@ -649,6 +721,37 @@ CREATE TABLE `object_routes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `object_routes` WRITE;
+/*!40000 ALTER TABLE `object_routes` DISABLE KEYS */;
+
+INSERT INTO `object_routes` (`id`, `active`, `creation_date`, `last_modification_date`, `lang`, `slug`, `route_obj_type`, `route_obj_id`, `route_template`)
+VALUES
+	(1,1,'2016-11-01 14:58:36','2016-11-01 14:58:36','fr','/fr/accueuil','boilerplate/object/section','1','home'),
+	(2,1,'2016-11-01 14:58:36','2016-11-01 14:58:36','en','/en/accueuil','boilerplate/object/section','1','home'),
+	(3,1,'2016-11-01 14:59:23','2016-11-01 14:59:23','fr','/fr/page-exemple','boilerplate/object/section','2','generic'),
+	(4,1,'2016-11-01 14:59:23','2016-11-01 14:59:23','en','/en/page-exemple','boilerplate/object/section','2','generic'),
+	(5,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','fr','/fr/accueil','boilerplate/object/section','1','home'),
+	(6,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','en','/en/home','boilerplate/object/section','1','home'),
+	(7,1,'2016-11-01 15:03:29','2016-11-01 15:03:29','en','/en/exemple-page','boilerplate/object/section','2','generic'),
+	(8,1,'2016-11-01 15:04:03','2016-11-01 15:04:03','fr','/fr/actualite','boilerplate/object/section','3','news-list'),
+	(9,1,'2016-11-01 15:04:03','2016-11-01 15:04:03','en','/en/news','boilerplate/object/section','3','news-list'),
+	(10,1,'2016-11-01 15:08:28','2016-11-01 15:08:28','fr','/fr/evenements','boilerplate/object/section','4','event-list'),
+	(11,1,'2016-11-01 15:08:28','2016-11-01 15:08:28','en','/en/events','boilerplate/object/section','4','event-list'),
+	(14,1,'2016-11-02 14:20:59','2016-11-02 14:20:59','fr','/fr/actualites/nouvelle-1','boilerplate/object/news','1','news-entry'),
+	(15,1,'2016-11-02 14:20:59','2016-11-02 14:20:59','en','/en/news/nouvelle-1','boilerplate/object/news','1','news-entry'),
+	(16,1,'2016-11-02 14:21:45','2016-11-02 14:21:45','fr','/fr/actualites/nouvelle-2','boilerplate/object/news','2','news-entry'),
+	(17,1,'2016-11-02 14:21:45','2016-11-02 14:21:45','en','/en/news/news-2','boilerplate/object/news','2','news-entry'),
+	(18,1,'2016-11-02 14:22:14','2016-11-02 14:22:14','fr','/fr/actualites/nouvelle-3','boilerplate/object/news','3','news-entry'),
+	(19,1,'2016-11-02 14:22:14','2016-11-02 14:22:14','en','/en/news/news-3','boilerplate/object/news','3','news-entry'),
+	(20,1,'2016-11-02 14:22:55','2016-11-02 14:22:55','fr','/fr/evenements/evenement-1','boilerplate/object/event','1','event-entry'),
+	(21,1,'2016-11-02 14:22:55','2016-11-02 14:22:55','en','/en/events/event-1','boilerplate/object/event','1','event-entry'),
+	(22,1,'2016-11-02 14:23:12','2016-11-02 14:23:12','fr','/fr/evenements/evenement-2','boilerplate/object/event','2','event-entry'),
+	(23,1,'2016-11-02 14:23:12','2016-11-02 14:23:12','en','/en/events/event-2','boilerplate/object/event','2','event-entry'),
+	(24,1,'2016-11-02 14:23:30','2016-11-02 14:23:30','fr','/fr/evenements/evenement-3','boilerplate/object/event','3','event-entry'),
+	(25,1,'2016-11-02 14:23:30','2016-11-02 14:23:30','en','/en/events/event-3','boilerplate/object/event','3','event-entry');
+
+/*!40000 ALTER TABLE `object_routes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 

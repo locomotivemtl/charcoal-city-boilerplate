@@ -413,12 +413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "64862e854f876bc5aee2996cab2f552db8586065"
+                "reference": "5f17a79615bd36d52d3b3ce44075aec02605d8bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/64862e854f876bc5aee2996cab2f552db8586065",
-                "reference": "64862e854f876bc5aee2996cab2f552db8586065",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/5f17a79615bd36d52d3b3ce44075aec02605d8bf",
+                "reference": "5f17a79615bd36d52d3b3ce44075aec02605d8bf",
                 "shasum": ""
             },
             "require": {
@@ -470,7 +470,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-08-03 09:33:34"
+            "time": "2016-11-02 14:11:11"
         },
         {
             "name": "igorw/get-in",
@@ -808,12 +808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-base.git",
-                "reference": "9e820bceb342d42c24c5ec756ac1813d7f982cd5"
+                "reference": "5cdd939274bc847ee86ed052fa0aecd2c3e15712"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/locomotivemtl/charcoal-base/zipball/9e820bceb342d42c24c5ec756ac1813d7f982cd5",
-                "reference": "9e820bceb342d42c24c5ec756ac1813d7f982cd5",
+                "url": "https://api.github.com/repos/locomotivemtl/charcoal-base/zipball/5cdd939274bc847ee86ed052fa0aecd2c3e15712",
+                "reference": "5cdd939274bc847ee86ed052fa0aecd2c3e15712",
                 "shasum": ""
             },
             "require": {
@@ -863,7 +863,7 @@
                 "cms",
                 "framework"
             ],
-            "time": "2016-10-25 21:04:18"
+            "time": "2016-11-02 18:51:30"
         },
         {
             "name": "locomotivemtl/charcoal-city",
@@ -871,7 +871,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-city",
-                "reference": "72c6beb53fca1f6de9fefee7a06cfb98cfd102f7"
+                "reference": "e09c1342ab5b2f8f16c5d325a4a07f7f41336200"
             },
             "require": {
                 "beneroch/charcoal-attachment": "dev-master",
@@ -921,7 +921,7 @@
                 "charcoal",
                 "city"
             ],
-            "time": "2016-11-01 20:49:51"
+            "time": "2016-11-02 19:04:06"
         },
         {
             "name": "locomotivemtl/charcoal-cms",
@@ -2330,12 +2330,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "6d1c49a18a1c52eb1bd1af432e5aa6884661099a"
+                "reference": "05b37873d62341c7bfccc09fd21fc0ed994ede0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/6d1c49a18a1c52eb1bd1af432e5aa6884661099a",
-                "reference": "6d1c49a18a1c52eb1bd1af432e5aa6884661099a",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/05b37873d62341c7bfccc09fd21fc0ed994ede0f",
+                "reference": "05b37873d62341c7bfccc09fd21fc0ed994ede0f",
                 "shasum": ""
             },
             "require": {
@@ -2380,7 +2380,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-10-31 14:54:46"
+            "time": "2016-11-02 14:00:58"
         },
         {
             "name": "tedivm/stash",
@@ -3745,12 +3745,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "d2cab32980d8de786744fabdec95991a0ebd7ea8"
+                "reference": "fc738a6cb48d418caee991c634851a7f4d444505"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/d2cab32980d8de786744fabdec95991a0ebd7ea8",
-                "reference": "d2cab32980d8de786744fabdec95991a0ebd7ea8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/fc738a6cb48d418caee991c634851a7f4d444505",
+                "reference": "fc738a6cb48d418caee991c634851a7f4d444505",
                 "shasum": ""
             },
             "require": {
@@ -3792,7 +3792,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-10-24 18:44:12"
+            "time": "2016-10-28 07:35:03"
         },
         {
             "name": "webmozart/assert",
