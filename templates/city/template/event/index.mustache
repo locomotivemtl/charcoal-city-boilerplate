@@ -48,7 +48,12 @@ usable tags from Event object (inside tag currentEvent):
 
 {{>city/partial/site/header}}
 
-{{# section }}
+{{# currentSection }}
+
+    {{>city/partial/site/nav}}
+
+    {{>city/partial/site/breadcrumb}}
+
     <h1>{{title}}</h1>
     <ul>
         {{# eventsList }}
@@ -110,6 +115,6 @@ usable tags from Event object (inside tag currentEvent):
             <br>
         {{/ archiveList }}
     </ul>
-{{/ section }}
+{{/ currentSection }}
 
 {{>city/partial/site/footer}}

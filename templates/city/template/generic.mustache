@@ -1,8 +1,13 @@
 {{>city/partial/site/header}}
 
-<h1>{{page_title}}</h1>
+{{# currentSection }}
 
-<h2>Home template.</h2>
-<strong>{{test}}</strong>
+    {{>city/partial/site/nav}}
+
+    {{> city/partial/site/breadcrumb }}
+
+    <h1>{{title}}</h1>
+
+{{/ currentSection }}
 
 {{>city/partial/site/footer}}

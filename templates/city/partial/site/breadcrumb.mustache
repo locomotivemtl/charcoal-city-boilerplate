@@ -1,0 +1,12 @@
+<p>
+    Breadcrumb :
+    {{# breadcrumb }}
+        {{# isCurrent }}
+            {{ label }}
+        {{/ isCurrent }}
+        {{^ isCurrent }}
+            <a href="{{ url }}">{{ label }}</a>
+        {{/ isCurrent }}
+        /
+    {{/ breadcrumb }}
+</p>

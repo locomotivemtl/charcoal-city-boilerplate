@@ -48,7 +48,12 @@ usable tags from News object (inside tag currentNews):
 
 {{>city/partial/site/header}}
 
-{{# section }}
+{{# currentSection }}
+
+    {{>city/partial/site/nav}}
+
+    {{>city/partial/site/breadcrumb}}
+
     <h1>{{title}}</h1>
     <ul>
         {{# newsList }}
@@ -113,6 +118,6 @@ usable tags from News object (inside tag currentNews):
             </ul>
         </li>
     </ul>
-{{/ section }}
+{{/ currentSection }}
 
 {{>city/partial/site/footer}}
