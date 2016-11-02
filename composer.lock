@@ -565,12 +565,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "54831cecf511cb2898ccbd85331d3fc6393274a1"
+                "reference": "564f45c9e724556922f30007118646bbe4a3dad2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/54831cecf511cb2898ccbd85331d3fc6393274a1",
-                "reference": "54831cecf511cb2898ccbd85331d3fc6393274a1",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/564f45c9e724556922f30007118646bbe4a3dad2",
+                "reference": "564f45c9e724556922f30007118646bbe4a3dad2",
                 "shasum": ""
             },
             "require": {
@@ -614,7 +614,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2016-11-01 18:52:54"
+            "time": "2016-11-02 19:49:26"
         },
         {
             "name": "league/climate",
@@ -871,7 +871,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/locomotivemtl/charcoal-city",
-                "reference": "e09c1342ab5b2f8f16c5d325a4a07f7f41336200"
+                "reference": "dd91ea6b3ad1222001f0b232ae5c15d5119aaa18"
             },
             "require": {
                 "beneroch/charcoal-attachment": "dev-master",
@@ -921,7 +921,7 @@
                 "charcoal",
                 "city"
             ],
-            "time": "2016-11-02 19:04:06"
+            "time": "2016-11-02 20:47:15"
         },
         {
             "name": "locomotivemtl/charcoal-cms",
