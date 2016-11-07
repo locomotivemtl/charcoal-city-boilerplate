@@ -267,6 +267,7 @@ class RenameScript extends AbstractScript
             $this->globRecursive('templates/*'),
             $this->globRecursive('tests/*'),
             $this->globRecursive('www/*'),
+            $this->globRecursive('build/loco_city.sql'),
             glob('*.*')
         );
         foreach ($files as $filename) {
