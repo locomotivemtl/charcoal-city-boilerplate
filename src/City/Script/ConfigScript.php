@@ -416,7 +416,7 @@ class ConfigScript extends AbstractScript
                 return true;
             }
             // Validate the output
-            return $this->isValidDbUser($response);
+            return $that->isValidDbUser($response);
         });
 
         $this->dbUser = $input->prompt();
@@ -455,7 +455,7 @@ class ConfigScript extends AbstractScript
                 return true;
             }
             // Validate the output
-            return $this->isValidDbPassword($response);
+            return $that->isValidDbPassword($response);
         })
 
         $this->dbPassword = $input->prompt();
@@ -494,7 +494,7 @@ class ConfigScript extends AbstractScript
                 return true;
             }
             // Validate the output
-            return $this->isValidDbHost($response);
+            return $that->isValidDbHost($response);
         });
         $input->defaultTo($this->defaultDbHost);
 
