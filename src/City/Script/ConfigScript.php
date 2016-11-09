@@ -375,9 +375,10 @@ class ConfigScript extends AbstractScript
             'let blank to use another database</red>) :'
         );
 
-        $input->accept(function ($response) use ($this) {
+        $that = $this;
+        $input->accept(function ($response) use ($that) {
             // Validate the output
-            return $this->isValidDbName($response);
+            return $that->isValidDbName($response);
         });
 
         $this->dbName = $input->prompt();
@@ -407,7 +408,9 @@ class ConfigScript extends AbstractScript
             $this->defaultDbUser
         ));
         $input->defaultTo($this->defaultDbUser);
-        $input->accept(function ($response) use ($this) {
+
+        $that = $this;
+        $input->accept(function ($response) use ($that) {
             // Use default to.
             if (!$response) {
                 return true;
@@ -444,7 +447,9 @@ class ConfigScript extends AbstractScript
             $this->defaultDbPassword
         ));
         $input->defaultTo($this->defaultDbPassword);
-        $input->accept(function ($response) use ($this) {
+
+        $that = $this;
+        $input->accept(function ($response) use ($that) {
             // Use default to.
             if (!$response) {
                 return true;
@@ -481,7 +486,9 @@ class ConfigScript extends AbstractScript
             'Database <red>hostname</red> : [default: <green>%s</green>]',
             $this->defaultDbHost
         ));
-        $input->accept(function ($response) use ($this) {
+
+        $that = $this;
+        $input->accept(function ($response) use ($that) {
             // Use default to.
             if (!$response) {
                 return true;
