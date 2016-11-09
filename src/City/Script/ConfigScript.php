@@ -196,18 +196,16 @@ class ConfigScript extends AbstractScript
 
         $climate->underline()->green()->out('Charcoal city config script');
 
+        // If the user asked for help, give it.
         if ($climate->arguments->defined('help')) {
             $climate->usage();
-
             return;
         }
 
         // Parse the received arguments
         $climate->arguments->parse();
-        $dbName     = $climate->arguments->get('databaseName') ?: $this->dbName;
-        $dbUser     = $climate->arguments->get('databaseUser') ?: $this->dbUser;
-        $dbPassword = $climate->arguments->get('databasePassword') ?: $this->dbPassword;
-        $dbHost     = $climate->arguments->get('databaseHost') ?: $this->dbHost;
+
+        // Verbose
         $verbose    = !!$climate->arguments->get('quiet');
         $this->setVerbose($verbose);
 
@@ -218,30 +216,6 @@ class ConfigScript extends AbstractScript
             $env
         ));
 
-        // Prompt for database name until correctly entered
-        do {
-            $dbName = $this->promptDbName($dbName);
-        } while ($dbName === null);
-
-        if (!$dbName) {
-            throw new CancelledScriptException(
-                'The database configuration has been skipped.'
-            );
-        }
-
-        // Prompt for database user name until correctly entered
-        do {
-            $dbUser = $this->promptDbUser($dbUser);
-        } while (!$dbUser);
-
-        // Prompt for database password until correctly entered
-        $dbPassword = $this->promptDbPassword($dbPassword);
-
-        // Prompt for database host until correctly entered
-        do {
-            $dbHost = $this->promptDbHost($dbHost);
-        } while (!$dbHost);
-
         // Database creation
         $this->createDb();
 
@@ -249,14 +223,16 @@ class ConfigScript extends AbstractScript
         $this->createConfigFile();
 
         // Modify database data
+        // @todo Update datas to stay up to date.
         $this->updateDatabaseData();
 
+        // GG
         $climate->green()->out("\n".'The project was configured with Success!');
     }
 
     /**
-     * Creates the database for the user,
-     * using a supplied sql database.
+     * Creates the database for the user using
+     * the supplied sql database (loco_city.sql).
      *
      * @return void
      */
@@ -264,30 +240,28 @@ class ConfigScript extends AbstractScript
     {
         $climate = $this->climate();
 
-        $name     = $this->dbName();
-        $username = $this->dbUser();
-        $password = $this->dbPassword();
-        $host     = $this->dbHost();
+        // Should be set, at this point.
+        $dbName     = $this->dbName();
+        $dbUser     = $this->dbUser();
+        $dbPassword = $this->dbPassword();
+        $dbHost     = $this->dbHost();
 
         // Output database creation data
         $climate->out('Creating database using :');
         $climate->table([
             [
-                'Name'     => '<green>'.$name.'</green>',
-                'User'     => '<green>'.$username.'</green>',
-                'Password' => '<green>'.$password.'</green>',
-                'Hostname' => '<green>'.$host.'</green>',
+                'Name'     => '<green>'.$dbName.'</green>',
+                'User'     => '<green>'.$dbUser.'</green>',
+                'Password' => '<green>'.$dbPassword.'</green>',
+                'Hostname' => '<green>'.$dbHost.'</green>',
             ]
         ]);
 
-        // Set UTf-8 compatibility by default. Disable it if it is set as such in config
-        $extraOptions = null;
-        if (!isset($dbConfig['disable_utf8']) || !$dbConfig['disable_utf8']) {
-            $extraOptions = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'];
-        }
+        // Set UTf-8 compatibility by default.
+        $extraOptions = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'];
 
-        $dsn = 'mysql:host='.$host;
-        $db  = new PDO($dsn, $username, $password, $extraOptions);
+        $dsn = 'mysql:host='.$dbHost;
+        $db  = new PDO($dsn, $dbUser, $dbPassword, $extraOptions);
 
         // Set PDO options
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -295,7 +269,7 @@ class ConfigScript extends AbstractScript
 
         $q = "SELECT COUNT(*)
               FROM INFORMATION_SCHEMA.SCHEMATA
-              WHERE SCHEMA_NAME = '".$name."'";
+              WHERE SCHEMA_NAME = '".$dbName."'";
 
         $dbExist = $db->query($q);
 
@@ -303,11 +277,11 @@ class ConfigScript extends AbstractScript
             $climate->out('database does not exist...');
             $climate->out('creating database...');
 
-            $q = 'CREATE DATABASE IF NOT EXISTS `'.$name.'`';
+            $q = 'CREATE DATABASE IF NOT EXISTS `'.$dbName.'`';
             $db->query($q);
         }
 
-        $q = 'USE `'.$name.'`';
+        $q = 'USE `'.$dbName.'`';
         $db->query($q);
 
         $q = file_get_contents($this->rootPath.$this->sqlPath);
@@ -315,7 +289,7 @@ class ConfigScript extends AbstractScript
 
         $climate->green()->out(sprintf(
             'The database %s was successfully created!',
-            $name
+            $dbName
         ));
     }
 
@@ -345,7 +319,6 @@ class ConfigScript extends AbstractScript
         $data       = json_decode($jsonString, true);
 
         // Replace config data with user data
-
         $data['databases']['default']['database'] = $this->dbName();
         $data['databases']['default']['username'] = $this->dbUser();
         $data['databases']['default']['password'] = $this->dbPassword();
@@ -362,222 +335,18 @@ class ConfigScript extends AbstractScript
 
     /**
      * Update the database with data that match current dates.
-     * @todo Update the database with dates baesd on today().
+     * @todo Update the database with dates based on today().
      * @return void
      */
     private function updateDatabaseData()
     {
     }
 
-    /**
-     * @param string|null $prompt The prompt string.
-     * @return string|null
-     */
-    private function promptDbName($prompt = null)
-    {
-        if (!$prompt) {
-            $input  = $this->climate()->input(
-                'Database <red>name</red> (<red>Database will be created or overwritten, '.
-                'let blank to use another database</red>) :'
-            );
-            $prompt = $input->prompt();
-        }
-
-        try {
-            $this->setDbName($prompt);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $prompt;
-    }
-
-    /**
-     * @param string|null $prompt The prompt string.
-     * @return string|null
-     */
-    private function promptDbUser($prompt = null)
-    {
-        if (!$prompt) {
-            $input = $this->climate()->input(sprintf(
-                'Database <red>username</red> : [default: <green>%s</green>]',
-                $this->defaultDbUser
-            ));
-            $input->defaultTo($this->defaultDbUser);
-            $prompt = $input->prompt();
-        }
-
-        try {
-            $this->setDbUser($prompt);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $prompt;
-    }
-
-    /**
-     * @param string|null $prompt The prompt string.
-     * @return string|null
-     */
-    private function promptDbPassword($prompt = null)
-    {
-        if (!$prompt) {
-            $input = $this->climate()->input(
-                'Database <red>password</red> :'
-            );
-            $input->defaultTo($this->defaultDbPassword);
-            $prompt = $input->prompt();
-        }
-
-        try {
-            $this->setDbPassword($prompt);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $prompt;
-    }
-
-    /**
-     * @param string|null $prompt The prompt string.
-     * @return string|null
-     */
-    private function promptDbHost($prompt = null)
-    {
-        if (!$prompt) {
-            $input = $this->climate()->input(sprintf(
-                'Database <red>hostname</red> : [default: <green>%s</green>]',
-                $this->defaultDbHost
-            ));
-            $input->defaultTo($this->defaultDbHost);
-            $prompt = $input->prompt();
-        }
-
-        try {
-            $this->setDbHost($prompt);
-        } catch (Exception $e) {
-            $this->climate()->error($e->getMessage());
-
-            return null;
-        }
-
-        return $prompt;
-    }
 
     // ==========================================================================
     // SETTERS
     // ==========================================================================
 
-    /**
-     * Set database name.
-     *
-     * @param string $name The database name.
-     * @throws InvalidArgumentException If the name is invalid.
-     * @return ConfigScript Chainable
-     */
-    public function setDbName($name)
-    {
-        if (!is_string($name)) {
-            throw new InvalidArgumentException(
-                'Invalid database name. Must be a string.'
-            );
-        }
-
-        if ($name != '' && !preg_match('/^[-a-z_0-9]+$/i', $name)) {
-            throw new InvalidArgumentException(
-                'Invalid database name. Only alphanumeric characters, dashes and underscores are allowed.'
-            );
-        }
-
-        $this->dbName = $name;
-
-        return $this;
-    }
-
-    /**
-     * Set database username.
-     *
-     * @param string $name The database name.
-     * @throws InvalidArgumentException If the username is invalid.
-     * @return ConfigScript Chainable
-     */
-    public function setDbUser($name)
-    {
-        if (!is_string($name)) {
-            throw new InvalidArgumentException(
-                'Invalid database username. Must be a string.'
-            );
-        }
-
-        if (!$name) {
-            throw new InvalidArgumentException(
-                'Invalid database username. Must contain at least one character.'
-            );
-        }
-
-        if (!preg_match('/^[-a-z_ ]+$/i', $name)) {
-            throw new InvalidArgumentException(
-                'Invalid database name. Only characters A-Z, dashes, underscores and spaces are allowed.'
-            );
-        }
-
-        $this->dbUser = $name;
-
-        return $this;
-    }
-
-    /**
-     * Set database password.
-     *
-     * @param string $password The database password.
-     * @throws InvalidArgumentException If the password is invalid.
-     * @return ConfigScript Chainable
-     */
-    public function setDbPassword($password)
-    {
-        if (!is_string($password)) {
-            throw new InvalidArgumentException(
-                'Invalid database password. Must be a string.'
-            );
-        }
-
-        $this->dbPassword = $password;
-
-        return $this;
-    }
-
-    /**
-     * Set database hostname.
-     *
-     * @param string $name The database hostname.
-     * @throws InvalidArgumentException If the hostname is invalid.
-     * @return ConfigScript Chainable
-     */
-    public function setDbHost($name)
-    {
-        if (!is_string($name)) {
-            throw new InvalidArgumentException(
-                'Invalid database password. Must be a string.'
-            );
-        }
-
-        if (!$name) {
-            throw new InvalidArgumentException(
-                'Invalid database username. Must contain at least one character.'
-            );
-        }
-
-        $this->dbHost = $name;
-
-        return $this;
-    }
 
     // ==========================================================================
     // GETTERS
@@ -590,6 +359,28 @@ class ConfigScript extends AbstractScript
      */
     public function dbName()
     {
+        if ($this->dbName) {
+            return $this->dbName;
+        }
+
+        // Information provided as argument
+        $dbName = $climate->arguments->get('databaseName');
+        if ($this->isValidDbName($dbName)) {
+            $this->dbName = $dbName;
+            return $this->dbHost;
+        }
+
+        $input  = $this->climate()->input(
+            'Database <red>name</red> (<red>Database will be created or overwritten, '.
+            'let blank to use another database</red>) :'
+        );
+
+        $input->accept(function ($response) use ($this) {
+            // Validate the output
+            return $this->isValidDbName($response);
+        });
+
+        $this->dbName = $input->prompt();
         return $this->dbName;
     }
 
@@ -600,6 +391,32 @@ class ConfigScript extends AbstractScript
      */
     public function dbUser()
     {
+        if ($this->dbUser) {
+            return $this->dbUser;
+        }
+
+        // Information provided as argument
+        $dbUser = $climate->arguments->get('databaseUser');
+        if ($this->isValidDbUser($dbUser)) {
+            $this->dbUser = $dbUser;
+            return $this->dbUser;
+        }
+
+        $input = $this->climate()->input(sprintf(
+            'Database <red>username</red> : [default: <green>%s</green>]',
+            $this->defaultDbUser
+        ));
+        $input->defaultTo($this->defaultDbUser);
+        $input->accept(function ($response) use ($this) {
+            // Use default to.
+            if (!$response) {
+                return true;
+            }
+            // Validate the output
+            return $this->isValidDbUser($response);
+        });
+
+        $this->dbUser = $input->prompt();
         return $this->dbUser;
     }
 
@@ -610,6 +427,33 @@ class ConfigScript extends AbstractScript
      */
     public function dbPassword()
     {
+        // Allows empty string password
+        if ($this->dbPassword !== null) {
+            return $this->dbPassword;
+        }
+
+        // Information provided as argument
+        $password = $climate->arguments->get('databasePassword');
+        if ($this->isValidDbPassword($password)) {
+            $this->dbPassword = $password;
+            return $this->dbPassword;
+        }
+
+        $input = $this->climate()->input(sprintf(
+            'Database <red>password</red> : [default: <green>%s</green>]',
+            $this->defaultDbPassword
+        ));
+        $input->defaultTo($this->defaultDbPassword);
+        $input->accept(function ($response) use ($this) {
+            // Use default to.
+            if (!$response) {
+                return true;
+            }
+            // Validate the output
+            return $this->isValidDbPassword($response);
+        })
+
+        $this->dbPassword = $input->prompt();
         return $this->dbPassword;
     }
 
@@ -620,6 +464,35 @@ class ConfigScript extends AbstractScript
      */
     public function dbHost()
     {
+        // Don't go twice there
+        if ($this->dbHost) {
+            return $this->dbHost;
+        }
+
+        // Information provided as argument
+        $host = $climate->arguments->get('databaseHost');
+        if ($this->isValidDbHost($host)) {
+            $this->dbHost = $host;
+            return $this->dbHost;
+        }
+
+        // Ask for the information
+        $input = $this->climate()->input(sprintf(
+            'Database <red>hostname</red> : [default: <green>%s</green>]',
+            $this->defaultDbHost
+        ));
+        $input->accept(function ($response) use ($this) {
+            // Use default to.
+            if (!$response) {
+                return true;
+            }
+            // Validate the output
+            return $this->isValidDbHost($response);
+        });
+        $input->defaultTo($this->defaultDbHost);
+
+        // Validates the prompt input.
+        $this->dbHost = $input->prompt();
         return $this->dbHost;
     }
 
@@ -639,4 +512,97 @@ class ConfigScript extends AbstractScript
 
         return $env;
     }
+
+
+    // ==========================================================================
+    // UTILS
+    // ==========================================================================
+
+    /**
+     * Check if the database name is valid.
+     * @param  string $dbName Database name.
+     * @return boolean        Database name is valid or not.
+     */
+    private function isValidDbName($dbName)
+    {
+        // Null || empty || false
+        if (!$dbName) {
+            return false;
+        }
+
+        // Not a string
+        if (!is_string($dbName)) {
+            return false;
+        }
+
+        // Invalid string
+        if (!preg_match('/^[-a-z_0-9]+$/i', $dbName)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the database user name is valid.
+     * @param  string $dbUser Database user.
+     * @return boolean        Database user is valid or not.
+     */
+    private function isValidDbUser($dbUser)
+    {
+        // Null || empty || false
+        if (!$dbUser) {
+            return false;
+        }
+
+        // Not a string
+        if (!is_string($dbUser)) {
+            return false;
+        }
+
+        // Invalid string
+        if (!preg_match('/^[-a-z_ ]+$/i', $dbUser)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the database password is valid.
+     * Allows empty string password.
+     * @param  string $dbPassword Database password.
+     * @return boolean            Database password is valid or not.
+     */
+    private function isValidDbPassword($dbPassword)
+    {
+        if ($dbPassword === null) {
+            return false;
+        }
+
+        if (!is_string($dbPassword)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check if the database user host is valid.
+     * @param  string $dbHost Database host.
+     * @return boolean        Database host is valid or not.
+     */
+    public function isValidDbHost($dbHost)
+    {
+        if (!is_string($dbHost)) {
+            return false;
+        }
+
+        if (!$dbHost) {
+            return false;
+        }
+
+        return true;
+    }
+
+
 }
