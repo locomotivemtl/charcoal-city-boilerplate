@@ -364,7 +364,7 @@ class ConfigScript extends AbstractScript
         }
 
         // Information provided as argument
-        $dbName = $climate->arguments->get('databaseName');
+        $dbName = $this->climate()->arguments->get('databaseName');
         if ($this->isValidDbName($dbName)) {
             $this->dbName = $dbName;
             return $this->dbHost;
@@ -397,7 +397,7 @@ class ConfigScript extends AbstractScript
         }
 
         // Information provided as argument
-        $dbUser = $climate->arguments->get('databaseUser');
+        $dbUser = $this->climate()->arguments->get('databaseUser');
         if ($this->isValidDbUser($dbUser)) {
             $this->dbUser = $dbUser;
             return $this->dbUser;
@@ -436,7 +436,7 @@ class ConfigScript extends AbstractScript
         }
 
         // Information provided as argument
-        $password = $climate->arguments->get('databasePassword');
+        $password = $this->climate()->arguments->get('databasePassword');
         if ($this->isValidDbPassword($password)) {
             $this->dbPassword = $password;
             return $this->dbPassword;
@@ -456,7 +456,7 @@ class ConfigScript extends AbstractScript
             }
             // Validate the output
             return $that->isValidDbPassword($response);
-        })
+        });
 
         $this->dbPassword = $input->prompt();
         return $this->dbPassword;
@@ -475,7 +475,7 @@ class ConfigScript extends AbstractScript
         }
 
         // Information provided as argument
-        $host = $climate->arguments->get('databaseHost');
+        $host = $this->climate()->arguments->get('databaseHost');
         if ($this->isValidDbHost($host)) {
             $this->dbHost = $host;
             return $this->dbHost;
