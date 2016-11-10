@@ -94,7 +94,10 @@ class SetupScript extends AbstractScript
 
         try {
             // Configure database and the config file
-            ConfigScript::start();
+            $input = $climate->confirm('Setup database?');
+            if ($input->confirmed()) {
+                ConfigScript::start();
+            }
             // Create a user
             new CreateUser();
         } catch (CancelledScriptException $e) {
