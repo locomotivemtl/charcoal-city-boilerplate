@@ -610,6 +610,4 @@ class ConfigScript extends AbstractScript
 
         return true;
     }
-
-
 }
