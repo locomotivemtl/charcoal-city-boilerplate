@@ -8,9 +8,10 @@ The installation is fully automated.
 
 - [How to Install](#how-to-install)
     - [1. Create / clone the city boilerplate](#1-create--clone-the-city-boilerplate)
-    - [2. Test your installation](#2-test-your-installation)
-    - [3. Set up a database storage](#3-set-up-a-database-storage)
-    - [4. Set up `charcoal-admin`](#4-set-up-charcoal-admin)
+    - [2. Installation process](#2-installation-process)
+    - [3. Ready to go](#3-ready-to-go)
+    - [4. Basic debug](#4-basic-debug)
+    - [5. Set up `charcoal-admin`](#5-set-up-charcoal-admin)
 - [Going further](#going-further)
     - More config customizations
    - Creating a custom template
@@ -33,60 +34,69 @@ To start a Charcoal project with this Boilerplate, simply:
 ## 1. **Create / clone the city boilerplate**
 
 ```shell
-$ composer create-project locomotivemtl/charcoal-city-boilerplate [path] [version]
+$ composer create-project locomotivemtl/charcoal-city-boilerplate [path] --prefer-source -s dev
 ```
+The `--prefer-source` argument ensure you have the possibility to edit vendors while the `-s dev` argument specifies composer to user the latest development boilerplate.
 
 > **About the Document Root**
 >
 > 👉 The project should not be cloned directly in a web-accessible directory. The web server should be configured to serve the `www/` folder directly. The other folders (`vendor/`, `src/`, `templates/`, `metadata/`, `config/`, etc.) should therefore not be available from the web server (kept outside the document root).
 
+## 2. **Installation process**
+### **Create-project setup**
 
-## 2. **Test your installation**
+- **Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]?**
+    + Yes. This will remove the charcoal-city-boilerplate repository informations.
 
-A quick server can be started using the PHP builtin server:
+### **Project setup**
+The project setup uses the given name to rename all files to the currently choosen namespace.
 
+**Manual call:**
 ```shell
-$ cd www
-$ php -S localhost:8080
+$ ./vendor/bin/charcoal city/setup
 ```
 
-Point your browser to `http://localhost:8080/` and you should see the boilerplate's default home page.
+- **What is the name of the project?**
+    + Could be bascily any valid string that is not `charcoal` or `city` which are the 2 already used namespaces.
 
-![Boilerplate homepage](docs/images/boilerplate-home.png)
 
-How to change the default page and add routes/templates is explained later in this README.
+- **What is the namespace of the project?**
+    + Default will be the name of the project with a capital letter. Everything will be renamed accordingly.
 
-## 3. **Set up a database storage**
 
-The next step requires a custom configuration file. It is recommended to use `config/config.local.json` and making sure it is not committed to source control.
-However, the initial installation will create this file for you and configure it whit the provided information.
+#### **Composer setup**
+The composer setup updates the composer.json file to match the current project informations.
 
+- **What is the VCS repository of the project? (let blank to use an already installed VCS)**
+    + The repository in which the project will be held. If specified, the script will ensure to `git init` and `git remote add origin [specified repository]`
+
+- **What is the project website url? (optional)**
+    + Updates the composer.json file with the given information.
+
+### **City config script**
+The city config script generates a database and a config.local.json file matching the given informations.
+
+**Manual call:**
 ```shell
-$ cp config/config.sample.json config/config.local.json
-$ echo -n "config/config.local.json" >> .gitignore
+$ ./vendor/bin/charcoal city/config
 ```
 
-Create an empty database and ensure a SQL user has the proper permissions for this database. Then edit the `config/config.local.json` file with this information.
+- **Database name (Database will be created or overwritten, let blank to user another database)**
+    + Database name. If not specified, you will have to manually edit the config.local.json file automatically generated.
+- **Database username : [default: root]**
+    + Database username (usually root)
+- **Database password : [default: '']**
+    + Database password (default to empty string)
+- **Database hostname : [default: 127.0.0.1]**
+    + Database hostname which could be either 127.0.0.1 or localhost.
 
-```json
-{
-    "databases": {
-        "default": {
-            "type": "mysql",
-            "hostname": "127.0.0.1",
-            "database": "foobar",
-            "username": "foo_bar",
-            "password": "F00$BâR123"
-        }
-    },
-    "default_database": "default"
-}
-```
+## 3. **Ready to go**
+You can now visit the local webpage and access the home template, default news and default events. Depending on your installation, you might have to update the hosts file.
 
-In the auto-configuration you'll be asked for a database configuration. You'll need to provide a database name.
-The script will create the database if it doesn't already exist, otherwise it will use the provided one but will overwrite it with a default database.
+## 4. **Basic debug**
+If you can't see the home page with all these steps successfully completed, make sure you changed the hosts file accordingly. Then, you can manually `composer update` the project, which will rebuild the autoload and update to the latest package. When all else fails, ask for Joel or Bene.
 
-## 4. **Set up charcoal-admin**
+## 5. **Set up charcoal-admin**
 
 This step is now completely automated.
 
