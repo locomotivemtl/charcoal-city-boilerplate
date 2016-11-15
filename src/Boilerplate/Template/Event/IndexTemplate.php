@@ -5,16 +5,16 @@ namespace Boilerplate\Template\Event;
 // Pimple dependencies
 use Pimple\Container;
 
-// City dependencies
+// Module `charcoal-city` dependencies
 use City\Support\Interfaces\EventManagerAwareInterface;
 use City\Support\Traits\DateHelperAwareTrait;
 use City\Support\Traits\EventManagerAwareTrait;
 
-// local dependencies
+// Local module dependencies
 use Boilerplate\Template\AbstractTemplate;
 
 /**
- * Class IndexTemplate
+ * Event index template (event list)
  */
 class IndexTemplate extends AbstractTemplate implements
     EventManagerAwareInterface

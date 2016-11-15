@@ -2,10 +2,11 @@
 
 namespace Boilerplate\Object;
 
+// Dependencies from `charcoal-city` module
 use City\Object\Event as CityEvent;
 
 /**
- * Class Event
+ * Event model
  */
 class Event extends CityEvent
 {

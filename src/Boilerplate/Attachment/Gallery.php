@@ -2,10 +2,13 @@
 
 namespace Boilerplate\Attachment;
 
+// Dependencies from `charcoal-city` module
+use City\Attachment\Gallery as CityGallery;
+
 /**
- * Class Text
+ * Gallery attachment
  */
-class Gallery extends \City\Attachment\Gallery
+class Gallery extends CityGallery
 {
     /**
      * @return string

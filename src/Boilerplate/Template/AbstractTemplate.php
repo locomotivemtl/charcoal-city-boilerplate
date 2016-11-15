@@ -19,7 +19,7 @@ use City\AbstractCityTemplate;
 use City\Support\Traits\SectionLoaderAwareTrait;
 
 /**
- * Class AbstractTemplate
+ * Abstract (base) template
  */
 abstract class AbstractTemplate extends AbstractCityTemplate implements
     SectionLoaderAwareInterface,

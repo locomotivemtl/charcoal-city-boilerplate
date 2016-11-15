@@ -2,11 +2,14 @@
 
 namespace Boilerplate\Template\News;
 
+// Module `charcoal-core` dependencies
 use Charcoal\Model\ModelInterface;
+
+
 use Boilerplate\Object\News;
 
 /**
- * Class EntryTemplate
+ * News entry template
  */
 class EntryTemplate extends IndexTemplate
 {

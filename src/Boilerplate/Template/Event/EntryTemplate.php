@@ -2,11 +2,14 @@
 
 namespace Boilerplate\Template\Event;
 
+// Module `charcoal-core` dependencies
 use Charcoal\Model\ModelInterface;
+
+// Local module dependencies
 use Boilerplate\Object\Event;
 
 /**
- * Class EntryTemplate
+ * Event entry template
  */
 class EntryTemplate extends IndexTemplate
 {

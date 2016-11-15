@@ -2,8 +2,11 @@
 
 namespace Boilerplate\Template;
 
+// Local module dependencies
+use Boilerplate\Template\AbstractTemplate;
+
 /**
- * Class GenericTemplate
+ * Generic template (fallback template)
  */
 class GenericTemplate extends AbstractTemplate
 {

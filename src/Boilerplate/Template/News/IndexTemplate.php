@@ -5,16 +5,16 @@ namespace Boilerplate\Template\News;
 // Pimple dependencies
 use Pimple\Container;
 
-// City dependencies
+// Module `charcoal-city` dependencies
 use City\Support\Interfaces\NewsManagerAwareInterface;
 use City\Support\Traits\DateHelperAwareTrait;
 use City\Support\Traits\NewsManagerAwareTrait;
 
-// local dependencies
+// Local module dependencies
 use Boilerplate\Template\AbstractTemplate;
 
 /**
- * Class IndexTemplate
+ * News index template (news list)
  */
 class IndexTemplate extends AbstractTemplate implements
     NewsManagerAwareInterface

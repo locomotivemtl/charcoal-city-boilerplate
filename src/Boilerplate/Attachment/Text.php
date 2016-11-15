@@ -2,10 +2,13 @@
 
 namespace Boilerplate\Attachment;
 
+// Dependencies from `charcoal-city` module
+use City\Attachment\Text as CityText;
+
 /**
- * Class Text
+ * Text attachment
  */
-class Text extends \City\Attachment\Text
+class Text extends CityText
 {
     /**
      * @return string

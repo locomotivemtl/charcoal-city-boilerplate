@@ -5,15 +5,18 @@ namespace Boilerplate\Template;
 // Pimple dependencies
 use Pimple\Container;
 
-// City dependencies
+// Module `charcoal-city` dependencies
 use City\Support\Interfaces\EventManagerAwareInterface;
 use City\Support\Interfaces\NewsManagerAwareInterface;
 use City\Support\Traits\DateHelperAwareTrait;
 use City\Support\Traits\EventManagerAwareTrait;
 use City\Support\Traits\NewsManagerAwareTrait;
 
+// Local module dependencies
+use Boilerplate\Template\AbstractTemplate;
+
 /**
- * Class HomeTemplate
+ * Home template
  */
 class HomeTemplate extends AbstractTemplate implements
     NewsManagerAwareInterface,

@@ -2,10 +2,11 @@
 
 namespace Boilerplate\Object;
 
+// Dependencies from `charcoal-city` module
 use City\Object\Section as CitySection;
 
 /**
- * Class News
+ * Section model
  */
 class Section extends CitySection
 {
