@@ -25,6 +25,7 @@ use Psr\Log\NullLogger;
 class ConfigScript extends AbstractScript
 {
     use KeyNormalizerTrait;
+
     /**
      * @var string $dbName The database name.
      */

@@ -14,10 +14,13 @@ www/uploads/*
 *.log
 error_log
 logs/
+www/error_log
+www/charcoal.app.log
 
 # Caches
 
 mustache_cache/
+www/mustache_cache/
 tmp/
 
 # Package Managers
