@@ -84,7 +84,6 @@
         "charcoal/model/service-provider/model": {},
         "charcoal/admin/service-provider/admin": {},
         "charcoal/ui/service-provider/ui": {},
-        "city/service-provider/city": {},
-        "city/": {}
+        "city/service-provider/city": {}
     }
 }
