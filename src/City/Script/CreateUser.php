@@ -66,7 +66,7 @@ class CreateUser
 
         // Create the admin user
         exec(sprintf(
-            'vendor\\bin\\charcoal admin/user/create -u %s -e %s -p %s -r admin 2>&1',
+            'vendor'.DIRECTORY_SEPARATOR.'bin'.DIRECTORY_SEPARATOR.'charcoal admin/user/create -u %s -e %s -p %s -r admin 2>&1',
             $userName,
             $userEmail,
             $userPassword
