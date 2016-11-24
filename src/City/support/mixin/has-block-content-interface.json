@@ -1,0 +1,49 @@
+{
+    "admin": {
+        "forms": {
+            "default": {
+                "groups": {
+                    "content": {
+                        "title": {
+                            "fr": "Contenu",
+                            "en": "Content"
+                        },
+                        "show_title": false,
+                        "show_header": false,
+                        "icon": "edit",
+                        "priority": 200,
+                        "type": "charcoal/admin/widget/form-group/attachment",
+                        "template": "charcoal/admin/widget/form-group/attachment",
+                        "group": "content",
+                        "show_attachment_preview": true,
+                        "show_attachment_heading": false,
+                        "attachable_objects": {
+                            "boilerplate/attachment/text": {
+                                "label": {
+                                    "fr": "Texte",
+                                    "en": "Text"
+                                }
+                            }, "boilerplate/attachment/image": {
+                                "label": {
+                                    "fr": "Image",
+                                    "en": "Image"
+                                }
+                            }, "boilerplate/attachment/gallery": {
+                                "label": {
+                                    "fr": "Gallerie",
+                                    "en": "Gallery"
+                                }
+                            },
+                            "boilerplate/attachment/video": {
+                                "label": {
+                                    "fr": "Vidéo",
+                                    "en": "Video"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
