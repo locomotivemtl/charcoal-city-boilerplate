@@ -26,7 +26,6 @@ abstract class AbstractTemplate extends AbstractCityTemplate implements
     BreadcrumbAwareInterface
 {
     use ParsableValueTrait;
-    use ManufacturableModelCollectionTrait;
     use SectionLoaderAwareTrait;
     use BreadcrumbAwareTrait;
 
