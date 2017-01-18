@@ -16,6 +16,9 @@ use \Charcoal\App\Script\AbstractScript;
 use \PDO;
 use Psr\Log\NullLogger;
 
+// From 'league/climate'
+use \League\CLImate\CLImate;
+
 /**
  * Config the current project
  *
@@ -98,6 +101,10 @@ class ComposerScript extends AbstractScript
         if (!isset($data['logger'])) {
             $data['logger'] = new NullLogger();
         }
+        if (!isset($data['climate'])) {
+            $data['climate'] = new CLImate();
+        }
+
 
         parent::__construct($data);
 

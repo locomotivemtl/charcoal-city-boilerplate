@@ -13,6 +13,9 @@ use \Psr\Http\Message\ResponseInterface;
 use \Charcoal\App\Script\AbstractScript;
 use Psr\Log\NullLogger;
 
+// From 'league/climate'
+use \League\CLImate\CLImate;
+
 /**
  * Renames the current module's name
  *
@@ -94,6 +97,9 @@ class RenameScript extends AbstractScript
     {
         if (!isset($data['logger'])) {
             $data['logger'] = new NullLogger();
+        }
+        if (!isset($data['climate'])) {
+            $data['climate'] = new CLImate();
         }
 
         parent::__construct($data);
