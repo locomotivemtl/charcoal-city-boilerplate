@@ -254,8 +254,8 @@ class ComposerScript extends AbstractScript
         }
         if ($repo) {
             $data['name']              = parse_url($repo, PHP_URL_PATH);
-            $data['support']['source'] = $repo;
-            $data['support']['issues'] = $repo.'/issues';
+            // $data['support']['source'] = $repo;
+            // $data['support']['issues'] = $repo.'/issues';
         }
         // Change the script called by composer create-project
         $data['scripts']['post-create-project-cmd'] = ['City\\Script\\SetupScript::start'];
