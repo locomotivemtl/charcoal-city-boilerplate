@@ -68,7 +68,8 @@
             "vendor/locomotivemtl/charcoal-email/metadata/",
             "vendor/locomotivemtl/charcoal-messaging/metadata/",
             "vendor/locomotivemtl/charcoal-property/metadata/",
-            "vendor/locomotivemtl/charcoal-base/metadata/",
+            "vendor/locomotivemtl/charcoal-object/metadata/",
+            "vendor/locomotivemtl/charcoal-user/metadata/",
             "vendor/beneroch/charcoal-utils/metadata/",
             "vendor/beneroch/charcoal-attachment/metadata/",
             "vendor/locomotivemtl/charcoal-city/metadata/"
