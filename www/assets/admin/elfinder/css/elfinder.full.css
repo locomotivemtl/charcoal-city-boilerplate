@@ -1,6 +1,6 @@
 /*!
  * elFinder - file manager for web
- * Version 2.1.15 (2016-09-12)
+ * Version 2.1.15 (2.1-src Nightly: a9753d8) (2016-09-28)
  * http://elfinder.org
  * 
  * Copyright 2009-2016, Studio 42
@@ -594,6 +594,19 @@ div.elfinder-cwd-wrapper-list tr.ui-state-default td span.ui-icon {
 	content:attr(data-ph);
 }
 
+/* bottom tray */
+.elfinder div.elfinder-bottomtray {
+	position: fixed;
+	bottom: 0;
+	max-width:100%;
+	opacity: .8;
+}
+.elfinder.elfinder-ltr div.elfinder-bottomtray {
+	left: 0;
+}
+.elfinder.elfinder-rtl div.elfinder-bottomtray {
+	right: 0;
+}
 
 /* File: /css/contextmenu.css */
 /* menu and submenu */
@@ -958,6 +971,16 @@ div.elfinder-cwd-wrapper-list tr.ui-state-default td span.ui-icon {
 .elfinder-cwd .elfinder-navbar-root-googledrive.elfinder-droppable-active .elfinder-cwd-icon {
 	background-position:1px -1px;
 }
+.elfinder-navbar-root-network .elfinder-cwd-icon,
+.elfinder-cwd .elfinder-navbar-root-network.elfinder-droppable-active .elfinder-cwd-icon,
+.elfinder-cwd-view-list .elfinder-navbar-root-network td .elfinder-cwd-icon  {
+	background-image:url("../img/toolbar.png");
+	background-position: 0 86%;
+	background-size: cover;
+}
+.elfinder-cwd .elfinder-navbar-root-network.elfinder-droppable-active .elfinder-cwd-icon {
+	background-position:1px -1px;
+}
 
 /* thumbnail image */
 .elfinder-cwd-icon.elfinder-cwd-bgurl {
@@ -1304,6 +1327,14 @@ tr.elfinder-cwd-file td .elfinder-cwd-select {
 	left:auto;
 	right:auto;
 }
+.std42-dialog.elfinder-dialog-minimized {
+	overFlow: hidden;
+	position: relative;
+	float: left;
+}
+.elfinder-rtl .std42-dialog.elfinder-dialog-minimized {
+	float: right;
+}
 
 /* titlebar */
 .std42-dialog .ui-dialog-titlebar {
@@ -1319,18 +1350,91 @@ tr.elfinder-cwd-file td .elfinder-cwd-select {
 	font-weight:normal;
 	padding:.2em 1em;
 }
+.std42-dialog.elfinder-dialog-minimized .ui-dialog-titlebar {
+	padding: 0 .5em;
+	height: 20px;
+}
+.elfinder-touch .std42-dialog.elfinder-dialog-minimized .ui-dialog-titlebar {
+	padding:.3em .5em;
+}
+.std42-dialog.ui-draggable-disabled .ui-dialog-titlebar {
+	cursor: default;
+}
 
 .std42-dialog .ui-dialog-titlebar .ui-widget-header {
 	border : none;
 	cursor: pointer;
 }
 
-.ui-dialog .ui-dialog-titlebar-close.elfinder-titlebar-full {
-	right: 2em;
+.std42-dialog .ui-dialog-titlebar span.elfinder-dialog-title {
+	display: inline-block;
+	overflow: hidden;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	max-width: 100%;
+}
+.std42-dialog.elfinder-dialog-minimized .ui-dialog-titlebar span.elfinder-dialog-title {
+	max-width: -webkit-calc(100% - 26px);
+	max-width: -moz-calc(100% - 26px);
+	max-width: calc(100% - 26px);
+	white-space: nowrap;
+	word-wrap: normal;
+	overflow-wrap: normal;
+}
+
+.std42-dialog .ui-dialog-titlebar .elfinder-titlebar-button {
+	position: relative;
+	float: left;
+	top: 10px;
+	left: -10px;
+	right: 10px;
+	width: 20px;
+	height: 20px;
+	padding:1px;
+	margin: -10px 1px 0 1px;
+	background-color: transparent;
+	background-image: none;
+}
+.elfinder-touch .std42-dialog:not(.elfinder-dialog-minimized) .ui-dialog-titlebar .elfinder-titlebar-button {
+	transform: scale(1.2);
+	zoom: 1.2;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+.std42-dialog .ui-dialog-titlebar .elfinder-titlebar-button.elfinder-titlebar-button-right {
+	float: right;
+	left: 10px;
+	right: -10px;
+}
+.std42-dialog .ui-dialog-titlebar .elfinder-titlebar-button .ui-icon {
+	width: 17px;
+	height: 17px;
+	border-width: 1px;
+	border-color: transparent;
+	opacity: .8;
+	filter:Alpha(Opacity=80);
+	-moz-border-radius: 8px; 
+	-webkit-border-radius: 8px; 
+	border-radius: 8px;
+}
+.std42-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:hover .ui-icon,
+.elfinder-mobile .std42-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon {
+	background-color: #ff6252;
+	border-color: #e5695d;
+}
+.std42-dialog .ui-dialog-titlebar .elfinder-titlebar-minimize:hover .ui-icon,
+.elfinder-mobile .std42-dialog .ui-dialog-titlebar .elfinder-titlebar-minimize .ui-icon {
+	background-color: #ffbc00;
+	border-color: #e3a40b;
+}
+.std42-dialog .ui-dialog-titlebar .elfinder-titlebar-full:hover .ui-icon,
+.elfinder-mobile .std42-dialog .ui-dialog-titlebar .elfinder-titlebar-full .ui-icon {
+	background-color: #26c82f;
+	border-color: #13ae10;
 }
 
 /* resize handle for touch devices */
-.elfinder-touch .std42-dialog.ui-dialog .ui-resizable-se {
+.elfinder-touch .std42-dialog.ui-dialog:not(ui-resizable-disabled) .ui-resizable-se {
 	width: 12px;
 	height: 12px;
 	zoom: 1.5;
@@ -1340,23 +1444,19 @@ tr.elfinder-cwd-file td .elfinder-cwd-select {
 	background-position: -64px -224px;
 }
 
-.std42-dialog .ui-dialog-titlebar-close,
-.std42-dialog .ui-dialog-titlebar-close:hover { padding:1px; }
-
 .elfinder-rtl .elfinder-dialog .ui-dialog-titlebar { text-align:right; }
-.elfinder-rtl .elfinder-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close { right:auto; left:.3em; }
 
 /* content */
 .std42-dialog .ui-dialog-content {
 	padding:.3em .5em;
 	box-sizing: border-box;
 }
-.std42-dialog .ui-dialog-content,
-.std42-dialog .ui-dialog-content * {
-	-webkit-user-select:  auto !important;
-	-moz-user-select:     text !important;
-	-khtml-user-select:   text !important;
-	user-select:          text !important;
+.elfinder .std42-dialog .ui-dialog-content,
+.elfinder .std42-dialog .ui-dialog-content * {
+	-webkit-user-select:  auto;
+	-moz-user-select:     text;
+	-khtml-user-select:   text;
+	user-select:          text;
 }
 
 /* buttons */
@@ -2192,6 +2292,15 @@ embed.elfinder-quicklook-preview-audio {
 .elfinder-quicklook-preview-video {
 	width:100%;
 	height:100%;
+}
+
+/* allow user select */
+.elfinder .elfinder-quicklook .elfinder-quicklook-info *,
+.elfinder .elfinder-quicklook .elfinder-quicklook-preview * {
+	-webkit-user-select:  auto;
+	-moz-user-select:     text;
+	-khtml-user-select:   text;
+	user-select:          text;
 }
 
 /* File: /css/statusbar.css */
