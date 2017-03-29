@@ -27,11 +27,11 @@ usable tags from News object (inside tag currentNews):
 
 --}}
 
-{{>city/partial/site/header}}
+{{>boilerplate/partial/site/header}}
 
-{{>city/partial/site/nav}}
+{{>boilerplate/partial/site/nav}}
 
-{{>city/partial/site/breadcrumb}}
+{{>boilerplate/partial/site/breadcrumb}}
 
 {{# currentNews }}
 
@@ -45,13 +45,13 @@ usable tags from News object (inside tag currentNews):
         <li>image: {{ image }}</li>
         <li>date: {{ date }}</li>
         {{# hasContentBlocks }}
-            {{> city/partial/content-blocks }}
+            {{> boilerplate/partial/content-blocks }}
         {{/ hasContentBlocks }}
         {{# hasDocuments }}
-            {{> city/partial/attachments/ressources }}
+            {{> boilerplate/partial/attachments/ressources }}
         {{/ hasDocuments }}
         {{# hasGallery }}
-            {{> city/partial/attachments/image-gallery }}
+            {{> boilerplate/partial/attachments/image-gallery }}
         {{/ hasGallery }}
         <li><a href="{{ url }}">{{ url }}</a></li>
         <li>{{ metaTitle }}</li>
@@ -78,4 +78,4 @@ usable tags from News object (inside tag currentNews):
     </ul>
 {{/ currentNews }}
 
-{{>city/partial/site/footer}}
+{{>boilerplate/partial/site/footer}}
