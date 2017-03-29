@@ -32,14 +32,14 @@
         "user_menu": {},
         "header_menu": {
             "items": {
-                "section": {
+                "content": {
                     "active": true,
                     "label": {
                         "en": "Contents",
                         "fr": "Contenus"
                     },
                     "icon": "contents",
-                    "url": "object/collection?main_menu=section&obj_type=boilerplate/object/section",
+                    "url": "object/collection?main_menu=content&obj_type=boilerplate/object/section",
                     "has_children": false
                 },
                 "map": {
@@ -68,11 +68,11 @@
                     "url": "media?main_menu=media",
                     "has_children": false
                 },
-                "configuration": {
+                "options": {
                     "active": true,
                     "label": "Options",
                     "icon": "config",
-                    "url": "object/edit?main_menu=configuration&obj_type=city/object/config&obj_id=1",
+                    "url": "object/edit?main_menu=options&obj_type=boilerplate/object/config&obj_id=1",
                     "has_children": false
                 }
             }
@@ -90,28 +90,28 @@
                 "links": {
                     "boilerplate/object/section": {
                         "name": "Sections",
-                        "url": "object/collection?main_menu=section&obj_type=boilerplate/object/section"
+                        "url": "object/collection?main_menu=content&obj_type=boilerplate/object/section"
                     },
                     "boilerplate/object/news": {
                         "name": {
                             "en": "News",
                             "fr": "Nouvelles"
                         },
-                        "url": "object/collection?main_menu=section&obj_type=boilerplate/object/news"
+                        "url": "object/collection?main_menu=content&obj_type=boilerplate/object/news"
                     },
                     "boilerplate/object/event": {
                         "name": {
                             "en": "Events",
                             "fr": "Évènements"
                         },
-                        "url": "object/collection?main_menu=section&obj_type=boilerplate/object/event"
+                        "url": "object/collection?main_menu=content&obj_type=boilerplate/object/event"
                     },
                     "city/object/team-member": {
                         "name": {
                             "en": "Team",
                             "fr": "Équipe"
                         },
-                        "url": "object/collection?main_menu=section&obj_type=city/object/team-member"
+                        "url": "object/collection?main_menu=content&obj_type=city/object/team-member"
                     }
                 },
                 "groups": {
@@ -127,21 +127,21 @@
                                     "en": "News",
                                     "fr": "Nouvelles"
                                 },
-                                "url": "object/collection?main_menu=section&obj_type=city/object/news-category"
+                                "url": "object/collection?main_menu=content&obj_type=city/object/news-category"
                             },
                             "city/object/event-category": {
                                 "name": {
                                     "en": "Events",
                                     "fr": "Évènements"
                                 },
-                                "url": "object/collection?main_menu=section&obj_type=city/object/event-category"
+                                "url": "object/collection?main_menu=content&obj_type=city/object/event-category"
                             },
                             "city/object/team-category": {
                                 "name": {
                                     "en": "Team",
                                     "fr": "Équipe"
                                 },
-                                "url": "object/collection?main_menu=section&obj_type=city/object/team-category"
+                                "url": "object/collection?main_menu=content&obj_type=city/object/team-category"
                             }
                         }
                     }
@@ -196,19 +196,19 @@
             "options": {
                 "title": "Options",
                 "links": {
-                    "city/object/config": {
+                    "boilerplate/object/config": {
                         "name": {
                             "en": "Configuration",
                             "fr": "Configuration"
                         },
-                        "url": "object/edit?main_menu=configuration&obj_type=city/object/config&obj_id=1"
+                        "url": "object/edit?main_menu=options&obj_type=boilerplate/object/config&obj_id=1"
                     },
-                    "city/object/author": {
+                    "city/object/user": {
                         "name": {
                             "en": "Authors",
                             "fr": "Auteurs"
                         },
-                        "url": "object/collection?main_menu=configuration&obj_type=city/object/author"
+                        "url": "object/collection?main_menu=options&obj_type=city/object/user"
                     }
                 }
             }

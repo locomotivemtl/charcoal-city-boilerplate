@@ -20,8 +20,8 @@ $this['base_path'] = dirname(__DIR__).'/';
 /** Import core settings */
 $this->addFile(__DIR__.'/admin.json');
 $this->addFile(__DIR__.'/config.json');
-$this->addFile(__DIR__.'/city.json');
-$this->addFile(__DIR__.'/date-formats.json');
+$this->addFile(__DIR__.'/attachments.json');
+$this->addFile(__DIR__.'/cms.json');
 $this->addFile(__DIR__.'/templates.json');
 
 // Load routes

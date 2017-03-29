@@ -6,7 +6,7 @@
                 "en": "Generic",
                 "fr": "Générique"
             },
-            "template": "city/template/generic",
+            "template": "boilerplate/template/generic",
             "controller": "\\Boilerplate\\Template\\Generic"
         },
         {
@@ -15,7 +15,7 @@
                 "en": "Front Page",
                 "fr": "Page d'accueil"
             },
-            "template": "city/template/home",
+            "template": "boilerplate/template/home",
             "controller": "\\Boilerplate\\Template\\Home"
         },
         {
@@ -24,7 +24,7 @@
                 "en": "News List",
                 "fr": "Liste des actualités"
             },
-            "template": "city/template/news/index",
+            "template": "boilerplate/template/news/index",
             "controller": "\\Boilerplate\\Template\\News\\Index"
         },
         {
@@ -33,7 +33,7 @@
                 "en": "News",
                 "fr": "Actualité"
             },
-            "template": "city/template/news/entry",
+            "template": "boilerplate/template/news/entry",
             "controller": "\\Boilerplate\\Template\\News\\Entry"
         },
         {
@@ -42,7 +42,7 @@
                 "en": "Events List",
                 "fr": "Liste des Événements"
             },
-            "template": "city/template/event/index",
+            "template": "boilerplate/template/event/index",
             "controller": "\\Boilerplate\\Template\\Event\\Index"
         },
         {
@@ -51,7 +51,7 @@
                 "en": "Event",
                 "fr": "Événement"
             },
-            "template": "city/template/event/entry",
+            "template": "boilerplate/template/event/entry",
             "controller": "\\Boilerplate\\Template\\Event\\Entry"
         },
         {

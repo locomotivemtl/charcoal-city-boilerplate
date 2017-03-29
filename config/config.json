@@ -28,19 +28,32 @@
     "locales": {
         "languages": {
             "fr": {
-                "locale": "fr-FR"
+                "locale": "fr_FR.utf8",
+                "name": {
+                    "fr": "Français",
+                    "en": "French"
+                }
             },
             "en": {
-                "locale": "en-US"
+                "locale": "en-US",
+                "name": {
+                    "fr": "Anglais",
+                    "en": "English"
+                }
             }
         },
         "default_language": "fr"
     },
 
-    "translations": {
+    "translator": {
+        "loaders": [
+            "csv"
+        ],
         "paths": [
-            "translations/city/",
-            "vendor/locomotivemtl/charcoal-app/translations/charcoal/app/"
+            "translations/",
+            "vendor/beneroch/charcoal-attachment/translations/",
+            "vendor/locomotivemtl/charcoal-app/translations/",
+            "vendor/locomotivemtl/charcoal-admin/translations/"
         ]
     },
 
@@ -61,6 +74,8 @@
     "metadata": {
         "paths": [
             "metadata/",
+            "vendor/beneroch/charcoal-utils/metadata/",
+            "vendor/beneroch/charcoal-attachment/metadata/",
             "vendor/mcaskill/charcoal-support/metadata/",
             "vendor/locomotivemtl/charcoal-cms/metadata/",
             "vendor/locomotivemtl/charcoal-admin/metadata/",
@@ -70,8 +85,6 @@
             "vendor/locomotivemtl/charcoal-property/metadata/",
             "vendor/locomotivemtl/charcoal-object/metadata/",
             "vendor/locomotivemtl/charcoal-user/metadata/",
-            "vendor/beneroch/charcoal-utils/metadata/",
-            "vendor/beneroch/charcoal-attachment/metadata/",
             "vendor/locomotivemtl/charcoal-city/metadata/"
         ]
     },
@@ -81,10 +94,11 @@
     },
 
     "service_providers": {
+        "charcoal/translator/service-provider/translator": {},
         "charcoal/email/service-provider/email": {},
         "charcoal/model/service-provider/model": {},
         "charcoal/admin/service-provider/admin": {},
         "charcoal/ui/service-provider/ui": {},
-        "city/service-provider/city": {}
+        "charcoal/cms/service-provider/cms": {}
     }
 }
