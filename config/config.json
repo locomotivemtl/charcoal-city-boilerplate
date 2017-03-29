@@ -68,7 +68,7 @@
             "vendor/locomotivemtl/charcoal-app/templates/"
         ],
         "default_engine": "mustache",
-        "default_controller": "\\City\\Template\\Generic"
+        "default_controller": "\\Boilerplate\\Template\\Generic"
     },
 
     "metadata": {
