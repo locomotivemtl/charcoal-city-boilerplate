@@ -1,24 +1,23 @@
 <?php
 
-namespace Boilerplate\Template\Event;
+namespace Boilerplate\Template;
 
 // Module `charcoal-core` dependencies
 use Charcoal\Model\ModelInterface;
 
-// Local module dependencies
-use Boilerplate\Object\Event;
+use Boilerplate\Object\News;
 
 /**
- * Event entry template
+ * News entry template
  */
-class EntryTemplate extends IndexTemplate
+class NewsDetailsTemplate extends NewsListTemplate
 {
     /**
      * @return string
      */
     public function templateIdent()
     {
-        return 'event-entry';
+        return 'news-entry';
     }
 
     // ==========================================================================
@@ -33,9 +32,9 @@ class EntryTemplate extends IndexTemplate
      */
     public function setContextObject(ModelInterface $context)
     {
-        if ($context instanceof Event) {
-            $this->eventManager()->setCurrentEvent($context);
-            $this->setSection($this->sectionFromSlug('/fr/evenements'));
+        if ($context instanceof News) {
+            $this->newsManager()->setCurrentNews($context);
+            $this->setSection($this->sectionFromSlug('/fr/actualite'));
         }
 
         parent::setContextObject($context);

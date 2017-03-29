@@ -1,6 +1,6 @@
 <?php
 
-namespace Boilerplate\Template\News;
+namespace Boilerplate\Template;
 
 // Pimple dependencies
 use Pimple\Container;
@@ -16,7 +16,7 @@ use Boilerplate\Template\AbstractTemplate;
 /**
  * News index template (news list)
  */
-class IndexTemplate extends AbstractTemplate implements
+class NewsListTemplate extends AbstractTemplate implements
     NewsManagerAwareInterface
 {
     use NewsManagerAwareTrait;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Boilerplate\Template\Event;
+namespace Boilerplate\Template;
 
 // Pimple dependencies
 use Pimple\Container;
@@ -14,9 +14,9 @@ use Charcoal\Cms\Support\Traits\EventManagerAwareTrait;
 use Boilerplate\Template\AbstractTemplate;
 
 /**
- * Event index template (event list)
+ * Event list template
  */
-class IndexTemplate extends AbstractTemplate implements
+class EventListTemplate extends AbstractTemplate implements
     EventManagerAwareInterface
 {
     use EventManagerAwareTrait;

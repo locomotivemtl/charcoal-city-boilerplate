@@ -40,19 +40,6 @@ class News extends AbstractNews implements
     // ==========================================================================
 
     /**
-     * Section constructor.
-     * @param array $data The data.
-     */
-    public function __construct(array $data = null)
-    {
-        parent::__construct($data);
-
-        if (is_callable([$this, 'defaultData'])) {
-            $this->setData($this->defaultData());
-        }
-    }
-
-    /**
      * @param Container $container Pimple/Container.
      * @return void
      */
@@ -70,7 +57,7 @@ class News extends AbstractNews implements
      */
     public function templateIdent()
     {
-        return 'boilerplate/template/news/entry';
+        return 'boilerplate/template/news-details';
     }
 
     // ==========================================================================

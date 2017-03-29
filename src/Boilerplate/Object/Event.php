@@ -95,6 +95,16 @@ class Event extends AbstractEvent implements
         $this->setCollectionLoader($container['model/collection/loader']);
     }
 
+    /**
+     * Defines the mustache template for the view.
+     *
+     * @return string
+     */
+    public function templateIdent()
+    {
+        return 'boilerplate/template/event-details';
+    }
+
     // ==========================================================================
     // FUNCTIONS
     // ==========================================================================
