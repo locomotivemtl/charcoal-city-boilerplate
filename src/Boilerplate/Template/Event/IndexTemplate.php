@@ -5,10 +5,10 @@ namespace Boilerplate\Template\Event;
 // Pimple dependencies
 use Pimple\Container;
 
-// Module `charcoal-city` dependencies
-use City\Support\Interfaces\EventManagerAwareInterface;
-use City\Support\Traits\DateHelperAwareTrait;
-use City\Support\Traits\EventManagerAwareTrait;
+// Module `charcoal-cms` dependencies
+use Charcoal\Cms\Support\Interfaces\EventManagerAwareInterface;
+use Charcoal\Cms\Support\Traits\DateHelperAwareTrait;
+use Charcoal\Cms\Support\Traits\EventManagerAwareTrait;
 
 // Local module dependencies
 use Boilerplate\Template\AbstractTemplate;
@@ -42,7 +42,7 @@ class IndexTemplate extends AbstractTemplate implements
     {
         parent::setDependencies($container);
 
-        $this->setEventManager($container['city/event/manager']);
+        $this->setEventManager($container['cms/event/manager']);
         $this->setDateHelper($container['date/helper']);
     }
 }

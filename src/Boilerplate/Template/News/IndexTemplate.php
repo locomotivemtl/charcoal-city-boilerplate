@@ -6,9 +6,9 @@ namespace Boilerplate\Template\News;
 use Pimple\Container;
 
 // Module `charcoal-city` dependencies
-use City\Support\Interfaces\NewsManagerAwareInterface;
-use City\Support\Traits\DateHelperAwareTrait;
-use City\Support\Traits\NewsManagerAwareTrait;
+use Charcoal\Cms\Support\Interfaces\NewsManagerAwareInterface;
+use Charcoal\Cms\Support\Traits\DateHelperAwareTrait;
+use Charcoal\Cms\Support\Traits\NewsManagerAwareTrait;
 
 // Local module dependencies
 use Boilerplate\Template\AbstractTemplate;
@@ -42,7 +42,7 @@ class IndexTemplate extends AbstractTemplate implements
     {
         parent::setDependencies($container);
 
-        $this->setNewsManager($container['city/news/manager']);
+        $this->setNewsManager($container['cms/news/manager']);
         $this->setDateHelper($container['date/helper']);
     }
 }

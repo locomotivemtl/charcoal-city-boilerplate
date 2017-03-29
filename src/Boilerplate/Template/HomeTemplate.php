@@ -5,12 +5,12 @@ namespace Boilerplate\Template;
 // Pimple dependencies
 use Pimple\Container;
 
-// Module `charcoal-city` dependencies
-use City\Support\Interfaces\EventManagerAwareInterface;
-use City\Support\Interfaces\NewsManagerAwareInterface;
-use City\Support\Traits\DateHelperAwareTrait;
-use City\Support\Traits\EventManagerAwareTrait;
-use City\Support\Traits\NewsManagerAwareTrait;
+// Module `charcoal-cms` dependencies
+use Charcoal\Cms\Support\Interfaces\EventManagerAwareInterface;
+use Charcoal\Cms\Support\Traits\EventManagerAwareTrait;
+use Charcoal\Cms\Support\Interfaces\NewsManagerAwareInterface;
+use Charcoal\Cms\Support\Traits\NewsManagerAwareTrait;
+use Charcoal\Cms\Support\Traits\DateHelperAwareTrait;
 
 // Local module dependencies
 use Boilerplate\Template\AbstractTemplate;
@@ -46,8 +46,8 @@ class HomeTemplate extends AbstractTemplate implements
     {
         parent::setDependencies($container);
 
-        $this->setNewsManager($container['city/news/manager']);
-        $this->setEventManager($container['city/event/manager']);
+        $this->setNewsManager($container['cms/news/manager']);
+        $this->setEventManager($container['cms/event/manager']);
         $this->setDateHelper($container['date/helper']);
     }
 }
