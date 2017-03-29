@@ -1,56 +1,38 @@
 {
-    "admin": {
-        "lists": {
-            "default": {
-                "list_actions": [
-                    {
-                        "label": {
-                            "fr": "Nouvelle actualité",
-                            "en": "Add a news"
-                        },
-                        "ident": "create",
-                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/news"
-                    }
-                ],
-                "object_actions": {
-                    "edit": {
-                        "label": {
-                            "en": "Modify",
-                            "fr": "Modifier"
-                        },
-                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/news&obj_id={{id}}",
-                        "priority": 1
-                    },
-                    "view": {
-                        "label": {
-                            "en": "Go to page",
-                            "fr": "Voir l'article"
-                        },
-                        "url": "{{baseUrl}}{{url}}",
-                        "priority": 2
-                    },
-                    "copy": {
-                        "label": {
-                            "en": "Clone",
-                            "fr": "Cloner"
-                        },
-                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/news&clone_id={{id}}",
-                        "priority": 3
-                    },
-                    "delete": {
-                        "label": {
-                            "en": "Delete",
-                            "fr": "Supprimer"
-                        },
-                        "priority": 4
-                    }
-                }
+    "properties": {
+        "category": {
+            "obj_type": "city/object/news-category"
+        },
+        "summary": {
+            "type": "text",
+            "input_type": "charcoal/admin/property/input/textarea",
+            "rows": 10,
+            "input_class": "u-resize-vertical"
+        },
+        "alert": {
+            "type": "boolean",
+            "label": {
+                "fr": "Afficher en tant qu'alerte",
+                "en": "Display as an alert"
             }
         },
+        "slug": {
+            "description": {
+                "en": "The part of the url that point to the article on the site",
+                "fr": "La partie du url qui pointe vers cet article"
+            },
+            "notes": {
+                "en": "Will be automatically generated if blank",
+                "fr": "Sera généré automatiquement si laissé vide"
+            }
+        }
+    },
+    "admin": {
+        "lists": {},
         "forms": {
-            "default": {
+            "cms.default": {
                 "groups": {
-                    "info_content": {
+                    "info": {
                         "title": "Info",
                         "show_title": false,
                         "show_header": false,
@@ -58,23 +40,53 @@
                         "properties": [
                             "title",
                             "summary",
-                            "content",
                             "image"
                         ],
-                        "active": false,
                         "priority": 10
                     },
-                    "info_no_content": {
-                        "title": "Info",
+                    "cms.content-blocks": {
+                        "group": "content",
+                        "priority": 200
+                    },
+                    "advanced": {
+                        "title": "Options",
                         "show_title": false,
                         "show_header": false,
-                        "icon": "info",
+                        "icon": "cog",
+                        "layout": {
+                            "structure": [
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1, 1, 1]},
+                                {"columns": [1, 1, 1]}
+                            ]
+                        },
                         "properties": [
-                            "title",
-                            "summary",
-                            "image"
+                            "category",
+                            "news_date",
+                            "publish_date",
+                            "expiry_date",
+                            "slug",
+                            "alert",
+                            "active"
                         ],
-                        "priority": 10
+                        "priority": 500
+                    },
+                    "cms.meta": {
+                        "priority": 1000
+                    },
+                    "cms.revisions": {
+                        "priority": 8000
+                    }
+                },
+                "sidebars": {
+                    "default": {
+                        "properties": [
+                            "created",
+                            "created_by",
+                            "last_modified",
+                            "last_modified_by"
+                        ]
                     }
                 }
             }
@@ -86,7 +98,6 @@
                         "priority": 10,
                         "type": "charcoal/admin/widget/objectForm",
                         "form_ident": "default",
-                        "obj_type": "boilerplate/object/news",
                         "group_display_mode": "tab"
                     }
                 }
@@ -95,8 +106,7 @@
                 "widgets": {
                     "form": {
                         "type": "charcoal/admin/widget/table",
-                        "collection_ident": "default",
-                        "obj_type": "boilerplate/object/news"
+                        "collection_ident": "default"
                     }
                 }
             }

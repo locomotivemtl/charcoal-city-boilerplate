@@ -1,0 +1,185 @@
+{
+    "properties": {
+        "id": {
+            "type": "id"
+        },
+        "city": {
+            "label": {
+                "fr": "Ville",
+                "en": "City"
+            },
+            "l10n": true,
+            "type": "string"
+        },
+        "state": {
+            "label": {
+                "fr": "Province / État",
+                "en": "State / Province"
+            },
+            "l10n": true,
+            "type": "string"
+        },
+        "country": {
+            "label": {
+                "fr": "Pays",
+                "en": "Country"
+            },
+            "l10n": true,
+            "type": "string"
+        },
+        "home_news": {
+            "type": "object",
+            "input_type": "charcoal/admin/property/input/dual-select",
+            "obj_type": "boilerplate/object/news",
+            "multiple": true,
+            "orders": {
+                "position": {
+                    "property": "publish_date",
+                    "mode": "desc"
+                }
+            },
+            "dualselect_options": {
+                "searchable": true,
+                "sort": false,
+                "submitAllLeft": false,
+                "reorderable": true
+            },
+            "pattern": "{{ admin_date_filter}} - {{title}}",
+            "label": {
+                "en": "News on home page",
+                "fr": "Nouvelles à l'acceuil"
+            },
+            "description": {
+                "en": "",
+                "fr": ""
+            }
+        },
+        "home_events": {
+            "type": "object",
+            "input_type": "charcoal/admin/property/input/dual-select",
+            "obj_type": "boilerplate/object/event",
+            "multiple": true,
+            "orders": {
+                "position": {
+                    "property": "publish_date",
+                    "mode": "desc"
+                }
+            },
+            "dualselect_options": {
+                "searchable": true,
+                "sort": false,
+                "submitAllLeft": false,
+                "reorderable": true
+            },
+            "pattern": "{{ admin_date_filter }} - {{title}}",
+            "label": {
+                "en": "Events on home page",
+                "fr": "Événements à l'acceuil"
+            },
+            "description": {
+                "en": "",
+                "fr": ""
+            }
+        }
+    },
+    "key": "id",
+
+    "admin": {
+        "forms": {
+            "default": {
+                "label": "Configuration",
+                "groups": {
+                    "general": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1, 1]}
+                            ]
+                        },
+                        "title": {
+                            "en": "General",
+                            "fr": "Général"
+                        },
+                        "show_title": false,
+                        "icon": "wrench",
+                        "priority": 100,
+                        "properties": [
+                            "default_from_email",
+                            "city",
+                            "state",
+                            "country"
+                        ]
+                    },
+                    "featured": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "title": {
+                            "en": "Featured articles",
+                            "fr": "Articles en vedettes"
+                        },
+                        "show_title": false,
+                        "icon": "star",
+                        "priority": 200,
+                        "properties": [
+                            "home_news",
+                            "home_events"
+                        ]
+                    },
+                    "cms.sharer": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1, 1]},
+                                {"columns": [1, 1]}
+                            ]
+                        },
+                        "priority": 300
+                    },
+                    "cms.meta": {
+                        "priority": 400
+                    },
+                    "cms.revisions": {
+                        "priority": 8000
+                    }
+                },
+                "sidebars": {
+                    "action": {
+                        "permissions": {
+                            "footer": [
+                                "dev-footer"
+                            ]
+                        },
+                        "title": "Actions",
+                        "properties": [],
+                        "actions": {}
+                    }
+                }
+            }
+        },
+        "default_form": "default",
+
+        "dashboards": {
+            "admin.edit": {
+                "layout": {
+                    "structure": [
+                        {"columns": [1]}
+                    ]
+                },
+                "widgets": {
+                    "form": {
+                        "form_ident": "default",
+                        "request": "main_menu=options",
+                        "group_display_mode": "tab"
+                    }
+                }
+            }
+        }
+    }
+}
