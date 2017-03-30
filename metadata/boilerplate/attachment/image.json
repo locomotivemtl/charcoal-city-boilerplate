@@ -1,13 +1,115 @@
 {
+    "properties": {
+        "caption": {
+            "type": "text",
+            "input_type": "charcoal/admin/property/input/textarea",
+            "rows": "4",
+            "l10n": true,
+            "label": {
+                "en": "Caption",
+                "fr": "Légende"
+            },
+            "description": {
+                "en": "image's caption",
+                "fr": "Légende de l'image"
+            }
+        },
+        "caption_title": {
+            "type": "string",
+            "l10n": true,
+            "label": {
+                "en": "Caption Title",
+                "fr": "Titre de Légende"
+            },
+            "description": {
+                "en": "image's caption",
+                "fr": "Légende de l'image"
+            }
+        },
+        "title": {
+            "label": {
+                "en": "Title",
+                "fr": "Titre"
+            }
+        }
+    },
+
     "default_data": {
         "type": "boilerplate/attachment/image",
         "preview": "{{> city/partial/attachments/image }}"
     },
+
     "admin": {
+        "forms": {
+            "quick": {
+                "group_display_mode": "tab",
+                "groups": {
+                    "main": {
+                        "priority": 100,
+                        "icon": "info",
+                        "show_title": false,
+                        "show_header": false,
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "title": "Infos",
+                        "properties": [
+                            "title",
+                            "active",
+                            "caption_title",
+                            "caption",
+                            "file"
+                        ]
+                    }
+                }
+            },
+            "full": {
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [2]},
+                                {"columns": [2]},
+                                {"columns": [2]},
+                                {"columns": [2]},
+                                {"columns": [2]}
+                            ]
+                        },
+                        "title": {
+                            "fr": "Image",
+                            "en": "Image"
+                        },
+                        "properties": [
+                            "title",
+                            "active",
+                            "file",
+                            "caption_title",
+                            "caption"
+                        ]
+                    }
+                },
+                "sidebars": {
+                    "action": {
+                        "title": "Actions",
+                        "properties": [],
+                        "actions": {}
+                    }
+                }
+            }
+        },
         "dashboards": {
             "edit": {
                 "widgets": {
                     "form": {
+                        "type": "charcoal/admin/widget/objectForm",
+                        "form_ident": "full",
                         "obj_type": "boilerplate/object/attachment/image"
                     }
                 }

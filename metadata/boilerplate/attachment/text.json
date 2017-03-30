@@ -1,20 +1,69 @@
 {
     "default_data": {
         "type": "boilerplate/attachment/text",
-        "preview": "{{> city/partial/attachments/text }}"
-    },
-
-    "data": {
-        "type": "boilerplate/attachment/text"
+        "preview": "{{> boilerplate/partial/attachments/text }}"
     },
 
     "properties": {
         "description": {
+            "label": {
+                "en": "Content",
+                "fr": "Contenu"
+            },
             "input_type": "charcoal/admin/property/input/tinymce/content"
         }
     },
 
     "admin": {
+        "forms": {
+            "quick": {
+                "l10n_mode": "loop_inputs",
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "title": null,
+                        "properties": [
+                            "title",
+                            "active",
+                            "description"
+                        ]
+                    }
+                }
+            },
+            "full": {
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "title": {
+                            "fr": "Texte",
+                            "en": "Text"
+                        },
+                        "properties": [
+                            "title",
+                            "active",
+                            "description"
+                        ]
+                    }
+                },
+                "sidebars": {
+                    "action": {
+                        "title": "Actions",
+                        "properties": [],
+                        "actions": {}
+                    }
+                }
+            }
+        },
         "dashboards": {
             "admin.table": {
                 "widgets": {
@@ -26,6 +75,8 @@
             "admin.edit": {
                 "widgets": {
                     "form": {
+                        "type": "charcoal/admin/widget/objectForm",
+                        "form_ident": "full",
                         "obj_type": "boilerplate/object/attachment/text"
                     }
                 }

@@ -1,13 +1,80 @@
 {
+    "properties": {
+        "title": {
+            "label": {
+                "en": "Identifier",
+                "fr": "Identifiant"
+            }
+        }
+    },
+
     "default_data": {
         "type": "boilerplate/attachment/video",
         "preview": "{{> city/partial/attachments/video }}"
     },
+
     "admin": {
+        "forms": {
+            "quick": {
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "title": null,
+                        "properties": [
+                            "title",
+                            "active",
+                            "embed"
+                        ]
+                    }
+                }
+            },
+            "full": {
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [2]},
+                                {"columns": [2]},
+                                {"columns": [2]},
+                                {"columns": [2]},
+                                {"columns": [2]}
+                            ]
+                        },
+                        "title": {
+                            "fr": "Vidéo",
+                            "en": "Video"
+                        },
+                        "properties": [
+                            "title",
+                            "active",
+                            "embed"
+                        ]
+                    }
+                },
+                "sidebars": {
+                    "action": {
+                        "title": "Actions",
+                        "properties": [],
+                        "actions": {}
+                    }
+                }
+            }
+        },
         "dashboards": {
             "edit": {
                 "widgets": {
                     "form": {
+                        "type": "charcoal/admin/widget/objectForm",
+                        "form_ident": "full",
                         "obj_type": "boilerplate/object/attachment/video"
                     }
                 }

@@ -1,22 +1,22 @@
 {
     "attachable_objects": {
         "cms.content-blocks": {
-            "city/attachment/text": {
+            "boilerplate/attachment/text": {
                 "label": {
                     "fr": "Texte",
                     "en": "Text"
                 }
-            }, "city/attachment/image": {
+            }, "boilerplate/attachment/image": {
                 "label": {
                     "fr": "Image",
                     "en": "Image"
                 }
-            }, "city/attachment/gallery": {
+            }, "boilerplate/attachment/gallery": {
                 "label": {
                     "fr": "Gallerie",
                     "en": "Gallery"
                 }
-            }, "city/attachment/video": {
+            }, "boilerplate/attachment/video": {
                 "label": {
                     "fr": "Vidéo",
                     "en": "Video"
