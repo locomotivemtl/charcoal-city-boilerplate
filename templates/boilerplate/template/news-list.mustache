@@ -1,0 +1,123 @@
+{{!--
+
+News index template
+===================
+
+usable tags from index section (inside tag section):
+
+| TAG         | DESCRIPTION                                     | TYPE              |
+| ----        | ----                                            | ----              |
+| title       | The title                                       | TranslationString |
+| newsList    | The list of news                                | Collection        |
+| numPages    | The number of pages                             | Integer           |
+| hasPager    | Is there a pager                                | Boolean           |
+| currentPage | The current page                                | integer           |
+| currentNews | The current news if news are displayed in index | News              |
+| nextNews    | The next news                                   | News              |
+| prevNews    | The previous news                               | News              |
+
+usable tags from News object (inside tag newsList, nextNews, prevNews):
+
+| TAG                       | DESCRIPTION                  | TYPE              |
+| ----                      | ----                         | ----              |
+| title                     | The news title               | TranslationString |
+| date                      | The formatted date           | TranslationString |
+| url                       | The news url                 | TranslationString |
+| active (only in newsList) | Is the news currently active | boolean           |
+
+usable tags from News object (inside tag currentNews):
+
+| TAG              | DESCRIPTION                               | TYPE              |
+| ----             | ----                                      | ----              |
+| id               | The news id                               | Integer           |
+| title            | The news title                            | TranslationString |
+| summary          | The news summary                          | TranslationString |
+| content          | The news content                          | TranslationString |
+| image            | The news image                            | string            |
+| date             | The formatted date                        | TranslationString |
+| contentBlocks    | The news contentBlocks (flexible content) | Attachments       |
+| hasContentBlocks | Check for content blocks                  | boolean           |
+| document         | The news document attachments             | Attachments       |
+| hasDocument      | Check for documents                       | boolean           |
+| gallery          | The news gallery attachments              | Attachments       |
+| hasGallery       | Check for gallery attachments             | boolean           |
+| url              | The news url                              | TranslationString |
+| metaTitle        | The news metaTitle                        | TranslationString |
+
+--}}
+
+{{>boilerplate/partial/site/header}}
+
+{{# currentSection }}
+
+    {{>boilerplate/partial/site/nav}}
+
+    {{>boilerplate/partial/site/breadcrumb}}
+
+    <h1>{{title}}</h1>
+    <ul>
+        {{# newsList }}
+            <li>
+                <ul>
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            </li>
+            <br>
+        {{/ newsList }}
+        <li>numPage: {{numPages}}</li>
+        <li>currentNews:
+            <ul>
+                {{# currentNews }}
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                {{/ currentNews }}
+            </ul>
+        </li>
+        <li>nextNews:
+            <ul>
+                {{# nextNews }}
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                {{/ nextNews }}
+            </ul>
+        </li>
+        <li>prevNews:
+            <ul>
+                {{# prevNews }}
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                {{/ prevNews }}
+            </ul>
+        </li>
+        <li>featured news:
+            {{# featNews }}
+                <ul>
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ featNews }}
+        </li>
+        <li>
+            <ul> archive
+                {{# archiveList }}
+                    <li>
+                        <ul>
+                            <li> {{ title }} </li>
+                            <li>{{ date }}</li>
+                            <li><a href="{{ url }}">{{ url }}</a></li>
+                        </ul>
+                    </li>
+                    <br>
+                {{/ archiveList }}
+            </ul>
+        </li>
+    </ul>
+{{/ currentSection }}
+
+{{>boilerplate/partial/site/footer}}

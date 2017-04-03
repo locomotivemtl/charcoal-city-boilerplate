@@ -1,0 +1,48 @@
+{
+    "properties": {
+        "meta_title": {
+            "type": "string",
+            "l10n": true,
+            "description": {
+                "en": "Meta tags are useful for search engine optimisation and sharing on social medias",
+                "fr": "Les tags méta sont utilisés pour optimiser les moteurs de cherches et lors des partages sur les résaux sociaux"
+            },
+            "notes": {
+                "en": "Meta tags will be auto-generated if not filled",
+                "fr": "Les tags méta seront générés automatiquement si laissés vide"
+            }
+        },
+        "meta_description": {
+            "type": "text",
+            "l10n": true,
+            "max_length": 255,
+            "input_type": "charcoal/admin/property/input/textarea",
+            "rows": 5,
+            "input_class": "u-resize-vertical",
+            "description": {
+                "en": "Meta tags are useful for search engine optimisation and sharing on social medias",
+                "fr": "Les tags méta sont utilisés pour optimiser les moteurs de cherches et lors des partages sur les résaux sociaux"
+            },
+            "notes": {
+                "en": "Meta tags will be auto-generated if not filled",
+                "fr": "Les tags méta seront générés automatiquement si laissés vide"
+            }
+        },
+        "meta_image": {
+            "type": "image",
+            "l10n": true,
+            "description": {
+                "en": "Meta tags are useful for search engine optimisation and sharing on social medias",
+                "fr": "Les tags méta sont utilisés pour optimiser les moteurs de cherches et lors des partages sur les résaux sociaux"
+            },
+            "notes": {
+                "en": "Meta tags will be auto-generated if not filled",
+                "fr": "Les tags méta seront générés automatiquement si laissés vide"
+            }
+        },
+        "meta_author": {
+            "type": "string",
+            "l10n": true
+        }
+    }
+}

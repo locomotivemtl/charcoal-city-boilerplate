@@ -6,7 +6,7 @@
                 "en": "Generic",
                 "fr": "Générique"
             },
-            "template": "city/template/generic",
+            "template": "boilerplate/template/generic",
             "controller": "\\Boilerplate\\Template\\Generic"
         },
         {
@@ -15,7 +15,7 @@
                 "en": "Front Page",
                 "fr": "Page d'accueil"
             },
-            "template": "city/template/home",
+            "template": "boilerplate/template/home",
             "controller": "\\Boilerplate\\Template\\Home"
         },
         {
@@ -24,8 +24,8 @@
                 "en": "News List",
                 "fr": "Liste des actualités"
             },
-            "template": "city/template/news/index",
-            "controller": "\\Boilerplate\\Template\\News\\Index"
+            "template": "boilerplate/template/news-list",
+            "controller": "\\Boilerplate\\Template\\NewsList"
         },
         {
             "value": "news-entry",
@@ -33,8 +33,8 @@
                 "en": "News",
                 "fr": "Actualité"
             },
-            "template": "city/template/news/entry",
-            "controller": "\\Boilerplate\\Template\\News\\Entry"
+            "template": "boilerplate/template/news-details",
+            "controller": "\\Boilerplate\\Template\\News\\NewsDetails"
         },
         {
             "value": "event-list",
@@ -42,8 +42,8 @@
                 "en": "Events List",
                 "fr": "Liste des Événements"
             },
-            "template": "city/template/event/index",
-            "controller": "\\Boilerplate\\Template\\Event\\Index"
+            "template": "boilerplate/template/event-list",
+            "controller": "\\Boilerplate\\Template\\EventList"
         },
         {
             "value": "event-entry",
@@ -51,8 +51,8 @@
                 "en": "Event",
                 "fr": "Événement"
             },
-            "template": "city/template/event/entry",
-            "controller": "\\Boilerplate\\Template\\Event\\Entry"
+            "template": "boilerplate/template/event-details",
+            "controller": "\\Boilerplate\\Template\\EventDetails"
         },
         {
             "value": "grouping",

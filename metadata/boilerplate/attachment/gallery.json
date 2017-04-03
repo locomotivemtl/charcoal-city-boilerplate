@@ -3,6 +3,15 @@
         "type": "boilerplate/attachment/gallery"
     },
 
+    "properties": {
+        "title": {
+            "label": {
+                "en": "Title",
+                "fr": "Titre"
+            }
+        }
+    },
+
     "attachments": {
         "default_widget": "images",
         "attachable_objects": {
@@ -17,9 +26,49 @@
 
     "admin": {
         "forms": {
+            "quick": {
+                "groups": {
+                    "main": {
+                        "layout": {
+                            "structure": [
+                                {"columns": [2, 1]},
+                                {"columns": [1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "title": null,
+                        "properties": [
+                            "title",
+                            "active"
+                        ]
+                    }
+                }
+            },
             "full": {
                 "groups": {
+                    "main": {
+                        "show_title": false,
+                        "show_header": false,
+                        "icon": "cog",
+                        "priority": 200,
+                        "layout": {
+                            "structure": [
+                                {"columns": [1, 1, 1]}
+                            ]
+                        },
+                        "title": {
+                            "fr": "Galerie de photo",
+                            "en": "Picture Gallery"
+                        },
+                        "properties": [
+                            "title"
+                        ]
+                    },
                     "images": {
+                        "show_title": false,
+                        "show_header": false,
+                        "icon": "image",
+                        "priority": 100,
                         "title": {
                             "fr": "Images",
                             "en": "Images"
@@ -48,12 +97,26 @@
         },
         "dashboards": {
             "admin.edit": {
+                "title": {
+                    "fr": "Attachements",
+                    "en": "Edit attachment"
+                },
+                "layout": {
+                    "structure": [
+                        {"columns": [1]}
+                    ]
+                },
                 "widgets": {
                     "form": {
+                        "type": "charcoal/admin/widget/objectForm",
+                        "group_display_mode": "tab",
+                        "form_ident": "full",
                         "obj_type": "boilerplate/attachment/gallery"
                     }
                 }
             }
-        }
+        },
+        "default_create_dashboard": "admin.edit",
+        "default_edit_dashboard": "admin.edit"
     }
 }

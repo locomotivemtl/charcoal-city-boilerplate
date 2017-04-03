@@ -1,0 +1,120 @@
+{{!--
+
+Event index template
+====================
+
+usable tags from index section (inside tag section):
+
+| TAG          | DESCRIPTION                                        | TYPE              |
+| ----         | ----                                               | ----              |
+| title        | The title                                          | TranslationString |
+| eventsList   | The list of events                                 | Collection        |
+| numPages     | The number of pages                                | Integer           |
+| hasPager     | Is there a pager                                   | Boolean           |
+| currentPage  | The current page                                   | integer           |
+| currentEvent | The current event if events are displayed in index | Event             |
+| nextEvent    | The next event                                     | Event             |
+| prevEvent    | The previous event                                 | Event             |
+
+usable tags from Event object (inside tag eventsList, nextEvent, prevEvent):
+
+| TAG                         | DESCRIPTION                   | TYPE              |
+| ----                        | ----                          | ----              |
+| title                       | The event title               | TranslationString |
+| date                        | The formatted date            | TranslationString |
+| url                         | The event url                 | TranslationString |
+| active (only in eventsList) | Is the event currently active | boolean           |
+
+usable tags from Event object (inside tag currentEvent):
+
+| TAG              | DESCRIPTION                                | TYPE              |
+| ----             | ----                                       | ----              |
+| id               | The event id                               | Integer           |
+| title            | The event title                            | TranslationString |
+| summary          | The event summary                          | TranslationString |
+| content          | The event content                          | TranslationString |
+| image            | The event image                            | string            |
+| date             | The formatted date                         | TranslationString |
+| contentBlocks    | The event contentBlocks (flexible content) | Attachments       |
+| hasContentBlocks | Check for content blocks                   | boolean           |
+| document         | The event document attachments             | Attachments       |
+| hasDocument      | Check for documents                        | boolean           |
+| gallery          | The event gallery attachments              | Attachments       |
+| hasGallery       | Check for gallery attachments              | boolean           |
+| url              | The event url                              | TranslationString |
+| metaTitle        | The event metaTitle                        | TranslationString |
+
+--}}
+
+{{>boilerplate/partial/site/header}}
+
+{{# currentSection }}
+
+    {{>boilerplate/partial/site/nav}}
+
+    {{>boilerplate/partial/site/breadcrumb}}
+
+    <h1>{{title}}</h1>
+    <ul>
+        {{# eventsList }}
+            <li>
+                <ul>
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            </li>
+            <br>
+        {{/ eventsList }}
+        <li>numPage: {{numPages}}</li>
+        <li>currentEvent:
+            <ul>
+                {{# currentEvent }}
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                {{/ currentEvent }}
+            </ul>
+        </li>
+        <li>nextEvent:
+            <ul>
+                {{# nextEvent }}
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                {{/ nextEvent }}
+            </ul>
+        </li>
+        <li>prevEvent:
+            <ul>
+                {{# prevEvent }}
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                {{/ prevEvent }}
+            </ul>
+        </li>
+        <li>featured events:
+            {{# featEvents }}
+                <ul>
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ featEvents }}
+        </li>
+        <li>archive</li>
+        {{# archiveList }}
+            <li>
+                <ul>
+                    <li> {{ title }} </li>
+                    <li>{{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            </li>
+            <br>
+        {{/ archiveList }}
+    </ul>
+{{/ currentSection }}
+
+{{>boilerplate/partial/site/footer}}

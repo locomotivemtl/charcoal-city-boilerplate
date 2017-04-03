@@ -1,11 +1,6 @@
 {
     "routes": {
-        "templates": {
-            "/": {
-                "template": "city/template/home",
-                "controller": "boilerplate/template/home"
-            }
-        },
+        "templates": {},
         "actions": {},
         "scripts": {
             "city/rename": {

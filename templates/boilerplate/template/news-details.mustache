@@ -1,0 +1,81 @@
+{{!--
+
+News entry template
+===================
+
+usable tags from News object (inside tag currentNews):
+
+| TAG              | DESCRIPTION                               | TYPE              |
+| ----             | ----                                      | ----              |
+| id               | The news id                               | Integer           |
+| title            | The news title                            | TranslationString |
+| summary          | The news summary                          | TranslationString |
+| content          | The news content                          | TranslationString |
+| image            | The news image                            | string            |
+| displayDate      | The formatted date                        | TranslationString |
+| dateTimeDate     | The unformatted date                      | Date              |
+| contentBlocks    | The news contentBlocks (flexible content) | Attachments       |
+| hasContentBlocks | Check for content blocks                  | boolean           |
+| document         | The news document attachments             | Attachments       |
+| hasDocument      | Check for documents                       | boolean           |
+| gallery          | The news gallery attachments              | Attachments       |
+| hasGallery       | Check for gallery attachments             | boolean           |
+| url              | The news url                              | TranslationString |
+| metaTitle        | The news metaTitle                        | TranslationString |
+| nextNews         | The next news                             | News              |
+| prevNews         | The previous news                         | News              |
+
+--}}
+
+{{>boilerplate/partial/site/header}}
+
+{{>boilerplate/partial/site/nav}}
+
+{{>boilerplate/partial/site/breadcrumb}}
+
+{{# currentNews }}
+
+    <ul>
+        <h1>{{title}}</h1>
+
+        <li>id : {{ id }}</li>
+        <li>title : {{ title }}</li>
+        <li>summary: {{ summary }}</li>
+        <li>content: {{ content }}</li>
+        <li>image: {{ image }}</li>
+        <li>date: {{ date }}</li>
+        {{# hasContentBlocks }}
+            {{> boilerplate/partial/content-blocks }}
+        {{/ hasContentBlocks }}
+        {{# hasDocuments }}
+            {{> boilerplate/partial/attachments/ressources }}
+        {{/ hasDocuments }}
+        {{# hasGallery }}
+            {{> boilerplate/partial/attachments/image-gallery }}
+        {{/ hasGallery }}
+        <li><a href="{{ url }}">{{ url }}</a></li>
+        <li>{{ metaTitle }}</li>
+        <li>
+            prev :
+            {{# prevNews }}
+                <ul>
+                    <li>title: {{ title }}</li>
+                    <li>date: {{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ prevNews }}
+        </li>
+        <li>
+            next :
+            {{# nextNews }}
+                <ul>
+                    <li>title: {{ title }}</li>
+                    <li>date: {{ date }}</li>
+                    <li><a href="{{ url }}">{{ url }}</a></li>
+                </ul>
+            {{/ nextNews }}
+        </li>
+    </ul>
+{{/ currentNews }}
+
+{{>boilerplate/partial/site/footer}}

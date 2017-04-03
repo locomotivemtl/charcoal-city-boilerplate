@@ -3,12 +3,12 @@
 namespace Boilerplate\Attachment;
 
 // Dependencies from `charcoal-city` module
-use City\Attachment\Video as CityVideo;
+use Charcoal\Attachment\Object\Video as VideoAttachment;
 
 /**
  * Video attachment
  */
-class Video extends CityVideo
+class Video extends VideoAttachment
 {
     /**
      * @return string

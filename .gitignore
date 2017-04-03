@@ -21,6 +21,7 @@ www/charcoal.app.log
 
 mustache_cache/
 www/mustache_cache/
+cache/
 tmp/
 
 # Package Managers

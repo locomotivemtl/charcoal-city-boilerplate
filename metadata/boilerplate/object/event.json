@@ -1,56 +1,117 @@
 {
+    "properties": {
+        "category": {
+            "obj_type": "city/object/event-category",
+            "label": {
+                "fr": "Catégorie",
+                "en": "Category"
+            }
+        },
+        "summary": {
+            "type": "text",
+            "input_type": "charcoal/admin/property/input/textarea",
+            "rows": 10,
+            "input_class": "u-resize-vertical"
+        },
+        "location_name": {
+            "type": "string",
+            "l10n": true,
+            "label": {
+                "fr": "Nom de l'emplacement",
+                "en": "Location name"
+            }
+        },
+        "address": {
+            "type": "string",
+            "l10n": true,
+            "label": {
+                "fr": "Adresse",
+                "en": "Address"
+            }
+        },
+        "postal_code": {
+            "type": "string",
+            "label": {
+                "fr": "Code postal",
+                "en": "Postal Code"
+            }
+        },
+        "city": {
+            "type": "string",
+            "label": {
+                "fr": "Ville",
+                "en": "City"
+            },
+            "l10n": true
+        },
+        "state": {
+            "type": "string",
+            "label": {
+                "fr": "Province",
+                "en": "State / Province"
+            },
+            "l10n": true
+        },
+        "country": {
+            "type": "string",
+            "label": {
+                "fr": "Pays",
+                "en": "Country"
+            },
+            "l10n": true
+        },
+        "external_url": {
+            "type": "string",
+            "l10n": true,
+            "label": {
+                "fr": "Lien externe",
+                "en": "External URL"
+            },
+            "notes": {
+                "fr": "Lien \"En savoir plus\" au bas de l'événement"
+            }
+        },
+        "date_notes": {
+            "type": "string",
+            "l10n": true,
+            "label": {
+                "en": "Date notes",
+                "fr": "Notes de date"
+            },
+            "notes": {
+                "en": "Hour replacement. ex: Each days from 15 to 17",
+                "fr": "Remplaçera l'heure. ex: Tous les jours de 15h à 17h"
+            }
+        },
+        "display_hours": {
+            "type": "boolean",
+            "input_type": "charcoal/admin/property/input/switch",
+            "label": {
+                "en": "Display hours",
+                "fr": "Afficher l'heure"
+            },
+            "description": {
+                "en": "Whether to display the time of the event or not.",
+                "fr": "Défini si l'heure de l'événement doit être affichée ou non."
+            }
+        },
+        "slug": {
+            "description": {
+                "en": "The part of the url that point to the article on the site",
+                "fr": "La partie du url qui pointe vers cet article"
+            },
+            "notes": {
+                "en": "Will be automatically generated if blank",
+                "fr": "Sera généré automatiquement si laissé vide"
+            }
+        }
+    },
     "admin": {
-        "lists": {
-            "default": {
-                "list_actions": [
-                    {
-                        "label": {
-                            "fr": "Nouvel événement",
-                            "en": "New event"
-                        },
-                        "ident": "create",
-                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/event"
-                    }
-                ],
-                "object_actions": {
-                    "edit": {
-                        "label": {
-                            "en": "Modify",
-                            "fr": "Modifier"
-                        },
-                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/event&obj_id={{id}}",
-                        "priority": 1
-                    },
-                    "view": {
-                        "label": {
-                            "en": "Go to page",
-                            "fr": "Voir l'article"
-                        },
-                        "url": "{{baseUrl}}{{url}}",
-                        "priority": 2
-                    },
-                    "copy": {
-                        "label": {
-                            "en": "Clone",
-                            "fr": "Cloner"
-                        },
-                        "url": "object/edit?main_menu=section&obj_type=boilerplate/object/event&clone_id={{id}}",
-                        "priority": 3
-                    },
-                    "delete": {
-                        "label": {
-                            "en": "Delete",
-                            "fr": "Supprimer"
-                        },
-                        "priority": 4
-                    }
-                }
-            }
-        },
+        "lists": {},
         "forms": {
-            "default": {
+            "cms.default": {
                 "groups": {
-                    "info_content": {
+                    "info": {
                         "title": "Info",
                         "show_title": false,
                         "show_header": false,
@@ -58,29 +119,81 @@
                         "properties": [
                             "title",
                             "summary",
-                            "content",
-                            "external_url",
                             "image"
                         ],
-                        "active": false,
-                        "priority": 10
+                        "priority": 100
                     },
-                    "info_no_content": {
-                        "title": "Info",
+                    "content-blocks": {
+                        "type": "charcoal/admin/widget/form-group/attachment",
+                        "preset": "content-blocks",
+                        "priority": 200
+                    },
+                    "location": {
+                        "title": {
+                            "fr": "Emplacement",
+                            "en": "Location"
+                        },
                         "show_title": false,
                         "show_header": false,
-                        "icon": "info",
+                        "icon": "map-marker",
                         "properties": [
-                            "title",
-                            "summary",
-                            "external_url",
-                            "image"
+                            "location_name",
+                            "address",
+                            "postal_code",
+                            "city",
+                            "state",
+                            "country"
                         ],
-                        "priority": 10
+                        "priority": 300
+                    },
+                    "advanced": {
+                        "title": "Options",
+                        "show_title": false,
+                        "show_header": false,
+                        "icon": "cog",
+                        "layout": {
+                            "structure": [
+                                {"columns": [1]},
+                                {"columns": [1, 1, 1]},
+                                {"columns": [1, 1]},
+                                {"columns": [1, 1]},
+                                {"columns": [1]},
+                                {"columns": [1]},
+                                {"columns": [1]}
+                            ]
+                        },
+                        "properties": [
+                            "category",
+                            "start_date",
+                            "end_date",
+                            "display_hours",
+                            "date_notes",
+                            "publish_date",
+                            "slug",
+                            "active"
+                        ],
+                        "priority": 600
+                    },
+                    "cms.meta": {
+                        "priority": 800
+                    },
+                    "cms.revisions": {
+                        "priority": 800
+                    }
+                },
+                "sidebars": {
+                    "default": {
+                        "properties": [
+                            "created",
+                            "created_by",
+                            "last_modified",
+                            "last_modified_by"
+                        ]
                     }
                 }
             }
         },
+
         "dashboards": {
             "admin.edit": {
                 "widgets": {

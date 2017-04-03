@@ -6,17 +6,18 @@ namespace Boilerplate\Template;
 use Boilerplate\Object\Section;
 use Charcoal\Model\ModelInterface;
 use City\Support\Interfaces\BreadcrumbAwareInterface;
-use City\Support\Interfaces\SectionLoaderAwareInterface;
 use City\Support\Traits\BreadcrumbAwareTrait;
 use Pimple\Container;
 
 // Dependencies from Charcoal-Support
-use Charcoal\Support\Model\ManufacturableModelCollectionTrait;
 use Charcoal\Support\Property\ParsableValueTrait;
 
 // Dependencies from Charcoal-City
 use City\AbstractCityTemplate;
-use City\Support\Traits\SectionLoaderAwareTrait;
+
+// Dependencies from `charcoal-cms`
+use Charcoal\Cms\Support\Interfaces\SectionLoaderAwareInterface;
+use Charcoal\Cms\Support\Traits\SectionLoaderAwareTrait;
 
 /**
  * Abstract (base) template
@@ -37,7 +38,7 @@ abstract class AbstractTemplate extends AbstractCityTemplate implements
     {
         parent::setDependencies($container);
 
-        $this->setSectionLoader($container['city/section/loader']);
+        $this->setSectionLoader($container['cms/section/loader']);
     }
 
     /**
@@ -59,7 +60,7 @@ abstract class AbstractTemplate extends AbstractCityTemplate implements
     public function beforeBreadcrumb()
     {
         return [
-            'label' => $this->parseAsTranslatable([
+            'label' => (string)$this->translator()->translation([
                 'en' => 'Home',
                 'fr' => 'Accueil'
             ]),

@@ -1,0 +1,25 @@
+{{#contentBlocks}}
+    {{#isText}}
+        {{> boilerplate/partial/attachments/text }}
+    {{/isText}}
+
+    {{#isTextImage}}
+        {{> boilerplate/partial/attachments/text-image }}
+    {{/isTextImage}}
+
+    {{#isGallery}}
+        {{> boilerplate/partial/attachments/image-gallery }}
+    {{/isGallery}}
+
+    {{#isAccordion}}
+        {{> boilerplate/partial/attachments/accordion }}
+    {{/isAccordion}}
+
+    {{#isDocument}}
+        {{> boilerplate/partial/attachments/resources }}
+    {{/isDocument}}
+
+    {{#isVideo}}
+        {{> boilerplate/partial/attachments/video }}
+    {{/isVideo}}
+{{/contentBlocks}}
