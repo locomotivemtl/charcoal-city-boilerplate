@@ -3,12 +3,11 @@
 namespace Boilerplate\Object;
 
 // Module `charcoal-attachment` dependencies
+use Charcoal\Attachment\Interfaces\AttachmentAwareInterface;
 use Charcoal\Attachment\Traits\AttachmentAwareTrait;
 
 // Module `charcoal-cms` dependencies
 use Charcoal\Cms\AbstractSection;
-use Charcoal\Cms\Mixin\HasContentBlocksInterface;
-use Charcoal\Cms\Mixin\Traits\HasContentBlocksTrait;
 
 // Dependencies from `mcaskill/charcoal-support`
 use Charcoal\Support\Model\ManufacturableModelCollectionTrait;
@@ -21,11 +20,10 @@ use Pimple\Container;
  * Section are the "pages" of the website
  */
 class Section extends AbstractSection implements
-    HasContentBlocksInterface
+    AttachmentAwareInterface
 {
     use AttachmentAwareTrait;
     use ManufacturableModelCollectionTrait;
-    use HasContentBlocksTrait;
 
     // ==========================================================================
     // INIT

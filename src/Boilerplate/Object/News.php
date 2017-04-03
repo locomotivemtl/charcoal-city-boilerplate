@@ -6,8 +6,6 @@ namespace Boilerplate\Object;
 use Charcoal\Attachment\Interfaces\AttachmentAwareInterface;
 use Charcoal\Attachment\Traits\AttachmentAwareTrait;
 use Charcoal\Cms\AbstractNews;
-use Charcoal\Cms\Mixin\HasContentBlocksInterface;
-use Charcoal\Cms\Mixin\Traits\HasContentBlocksTrait;
 use Charcoal\Cms\NewsCategory;
 use Charcoal\Object\CategoryInterface;
 use Charcoal\Support\Model\ManufacturableModelCollectionTrait;
@@ -17,12 +15,10 @@ use Pimple\Container;
  * News model
  */
 class News extends AbstractNews implements
-    AttachmentAwareInterface,
-    HasContentBlocksInterface
+    AttachmentAwareInterface
 {
     use AttachmentAwareTrait;
     use ManufacturableModelCollectionTrait;
-    use HasContentBlocksTrait;
 
     /**
      * Boolean param to set news as alert.

@@ -7,8 +7,6 @@ use Charcoal\Attachment\Interfaces\AttachmentAwareInterface;
 use Charcoal\Attachment\Traits\AttachmentAwareTrait;
 use Charcoal\Cms\AbstractEvent;
 use Charcoal\Cms\EventCategory;
-use Charcoal\Cms\Mixin\HasContentBlocksInterface;
-use Charcoal\Cms\Mixin\Traits\HasContentBlocksTrait;
 use Charcoal\Object\CategoryInterface;
 use Charcoal\Support\Model\ManufacturableModelCollectionTrait;
 use Charcoal\Translator\Translation;
@@ -18,12 +16,10 @@ use Pimple\Container;
  * Event model
  */
 class Event extends AbstractEvent implements
-    AttachmentAwareInterface,
-    HasContentBlocksInterface
+    AttachmentAwareInterface
 {
     use AttachmentAwareTrait;
     use ManufacturableModelCollectionTrait;
-    use HasContentBlocksTrait;
 
     /**
      * @var Translation|string $locationName
