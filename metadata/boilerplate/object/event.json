@@ -123,8 +123,9 @@
                         ],
                         "priority": 100
                     },
-                    "cms.content-blocks": {
-                        "group": "content",
+                    "content-blocks": {
+                        "type": "charcoal/admin/widget/form-group/attachment",
+                        "preset": "content-blocks",
                         "priority": 200
                     },
                     "location": {

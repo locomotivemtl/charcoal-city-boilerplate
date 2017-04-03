@@ -1,6 +1,6 @@
 {
-    "attachable_objects": {
-        "cms.content-blocks": {
+    "attachments": {
+        "attachables": {
             "boilerplate/attachment/text": {
                 "label": {
                     "fr": "Texte",
@@ -21,6 +21,31 @@
                     "fr": "Vidéo",
                     "en": "Video"
                 }
+            }
+        },
+        "groups": {
+            "content-blocks": [
+                "boilerplate/attachment/text",
+                "boilerplate/attachment/image",
+                "boilerplate/attachment/gallery",
+                "boilerplate/attachment/video"
+            ]
+        },
+        "widgets": {
+            "content-blocks": {
+                "title": {
+                    "en": "Content",
+                    "fr": "Contenus"
+                },
+                "show_title": false,
+                "show_header": false,
+                "icon": "edit",
+                "template": "charcoal/admin/widget/form-group/attachment",
+                "group": "content-blocks",
+                "attachment_heading": "{{ ident }}",
+                "show_attachment_heading": false,
+                "show_attachment_preview": true,
+                "attachable_objects": "content-blocks"
             }
         }
     }
