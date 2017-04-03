@@ -6,8 +6,8 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Hôte: 127.0.0.1 (MySQL 5.6.33)
-# Base de données: loco_city
-# Temps de génération: 2017-03-29 20:42:44 +0000
+# Base de données: loco_city_news
+# Temps de génération: 2017-04-03 18:09:03 +0000
 # ************************************************************
 
 
@@ -733,36 +733,37 @@ CREATE TABLE `object_routes` (
   `route_obj_type` varchar(255) DEFAULT NULL,
   `route_obj_id` varchar(255) DEFAULT NULL,
   `route_template` varchar(255) DEFAULT NULL,
+  `route_options` longtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `object_routes` WRITE;
 /*!40000 ALTER TABLE `object_routes` DISABLE KEYS */;
 
-INSERT INTO `object_routes` (`id`, `active`, `creation_date`, `last_modification_date`, `lang`, `slug`, `route_obj_type`, `route_obj_id`, `route_template`)
+INSERT INTO `object_routes` (`id`, `active`, `creation_date`, `last_modification_date`, `lang`, `slug`, `route_obj_type`, `route_obj_id`, `route_template`, `route_options`)
 VALUES
-	(3,1,'2016-11-01 14:59:23','2016-11-01 14:59:23','fr','/fr/page-exemple','boilerplate/object/section','2','generic'),
-	(4,1,'2016-11-01 14:59:23','2016-11-01 14:59:23','en','/en/page-exemple','boilerplate/object/section','2','generic'),
-	(5,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','fr','/fr/accueil','boilerplate/object/section','1','home'),
-	(6,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','en','/en/home','boilerplate/object/section','1','home'),
-	(7,1,'2016-11-01 15:03:29','2016-11-01 15:03:29','en','/en/exemple-page','boilerplate/object/section','2','generic'),
-	(8,1,'2016-11-01 15:04:03','2016-11-01 15:04:03','fr','/fr/actualite','boilerplate/object/section','3','news-list'),
-	(9,1,'2016-11-01 15:04:03','2016-11-01 15:04:03','en','/en/news','boilerplate/object/section','3','news-list'),
-	(10,1,'2016-11-01 15:08:28','2016-11-01 15:08:28','fr','/fr/evenements','boilerplate/object/section','4','event-list'),
-	(11,1,'2016-11-01 15:08:28','2016-11-01 15:08:28','en','/en/events','boilerplate/object/section','4','event-list'),
-	(14,1,'2016-11-02 14:20:59','2016-11-02 14:20:59','fr','/fr/actualites/nouvelle-1','boilerplate/object/news','1','news-entry'),
-	(15,1,'2016-11-02 14:20:59','2016-11-02 14:20:59','en','/en/news/news-1','boilerplate/object/news','1','news-entry'),
-	(16,1,'2016-11-02 14:21:45','2016-11-02 14:21:45','fr','/fr/actualites/nouvelle-2','boilerplate/object/news','2','news-entry'),
-	(17,1,'2016-11-02 14:21:45','2016-11-02 14:21:45','en','/en/news/news-2','boilerplate/object/news','2','news-entry'),
-	(18,1,'2016-11-02 14:22:14','2016-11-02 14:22:14','fr','/fr/actualites/nouvelle-3','boilerplate/object/news','3','news-entry'),
-	(19,1,'2016-11-02 14:22:14','2016-11-02 14:22:14','en','/en/news/news-3','boilerplate/object/news','3','news-entry'),
-	(20,1,'2016-11-02 14:22:55','2016-11-02 14:22:55','fr','/fr/evenements/evenement-1','boilerplate/object/event','1','event-entry'),
-	(21,1,'2016-11-02 14:22:55','2016-11-02 14:22:55','en','/en/events/event-1','boilerplate/object/event','1','event-entry'),
-	(22,1,'2016-11-02 14:23:12','2016-11-02 14:23:12','fr','/fr/evenements/evenement-2','boilerplate/object/event','2','event-entry'),
-	(23,1,'2016-11-02 14:23:12','2016-11-02 14:23:12','en','/en/events/event-2','boilerplate/object/event','2','event-entry'),
-	(24,1,'2016-11-02 14:23:30','2016-11-02 14:23:30','fr','/fr/evenements/evenement-3','boilerplate/object/event','3','event-entry'),
-	(25,1,'2016-11-02 14:23:30','2016-11-02 14:23:30','en','/en/events/event-3','boilerplate/object/event','3','event-entry'),
-	(26,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','fr','/','boilerplate/object/section','1','home');
+	(3,1,'2016-11-01 14:59:23','2016-11-01 14:59:23','fr','/fr/page-exemple','boilerplate/object/section','2','generic',NULL),
+	(4,1,'2016-11-01 14:59:23','2016-11-01 14:59:23','en','/en/page-exemple','boilerplate/object/section','2','generic',NULL),
+	(5,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','fr','/fr/accueil','boilerplate/object/section','1','home',NULL),
+	(6,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','en','/en/home','boilerplate/object/section','1','home',NULL),
+	(7,1,'2016-11-01 15:03:29','2016-11-01 15:03:29','en','/en/exemple-page','boilerplate/object/section','2','generic',NULL),
+	(8,1,'2016-11-01 15:04:03','2016-11-01 15:04:03','fr','/fr/actualite','boilerplate/object/section','3','news-list',NULL),
+	(9,1,'2016-11-01 15:04:03','2016-11-01 15:04:03','en','/en/news','boilerplate/object/section','3','news-list',NULL),
+	(10,1,'2016-11-01 15:08:28','2016-11-01 15:08:28','fr','/fr/evenements','boilerplate/object/section','4','event-list',NULL),
+	(11,1,'2016-11-01 15:08:28','2016-11-01 15:08:28','en','/en/events','boilerplate/object/section','4','event-list',NULL),
+	(14,1,'2016-11-02 14:20:59','2016-11-02 14:20:59','fr','/fr/actualites/nouvelle-1','boilerplate/object/news','1','news-entry',NULL),
+	(15,1,'2016-11-02 14:20:59','2016-11-02 14:20:59','en','/en/news/news-1','boilerplate/object/news','1','news-entry',NULL),
+	(16,1,'2016-11-02 14:21:45','2016-11-02 14:21:45','fr','/fr/actualites/nouvelle-2','boilerplate/object/news','2','news-entry',NULL),
+	(17,1,'2016-11-02 14:21:45','2016-11-02 14:21:45','en','/en/news/news-2','boilerplate/object/news','2','news-entry',NULL),
+	(18,1,'2016-11-02 14:22:14','2016-11-02 14:22:14','fr','/fr/actualites/nouvelle-3','boilerplate/object/news','3','news-entry',NULL),
+	(19,1,'2016-11-02 14:22:14','2016-11-02 14:22:14','en','/en/news/news-3','boilerplate/object/news','3','news-entry',NULL),
+	(20,1,'2016-11-02 14:22:55','2016-11-02 14:22:55','fr','/fr/evenements/evenement-1','boilerplate/object/event','1','event-entry',NULL),
+	(21,1,'2016-11-02 14:22:55','2016-11-02 14:22:55','en','/en/events/event-1','boilerplate/object/event','1','event-entry',NULL),
+	(22,1,'2016-11-02 14:23:12','2016-11-02 14:23:12','fr','/fr/evenements/evenement-2','boilerplate/object/event','2','event-entry',NULL),
+	(23,1,'2016-11-02 14:23:12','2016-11-02 14:23:12','en','/en/events/event-2','boilerplate/object/event','2','event-entry',NULL),
+	(24,1,'2016-11-02 14:23:30','2016-11-02 14:23:30','fr','/fr/evenements/evenement-3','boilerplate/object/event','3','event-entry',NULL),
+	(25,1,'2016-11-02 14:23:30','2016-11-02 14:23:30','en','/en/events/event-3','boilerplate/object/event','3','event-entry',NULL),
+	(26,1,'2016-11-01 15:03:02','2016-11-01 15:03:02','fr','/','boilerplate/object/section','1','home',NULL);
 
 /*!40000 ALTER TABLE `object_routes` ENABLE KEYS */;
 UNLOCK TABLES;
